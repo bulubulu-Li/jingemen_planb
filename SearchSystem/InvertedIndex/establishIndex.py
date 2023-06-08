@@ -6,12 +6,18 @@ from LanguageAnalysis import PreprocessFile
 def createIndex(directname):
     invertedIndex = {}
     path = tools.projectpath + directname
+    path = tools.reuterspath
     files = os.listdir(path)
+
+    #单词:docid:[pos]
     for file in files:
         print("analyzing file: ", file)
         #每个文档的词项 list
+        #此处，需要做一个分词，还需要设置停用词，做过滤
+        #然后，保存jingmen数据为html
+        #然后就没啥大问题了
         content = PreprocessFile.preProcess(path + '/' + file)
-        docId = getDocID(file)
+        docId = getDocID(file)#文档name必须是数字
 
         num = 0 #word在文档中的位置
         for word in content:

@@ -17,6 +17,7 @@ def sortScoreDocList(index,fileNum,words,docList):
 #堆排序实现的top K查询
 def TopKScore(K,index,fileNum,words,docList):
     scoreDocList = getScoreDocList(index, fileNum, words, docList)
+    # print(scoreDocList)
     N = len(scoreDocList)
     if N is 0:
         return []

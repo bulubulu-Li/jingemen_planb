@@ -5,6 +5,7 @@ def mergeTwoList(list1,list2):
     len2 = len(list2)
     n1 = 0
     n2 = 0
+    #避免出现重复的
     while n1 < len1 and n2 < len2 :
         if list1[n1] < list2[n2]:
             rlist.append(list1[n1])

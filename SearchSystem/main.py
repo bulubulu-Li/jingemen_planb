@@ -7,17 +7,17 @@ from Serching import searchWord
 from SpellingCorrect import spell
 from scoreQuery import sortDoc
 from BoolSearch import BoolSearchDel
-
+from InvertedIndex import establishIndex
 #下载需要的依赖文件
 # nltk.download("wordnet")
 # nltk.download("averaged_perceptron_tagger")
 # nltk.download("punkt")
-# nltk.download("maxnet_treebank_pos_tagger")
+# nltk.download("maxent_treebank_pos_tagger")
 
 DIRECTNAME = 'Reuters'
 
-# print("establishing the INDEX...")
-# establishIndex.createIndex(DIRECTNAME)
+#建立索引
+establishIndex.createIndex(DIRECTNAME)
 
 print("getting word list...")
 WORDLIST = getIndex.getWordList()
@@ -79,6 +79,9 @@ while LOOP:
             WORDSET = set(INPUTWORDS)
 
             DOCLIST = searchWord.searchWords(INDEX, WORDSET)
+            # print(DOCLIST)
+            #根据tf-idf计算分数
+            #取top20
             SORTEDDOCLIST = sortDoc.TopKScore(20, INDEX, FILENUM, WORDSET, DOCLIST)
             for doc in SORTEDDOCLIST:
                 print("doc ID: ", doc[1], " score: ", "%.3f" % doc[0])

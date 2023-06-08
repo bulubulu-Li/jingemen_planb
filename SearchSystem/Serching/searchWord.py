@@ -25,7 +25,7 @@ def searchWords(index, words):
     # print(wordset)
     for word in words:
         docQueue.put(searchOneWord(index, word))
-
+    
     while docQueue.qsize() > 1:
         list1 = docQueue.get()
         list2 = docQueue.get()
