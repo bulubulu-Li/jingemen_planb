@@ -8,6 +8,7 @@ from SpellingCorrect import spell
 from scoreQuery import sortDoc
 from BoolSearch import BoolSearchDel
 from InvertedIndex import establishIndex
+import jieba
 #下载需要的依赖文件
 # nltk.download("wordnet")
 # nltk.download("averaged_perceptron_tagger")
@@ -44,6 +45,11 @@ def preCheck(statement):
     print(INPUTWORDS)
     return INPUTWORDS
 
+def preCheck_zh(statement):
+    print("分词...")
+    INPUTWORDS = jieba.cut(statement)
+    return INPUTWORDS
+
 while LOOP:
     print("searching operation: ")
     print("[1] Overall [2]TOP K [3]BOOL [4]Phrase [5]wildcard [6]synonyms [7]exit")
@@ -64,7 +70,7 @@ while LOOP:
 
         #查询排序
         if choice == 1:
-            INPUTWORDS=preCheck(STATEMENT)
+            INPUTWORDS=preCheck_zh(STATEMENT)
 
             WORDSET = set(INPUTWORDS)
 
@@ -75,7 +81,7 @@ while LOOP:
 
         #TOP K 查询
         elif choice == 2:
-            INPUTWORDS=preCheck(STATEMENT)
+            INPUTWORDS=preCheck_zh(STATEMENT)
 
             WORDSET = set(INPUTWORDS)
 
@@ -88,14 +94,14 @@ while LOOP:
                 print("doc ID: ", doc[1], " score: ", "%.3f" % doc[0])
         #Bool 查询
         elif choice == 3:
-            INPUTWORDS=preCheck(STATEMENT)
+            INPUTWORDS=preCheck_zh(STATEMENT)
 
             DOCLIST = BoolSearchDel.BoolSearch(INPUTWORDS, INDEX)
             print(len(DOCLIST),"DOCs :")
             print(DOCLIST)
         #短语查询
         elif choice == 4:
-            INPUTWORDS=preCheck(STATEMENT)
+            INPUTWORDS=preCheck_zh(STATEMENT)
 
             WORDSET = set(INPUTWORDS)
 
@@ -111,7 +117,7 @@ while LOOP:
             list = searchWord.wildcardSearch(STATEMENT, INDEX, WORDLIST)
 
         elif choice == 6:
-            INPUTWORDS=preCheck(STATEMENT)
+            INPUTWORDS=preCheck_zh(STATEMENT)
 
             WORDSET = set(INPUTWORDS)
 
