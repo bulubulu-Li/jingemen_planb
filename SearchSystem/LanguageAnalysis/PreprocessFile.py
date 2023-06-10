@@ -15,8 +15,9 @@ def preProcess(filename):
 def preProcess_zh(filename):
     file = open(filename, 'r', encoding='utf-8')
     content = json.load(file)
-    content = content["page_content"]
-    words = jieba.cut(content)
+    words=[]
+    for page in content:
+        words+=jieba.cut(page["page_content"])
     return words
 
 

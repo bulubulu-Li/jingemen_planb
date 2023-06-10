@@ -32,6 +32,9 @@ def getWholeDocList():
     files = os.listdir(reuterspath)
     fileList = []
     for file in files:
+        # skip fold
+        if file.find('.') == -1:
+            continue
         fileList.append(getDocID(file))
     return sorted(fileList)
 

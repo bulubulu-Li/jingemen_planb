@@ -61,6 +61,9 @@ def createIndex_zh(directname):
         #此处，需要做一个分词，还需要设置停用词，做过滤
         #然后，保存jingmen数据为html
         #然后就没啥大问题了
+        # skip fold
+        if file.find('.') == -1:
+            continue
         content = PreprocessFile.preProcess_zh(path + '/' + file)
         docId = getDocID(file)#文档name必须是数字
         
