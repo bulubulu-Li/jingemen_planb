@@ -14,24 +14,35 @@ from InvertedIndex import establishIndex
 # nltk.download("punkt")
 # nltk.download("maxent_treebank_pos_tagger")
 
-DIRECTNAME = 'Reuters'
+DIRECTNAME = 'Reuters_zh'
 
 #建立索引
-establishIndex.createIndex(DIRECTNAME)
+establishIndex.createIndex_zh(DIRECTNAME)
 
 print("getting word list...")
-WORDLIST = getIndex.getWordList()
+WORDLIST = getIndex.getWordList_zh()
 print("getting index...")
-INDEX = getIndex.getIndex()
+INDEX = getIndex.getIndex_zh()
 print("loading the wordnet...")
-stemming.lemmatize_sentence("a", False)
-
+# stemming.lemmatize_sentence("a", False)
+ 
 PATH = tools.projectpath + DIRECTNAME
 FILES = os.listdir(tools.reuterspath)
 FILENUM = len(FILES)
 
 LOOP = True
 print("=================Searching System=================")
+
+# 词形还原+纠错
+def preCheck(statement):
+    return statement
+    print("spelling correcting...")
+    INPUTWORDS = spell.correctSentence(INPUTWORDS)
+    print(INPUTWORDS)
+    print("stemming...")
+    INPUTWORDS = stemming.lemmatize_sentence(statement, True)
+    print(INPUTWORDS)
+    return INPUTWORDS
 
 while LOOP:
     print("searching operation: ")
@@ -53,12 +64,7 @@ while LOOP:
 
         #查询排序
         if choice == 1:
-            print("stemming...")
-            INPUTWORDS = stemming.lemmatize_sentence(STATEMENT, True)
-            print(INPUTWORDS)
-            print("spelling correcting...")
-            INPUTWORDS = spell.correctSentence(INPUTWORDS)
-            print(INPUTWORDS)
+            INPUTWORDS=preCheck(STATEMENT)
 
             WORDSET = set(INPUTWORDS)
 
@@ -69,12 +75,7 @@ while LOOP:
 
         #TOP K 查询
         elif choice == 2:
-            print("stemming...")
-            INPUTWORDS = stemming.lemmatize_sentence(STATEMENT, True)
-            print(INPUTWORDS)
-            print("spelling correcting...")
-            INPUTWORDS = spell.correctSentence(INPUTWORDS)
-            print(INPUTWORDS)
+            INPUTWORDS=preCheck(STATEMENT)
 
             WORDSET = set(INPUTWORDS)
 
@@ -87,24 +88,14 @@ while LOOP:
                 print("doc ID: ", doc[1], " score: ", "%.3f" % doc[0])
         #Bool 查询
         elif choice == 3:
-            print("stemming...")
-            INPUTWORDS = stemming.lemmatize_sentence(STATEMENT, True)
-            print(INPUTWORDS)
-            print("spelling correcting...")
-            INPUTWORDS = spell.correctSentence(INPUTWORDS)
-            print(INPUTWORDS)
+            INPUTWORDS=preCheck(STATEMENT)
 
             DOCLIST = BoolSearchDel.BoolSearch(INPUTWORDS, INDEX)
             print(len(DOCLIST),"DOCs :")
             print(DOCLIST)
         #短语查询
         elif choice == 4:
-            print("stemming...")
-            INPUTWORDS = stemming.lemmatize_sentence(STATEMENT, True)
-            print(INPUTWORDS)
-            print("spelling correcting...")
-            INPUTWORDS = spell.correctSentence(INPUTWORDS)
-            print(INPUTWORDS)
+            INPUTWORDS=preCheck(STATEMENT)
 
             WORDSET = set(INPUTWORDS)
 
@@ -120,12 +111,7 @@ while LOOP:
             list = searchWord.wildcardSearch(STATEMENT, INDEX, WORDLIST)
 
         elif choice == 6:
-            print("stemming...")
-            INPUTWORDS = stemming.lemmatize_sentence(STATEMENT, True)
-            print(INPUTWORDS)
-            print("spelling correcting...")
-            INPUTWORDS = spell.correctSentence(INPUTWORDS)
-            print(INPUTWORDS)
+            INPUTWORDS=preCheck(STATEMENT)
 
             WORDSET = set(INPUTWORDS)
 
