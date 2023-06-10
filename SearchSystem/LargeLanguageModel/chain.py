@@ -36,10 +36,12 @@ API_KEY=""
 
 embeddings = None
 text_splitter = CharacterTextSplitter( separator = "。",chunk_size=300, chunk_overlap=0)
+doc_splitter =CharacterTextSplitter(separator = "。\n\n",chunk_size=150, chunk_overlap=0)
 docsearch=None
 persist_directory = 'db'
 chain=None
 
+# 标准json的loader，内部完成了split text
 class chain_loader(BaseLoader):
 
     def __init__(self) -> None:
@@ -57,7 +59,13 @@ class chain_loader(BaseLoader):
                 doc=Document(page_content=item["page_content"] ,metadata=item["metadata"])
                 if len(doc.page_content) > 1000:
                     print(f'{path}/{filename} is too long, {doc}')
-                docs.append(doc)
+                # split text if filetype is doc 
+                if item["metadata"]["filetype"]=="doc":
+                    print(f"splitting doc {path}/{filename}")
+                    docs.extend(doc_splitter.split_documents([doc]))  
+                else:
+                    print(f"splitting {item['metadata']['filetype']} {path}/{filename}")
+                    docs.extend(text_splitter.split_documents([doc]))
 
         return docs
 
@@ -90,9 +98,7 @@ def embedding(path):
     
     embeddings = OpenAIEmbeddings(openai_api_key=getApiKey())
     loader = chain_loader()
-    data = loader.load(path)
-    split_docs = text_splitter.split_documents(data)
-    print(f'Found {len(split_docs)} documents')
+    split_docs = loader.load(path)
     print(f'embeding start')
     if len(split_docs) > 0:
         if docsearch is None:

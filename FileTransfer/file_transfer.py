@@ -25,11 +25,14 @@ def get_path(fileType):
 def get_file_path(fileType,fileName):
     return f'content/{fileType}/{fileName}'
 
-def store_file(content):
+def store_file(fileType,content):
     global counter
     # add metadata "doc ID"=counter into every item of content
     for item in content:
         item["metadata"]["doc ID"]=counter
+        # set fileType
+        item["metadata"]["fileType"]=fileType
+        
     filename=f'{counter}.json'
     counter+=1
     # transfer content into json
@@ -50,7 +53,7 @@ def transfer_doc():
                 "page_content":page.page_content,
                 "metadata":page.metadata
             })
-        filename=store_file(content)
+        filename=store_file("doc",content)
 
 def transfer_pdf():
     path=get_path("pdf")
@@ -64,7 +67,7 @@ def transfer_pdf():
                 "page_content":page.page_content,
                 "metadata":page.metadata
             })
-        filename=store_file(content)
+        filename=store_file("pdf",content)
 
 def transfer_wx():
     path=get_path("wx")
@@ -81,7 +84,7 @@ def transfer_wx():
                     "title": "wx/"+filename,
                 }
             })
-        filename=store_file(content)
+        filename=store_file("wx",content)
 
 def transfer_json():
     path=get_path("json")
@@ -99,7 +102,7 @@ def transfer_json():
                         "title": "json/"+filename,
                     }
                 })
-        filename=store_file(content)
+        filename=store_file("json",content)
 
 def run():
     for fold in FOLD_LIST:
