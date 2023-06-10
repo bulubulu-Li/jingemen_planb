@@ -8,6 +8,7 @@ from SpellingCorrect import spell
 from scoreQuery import sortDoc
 from BoolSearch import BoolSearchDel
 from InvertedIndex import establishIndex
+from LargeLanguageModel import chain
 import jieba
 #下载需要的依赖文件
 # nltk.download("wordnet")
@@ -27,7 +28,7 @@ INDEX = getIndex.getIndex_zh()
 print("loading the wordnet...")
 # stemming.lemmatize_sentence("a", False)
  
-PATH = tools.projectpath + DIRECTNAME
+PATH = tools.reuterspath
 FILES = os.listdir(tools.reuterspath)
 FILENUM = len(FILES)
 
@@ -52,17 +53,17 @@ def preCheck_zh(statement):
 
 while LOOP:
     print("searching operation: ")
-    print("[1] Overall [2]TOP K [3]BOOL [4]Phrase [5]wildcard [6]synonyms [7]exit")
+    print("[1] Overall [2]TOP K [3]BOOL [4]Phrase [5]wildcard [6]synonyms [7]LLM [8]exit")
     print("your choice(int):")
     try:
         choice = int(input())
-        if choice == 7:
+        if choice == 8:
             break
     except :
         print()
         continue
 
-    if choice >= 1 and choice <= 6:
+    if choice >= 1 and choice <= 7:
         print("input the query statement:")
         STATEMENT = input()
         if STATEMENT == "EXIT":
@@ -122,6 +123,9 @@ while LOOP:
             WORDSET = set(INPUTWORDS)
 
             resultlist = searchWord.searchSynonymsWord(INDEX,INPUTWORDS[0])
+
+        elif choice == 7:
+            print(chain.Retrieve(STATEMENT,PATH))
 
 
     else:
