@@ -31,7 +31,7 @@ def store_file(fileType,content):
     for item in content:
         item["metadata"]["doc ID"]=counter
         # set fileType
-        item["metadata"]["fileType"]=fileType
+        item["metadata"]["filetype"]=fileType
         
     filename=f'{counter}.json'
     counter+=1
