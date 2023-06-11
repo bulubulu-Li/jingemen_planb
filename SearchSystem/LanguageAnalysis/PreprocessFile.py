@@ -1,12 +1,25 @@
 import os
 import tools
 from LanguageAnalysis import stemming
+import jieba
+import json
+
 
 def preProcess(filename):
-    file = open(filename,'r')
+    file = open(filename, 'r')
     content = file.read()
-    words = stemming.lemmatize_sentence(content,False)
+    words = stemming.lemmatize_sentence(content, False)
     return words
+
+
+def preProcess_zh(filename):
+    file = open(filename, 'r', encoding='utf-8')
+    content = json.load(file)
+    words=[]
+    for page in content:
+        words+=jieba.cut(page["page_content"])
+    return words
+
 
 def processDirectory(directname):
     path = tools.projectpath
@@ -19,4 +32,4 @@ def processDirectory(directname):
         # print(content)
     return result
 
-#processDirectory('test')
+# processDirectory('test')
