@@ -1,4 +1,5 @@
 *__pycache__
-SearchSystem/db*
-SearchSystem/invertIndex_zh.json
-SearchSystem/wordList_zh.json
+# SearchSystem/db*
+# SearchSystem/invertIndex_zh.json
+# SearchSystem/wordList_zh.json
+SearchSystem/secret.yaml
