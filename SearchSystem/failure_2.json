@@ -1,0 +1,5692 @@
+[
+    {
+        "question": "一般来说，我们可以采用哪些方法来处理运动损伤？",
+        "retrieved": [
+            131,
+            93,
+            186
+        ],
+        "expected": 100,
+        "method": 2
+    },
+    {
+        "question": "如何查询省社保系统资格认证情况？",
+        "retrieved": [
+            222,
+            223,
+            183
+        ],
+        "expected": 100,
+        "method": 2
+    },
+    {
+        "question": "中暑是由什么原因引起的？",
+        "retrieved": [
+            44,
+            67,
+            155
+        ],
+        "expected": 100,
+        "method": 2
+    },
+    {
+        "question": "肺结核可以分为哪几类？",
+        "retrieved": [
+            150,
+            301,
+            205
+        ],
+        "expected": 100,
+        "method": 2
+    },
+    {
+        "question": "胆固醇有哪些生理功能？",
+        "retrieved": [
+            61,
+            36,
+            328
+        ],
+        "expected": 100,
+        "method": 2
+    },
+    {
+        "question": "办理特种作业上岗操作证需要准备哪些材料？",
+        "retrieved": [
+            164,
+            148,
+            160
+        ],
+        "expected": 101,
+        "method": 2
+    },
+    {
+        "question": "皮下埋植避孕剂如何放置？",
+        "retrieved": [
+            309,
+            326,
+            48
+        ],
+        "expected": 101,
+        "method": 2
+    },
+    {
+        "question": "怎样预防维生素A缺乏？",
+        "retrieved": [
+            91,
+            159,
+            35
+        ],
+        "expected": 101,
+        "method": 2
+    },
+    {
+        "question": "在选择进口消毒剂时，应该注意哪些方面？",
+        "retrieved": [
+            297,
+            198,
+            222
+        ],
+        "expected": 101,
+        "method": 2
+    },
+    {
+        "question": "儿童在2月龄时需要接种哪种疫苗？",
+        "retrieved": [
+            44,
+            117,
+            59
+        ],
+        "expected": 102,
+        "method": 2
+    },
+    {
+        "question": "地质灾害是由什么因素引发的？",
+        "retrieved": [
+            45,
+            225,
+            261
+        ],
+        "expected": 102,
+        "method": 2
+    },
+    {
+        "question": "哪些人容易感染霍乱？",
+        "retrieved": [
+            130,
+            319,
+            180
+        ],
+        "expected": 102,
+        "method": 2
+    },
+    {
+        "question": "在我市缴纳公积金多久后可以申请购房贷款？贷款额度是多少？",
+        "retrieved": [
+            253,
+            163,
+            85
+        ],
+        "expected": 102,
+        "method": 2
+    },
+    {
+        "question": "得了一次性病后，是否会再次感染？",
+        "retrieved": [
+            124,
+            144,
+            306
+        ],
+        "expected": 102,
+        "method": 2
+    },
+    {
+        "question": "哪些人容易患上钩体病？",
+        "retrieved": [
+            71,
+            316,
+            127
+        ],
+        "expected": 102,
+        "method": 2
+    },
+    {
+        "question": "儿童在5月龄时需要接种哪种疫苗？",
+        "retrieved": [
+            44,
+            117,
+            59
+        ],
+        "expected": 102,
+        "method": 2
+    },
+    {
+        "question": "什么是内照射？",
+        "retrieved": [
+            179,
+            67,
+            288
+        ],
+        "expected": 103,
+        "method": 2
+    },
+    {
+        "question": "危险化学品的定义是什么？",
+        "retrieved": [
+            139,
+            148,
+            216
+        ],
+        "expected": 103,
+        "method": 2
+    },
+    {
+        "question": "办理特种作业证件可以通过哪个网站进行在线申请？",
+        "retrieved": [
+            238,
+            246,
+            52
+        ],
+        "expected": 103,
+        "method": 2
+    },
+    {
+        "question": "氮氧化物包括哪些化合物？",
+        "retrieved": [
+            109,
+            124,
+            198
+        ],
+        "expected": 103,
+        "method": 2
+    },
+    {
+        "question": "肺结核的常见症状有哪些？",
+        "retrieved": [
+            90,
+            324,
+            100
+        ],
+        "expected": 103,
+        "method": 2
+    },
+    {
+        "question": "如何查询省社保系统中一个人是否有多个号码？",
+        "retrieved": [
+            287,
+            219,
+            184
+        ],
+        "expected": 103,
+        "method": 2
+    },
+    {
+        "question": "滴虫阴道炎为什么需要积极治疗？",
+        "retrieved": [
+            113,
+            290,
+            93
+        ],
+        "expected": 103,
+        "method": 2
+    },
+    {
+        "question": "急性出血性结膜炎的临床表现是什么？",
+        "retrieved": [
+            170,
+            119,
+            116
+        ],
+        "expected": 104,
+        "method": 2
+    },
+    {
+        "question": "黄热病的预防措施有哪些？",
+        "retrieved": [
+            70,
+            80,
+            88
+        ],
+        "expected": 104,
+        "method": 2
+    },
+    {
+        "question": "慢性乙型肝炎的治疗原则是什么？",
+        "retrieved": [
+            172,
+            101,
+            106
+        ],
+        "expected": 104,
+        "method": 2
+    },
+    {
+        "question": "麻疹疫苗接种在哪个部位？",
+        "retrieved": [
+            313,
+            116,
+            134
+        ],
+        "expected": 105,
+        "method": 2
+    },
+    {
+        "question": "什么是滑坡灾害？",
+        "retrieved": [
+            278,
+            235,
+            213
+        ],
+        "expected": 105,
+        "method": 2
+    },
+    {
+        "question": "如何预防煤气中毒？",
+        "retrieved": [
+            146,
+            109,
+            89
+        ],
+        "expected": 105,
+        "method": 2
+    },
+    {
+        "question": "什么是子宫肌瘤？",
+        "retrieved": [
+            42,
+            156,
+            139
+        ],
+        "expected": 106,
+        "method": 2
+    },
+    {
+        "question": "申请职业培训补贴的条件是什么？",
+        "retrieved": [
+            227,
+            269,
+            150
+        ],
+        "expected": 106,
+        "method": 2
+    },
+    {
+        "question": "公积金贷款是否支持贷款期限变更？",
+        "retrieved": [
+            163,
+            269,
+            210
+        ],
+        "expected": 106,
+        "method": 2
+    },
+    {
+        "question": "为什么孕前营养很重要？",
+        "retrieved": [
+            329,
+            283,
+            328
+        ],
+        "expected": 106,
+        "method": 2
+    },
+    {
+        "question": "细菌性食物中毒是如何引起的？",
+        "retrieved": [
+            34,
+            285,
+            139
+        ],
+        "expected": 106,
+        "method": 2
+    },
+    {
+        "question": "办理新生儿出生登记需要提供哪些证件？",
+        "retrieved": [
+            2,
+            279,
+            212
+        ],
+        "expected": 107,
+        "method": 2
+    },
+    {
+        "question": "申请临时救助需要提供哪些材料？",
+        "retrieved": [
+            118,
+            276,
+            289
+        ],
+        "expected": 107,
+        "method": 2
+    },
+    {
+        "question": "申请特困人员认定需要提供哪些材料？",
+        "retrieved": [
+            2,
+            154,
+            260
+        ],
+        "expected": 107,
+        "method": 2
+    },
+    {
+        "question": "大学生实习实训补贴的办理流程是怎样的？",
+        "retrieved": [
+            53,
+            104,
+            229
+        ],
+        "expected": 108,
+        "method": 2
+    },
+    {
+        "question": "A群脑膜炎球菌疫苗的免疫程序是什么？",
+        "retrieved": [
+            178,
+            67,
+            136
+        ],
+        "expected": 109,
+        "method": 2
+    },
+    {
+        "question": "黄热病的治疗方法有哪些？",
+        "retrieved": [
+            70,
+            88,
+            177
+        ],
+        "expected": 109,
+        "method": 2
+    },
+    {
+        "question": "申请技能提升补贴的条件是什么？",
+        "retrieved": [
+            269,
+            267,
+            275
+        ],
+        "expected": 109,
+        "method": 2
+    },
+    {
+        "question": "如何预防药物中毒？",
+        "retrieved": [
+            190,
+            292,
+            168
+        ],
+        "expected": 109,
+        "method": 2
+    },
+    {
+        "question": "为什么一定要按照免疫程序进行预防接种？",
+        "retrieved": [
+            89,
+            117,
+            53
+        ],
+        "expected": 109,
+        "method": 2
+    },
+    {
+        "question": "煤气中毒时应该采取哪些急救措施？",
+        "retrieved": [
+            53,
+            55,
+            105
+        ],
+        "expected": 109,
+        "method": 2
+    },
+    {
+        "question": "人轮状病毒感染的症状有哪些？",
+        "retrieved": [
+            92,
+            88,
+            142
+        ],
+        "expected": 109,
+        "method": 2
+    },
+    {
+        "question": "中暑发生时应该采取哪些急救措施？",
+        "retrieved": [
+            44,
+            180,
+            48
+        ],
+        "expected": 109,
+        "method": 2
+    },
+    {
+        "question": "儿童在1月龄时需要接种哪种疫苗？",
+        "retrieved": [
+            44,
+            117,
+            59
+        ],
+        "expected": 109,
+        "method": 2
+    },
+    {
+        "question": "请提供一个问题",
+        "retrieved": [
+            266,
+            238,
+            123
+        ],
+        "expected": 11,
+        "method": 2
+    },
+    {
+        "question": "登革热是由什么病毒引起的？",
+        "retrieved": [
+            138,
+            136,
+            144
+        ],
+        "expected": 110,
+        "method": 2
+    },
+    {
+        "question": "什么是放射反应？",
+        "retrieved": [
+            180,
+            190,
+            281
+        ],
+        "expected": 110,
+        "method": 2
+    },
+    {
+        "question": "职业培训补贴的申报对象是什么？",
+        "retrieved": [
+            227,
+            269,
+            56
+        ],
+        "expected": 110,
+        "method": 2
+    },
+    {
+        "question": "猩红热是由什么引起的？",
+        "retrieved": [
+            320,
+            106,
+            125
+        ],
+        "expected": 110,
+        "method": 2
+    },
+    {
+        "question": "生产经营单位的安全生产管理机构和安全生产管理人员需要履行哪些职责？",
+        "retrieved": [
+            222,
+            246,
+            238
+        ],
+        "expected": 111,
+        "method": 2
+    },
+    {
+        "question": "什么是大风灾害？",
+        "retrieved": [
+            196,
+            103,
+            235
+        ],
+        "expected": 111,
+        "method": 2
+    },
+    {
+        "question": "如何防止儿童烫伤？",
+        "retrieved": [
+            294,
+            186,
+            76
+        ],
+        "expected": 111,
+        "method": 2
+    },
+    {
+        "question": "银行办理的装修贷款能否转为公积金贷款？",
+        "retrieved": [
+            137,
+            256,
+            276
+        ],
+        "expected": 112,
+        "method": 2
+    },
+    {
+        "question": "如何对垃圾进行消毒处理？",
+        "retrieved": [
+            31,
+            317,
+            271
+        ],
+        "expected": 112,
+        "method": 2
+    },
+    {
+        "question": "雷电灾害是什么？",
+        "retrieved": [
+            233,
+            103,
+            225
+        ],
+        "expected": 112,
+        "method": 2
+    },
+    {
+        "question": "流行性出血热的潜伏期是多久？",
+        "retrieved": [
+            49,
+            109,
+            320
+        ],
+        "expected": 112,
+        "method": 2
+    },
+    {
+        "question": "如何才能进行规范治疗？",
+        "retrieved": [
+            318,
+            186,
+            327
+        ],
+        "expected": 113,
+        "method": 2
+    },
+    {
+        "question": "农药中毒发生的原因有哪些？",
+        "retrieved": [
+            235,
+            298,
+            166
+        ],
+        "expected": 113,
+        "method": 2
+    },
+    {
+        "question": "A群C群流脑多糖疫苗的接种程序是什么？",
+        "retrieved": [
+            178,
+            283,
+            67
+        ],
+        "expected": 113,
+        "method": 2
+    },
+    {
+        "question": "湖北省区域内的企业应当履行哪些安全生产主体责任？",
+        "retrieved": [
+            238,
+            230,
+            234
+        ],
+        "expected": 113,
+        "method": 2
+    },
+    {
+        "question": "如何预防龋齿？",
+        "retrieved": [
+            310,
+            183,
+            332
+        ],
+        "expected": 114,
+        "method": 2
+    },
+    {
+        "question": "红码如何转码为黄码？",
+        "retrieved": [
+            165,
+            160,
+            277
+        ],
+        "expected": 114,
+        "method": 2
+    },
+    {
+        "question": "麻疹疫苗是否收费？",
+        "retrieved": [
+            296,
+            157,
+            71
+        ],
+        "expected": 114,
+        "method": 2
+    },
+    {
+        "question": "荆门市公安局的主要职能是什么？",
+        "retrieved": [
+            246,
+            244,
+            245
+        ],
+        "expected": 114,
+        "method": 2
+    },
+    {
+        "question": "出现药物不良反应后应该怎么办？",
+        "retrieved": [
+            36,
+            281,
+            34
+        ],
+        "expected": 114,
+        "method": 2
+    },
+    {
+        "question": "哪些场所存在中毒危险？",
+        "retrieved": [
+            55,
+            86,
+            321
+        ],
+        "expected": 114,
+        "method": 2
+    },
+    {
+        "question": "慢性病多发生在哪个年龄段？",
+        "retrieved": [
+            310,
+            308,
+            167
+        ],
+        "expected": 114,
+        "method": 2
+    },
+    {
+        "question": "补助标准包括哪些内容？",
+        "retrieved": [
+            264,
+            2,
+            311
+        ],
+        "expected": 114,
+        "method": 2
+    },
+    {
+        "question": "化妆品的定义是什么？",
+        "retrieved": [
+            148,
+            139,
+            301
+        ],
+        "expected": 114,
+        "method": 2
+    },
+    {
+        "question": "儿童在12月龄时可以接种哪种疫苗？",
+        "retrieved": [
+            44,
+            117,
+            59
+        ],
+        "expected": 114,
+        "method": 2
+    },
+    {
+        "question": "什么是森林火灾？",
+        "retrieved": [
+            219,
+            225,
+            318
+        ],
+        "expected": 114,
+        "method": 2
+    },
+    {
+        "question": "在鄂外籍、港澳台人员如何申领健康码？",
+        "retrieved": [
+            119,
+            121,
+            117
+        ],
+        "expected": 115,
+        "method": 2
+    },
+    {
+        "question": "乙脑的监测工作包括哪些方面？",
+        "retrieved": [
+            243,
+            116,
+            125
+        ],
+        "expected": 115,
+        "method": 2
+    },
+    {
+        "question": "接种水痘疫苗需要注意什么？",
+        "retrieved": [
+            317,
+            281,
+            329
+        ],
+        "expected": 115,
+        "method": 2
+    },
+    {
+        "question": "农产品质量安全的监督管理工作由哪些部门主管或负责？",
+        "retrieved": [
+            222,
+            97,
+            154
+        ],
+        "expected": 116,
+        "method": 2
+    },
+    {
+        "question": "哪些情况下不适合放置宫内节育器？",
+        "retrieved": [
+            91,
+            106,
+            48
+        ],
+        "expected": 116,
+        "method": 2
+    },
+    {
+        "question": "什么是刺激性毒剂？",
+        "retrieved": [
+            326,
+            64,
+            189
+        ],
+        "expected": 116,
+        "method": 2
+    },
+    {
+        "question": "钩体病是如何传播的？",
+        "retrieved": [
+            316,
+            127,
+            317
+        ],
+        "expected": 116,
+        "method": 2
+    },
+    {
+        "question": "为什么接种疫苗能预防疾病？",
+        "retrieved": [
+            89,
+            123,
+            51
+        ],
+        "expected": 116,
+        "method": 2
+    },
+    {
+        "question": "乙脑的诊断依据是什么？",
+        "retrieved": [
+            116,
+            310,
+            123
+        ],
+        "expected": 117,
+        "method": 2
+    },
+    {
+        "question": "外籍、港澳台人员如何申领湖北健康码？",
+        "retrieved": [
+            121,
+            119,
+            115
+        ],
+        "expected": 117,
+        "method": 2
+    },
+    {
+        "question": "非亲生父母是否可以享受个人所得税3岁以下婴幼儿照护专项附加扣除政策？",
+        "retrieved": [
+            73,
+            267,
+            213
+        ],
+        "expected": 117,
+        "method": 2
+    },
+    {
+        "question": "得了性病后应该注意哪些事项？",
+        "retrieved": [
+            194,
+            123,
+            312
+        ],
+        "expected": 117,
+        "method": 2
+    },
+    {
+        "question": "学龄前儿童容易出现哪些营养问题？",
+        "retrieved": [
+            99,
+            68,
+            110
+        ],
+        "expected": 117,
+        "method": 2
+    },
+    {
+        "question": "疫苗接种是否安全？",
+        "retrieved": [
+            89,
+            166,
+            93
+        ],
+        "expected": 117,
+        "method": 2
+    },
+    {
+        "question": "百白破联合疫苗可以预防哪种疾病？",
+        "retrieved": [
+            75,
+            33,
+            51
+        ],
+        "expected": 117,
+        "method": 2
+    },
+    {
+        "question": "接种疫苗后是否一定不会传染病？",
+        "retrieved": [
+            93,
+            331,
+            123
+        ],
+        "expected": 117,
+        "method": 2
+    },
+    {
+        "question": "荆门市教育局直管学校有哪些？",
+        "retrieved": [
+            261,
+            275,
+            162
+        ],
+        "expected": 118,
+        "method": 2
+    },
+    {
+        "question": "申请计量标准器具核准新建时需要提交哪些资料？",
+        "retrieved": [
+            222,
+            225,
+            224
+        ],
+        "expected": 118,
+        "method": 2
+    },
+    {
+        "question": "全身中毒性毒剂中毒的处理方法是什么？",
+        "retrieved": [
+            189,
+            184,
+            64
+        ],
+        "expected": 119,
+        "method": 2
+    },
+    {
+        "question": "如何预防伤寒和副伤寒？",
+        "retrieved": [
+            76,
+            99,
+            143
+        ],
+        "expected": 119,
+        "method": 2
+    },
+    {
+        "question": "谁可以享受失业保险待遇？",
+        "retrieved": [
+            208,
+            220,
+            154
+        ],
+        "expected": 119,
+        "method": 2
+    },
+    {
+        "question": "水痘是通过什么途径传播的？",
+        "retrieved": [
+            98,
+            282,
+            76
+        ],
+        "expected": 119,
+        "method": 2
+    },
+    {
+        "question": "狂犬疫苗是否需要付费？",
+        "retrieved": [
+            117,
+            108,
+            123
+        ],
+        "expected": 119,
+        "method": 2
+    },
+    {
+        "question": "失业保险待遇的办理流程是什么？",
+        "retrieved": [
+            275,
+            263,
+            221
+        ],
+        "expected": 119,
+        "method": 2
+    },
+    {
+        "question": "百白破联合疫苗的免疫程序是怎样的？",
+        "retrieved": [
+            121,
+            117,
+            193
+        ],
+        "expected": 120,
+        "method": 2
+    },
+    {
+        "question": "什么是风暴潮灾害？",
+        "retrieved": [
+            235,
+            112,
+            46
+        ],
+        "expected": 120,
+        "method": 2
+    },
+    {
+        "question": "单位停缴住房公积金后，个人可以自己缴纳吗？",
+        "retrieved": [
+            271,
+            276,
+            250
+        ],
+        "expected": 120,
+        "method": 2
+    },
+    {
+        "question": "流行性出血热的治疗原则是什么？",
+        "retrieved": [
+            115,
+            103,
+            109
+        ],
+        "expected": 120,
+        "method": 2
+    },
+    {
+        "question": "失业保险待遇的申报条件是什么？",
+        "retrieved": [
+            275,
+            56,
+            220
+        ],
+        "expected": 120,
+        "method": 2
+    },
+    {
+        "question": "根据《中华人民共和国农产品质量安全法》，哪些情形的农产品不得销售？",
+        "retrieved": [
+            235,
+            234,
+            245
+        ],
+        "expected": 120,
+        "method": 2
+    },
+    {
+        "question": "宫外孕的处理方法有哪些？",
+        "retrieved": [
+            93,
+            171,
+            318
+        ],
+        "expected": 120,
+        "method": 2
+    },
+    {
+        "question": "根据皮肤条件，我们应该如何选择化妆品？",
+        "retrieved": [
+            87,
+            69,
+            297
+        ],
+        "expected": 121,
+        "method": 2
+    },
+    {
+        "question": "中毒性毒剂中毒后会有哪些表现？",
+        "retrieved": [
+            200,
+            328,
+            189
+        ],
+        "expected": 121,
+        "method": 2
+    },
+    {
+        "question": "什么是急性高原反应？",
+        "retrieved": [
+            297,
+            195,
+            79
+        ],
+        "expected": 121,
+        "method": 2
+    },
+    {
+        "question": "在跟踪观察中，需要注意哪些主要内容？",
+        "retrieved": [
+            119,
+            37,
+            290
+        ],
+        "expected": 121,
+        "method": 2
+    },
+    {
+        "question": "为什么要接种狂犬病疫苗？",
+        "retrieved": [
+            89,
+            170,
+            172
+        ],
+        "expected": 121,
+        "method": 2
+    },
+    {
+        "question": "风疹的诊断方法有哪些？",
+        "retrieved": [
+            71,
+            82,
+            66
+        ],
+        "expected": 122,
+        "method": 2
+    },
+    {
+        "question": "黄码如何转码？",
+        "retrieved": [
+            277,
+            165,
+            160
+        ],
+        "expected": 123,
+        "method": 2
+    },
+    {
+        "question": "怎样预防除草剂中毒？",
+        "retrieved": [
+            124,
+            167,
+            313
+        ],
+        "expected": 123,
+        "method": 2
+    },
+    {
+        "question": "什么是月经？",
+        "retrieved": [
+            128,
+            280,
+            179
+        ],
+        "expected": 123,
+        "method": 2
+    },
+    {
+        "question": "申请就业生活补助的条件是什么？",
+        "retrieved": [
+            2,
+            276,
+            269
+        ],
+        "expected": 124,
+        "method": 2
+    },
+    {
+        "question": "口服避孕药对哪些人群不安全？",
+        "retrieved": [
+            80,
+            72,
+            89
+        ],
+        "expected": 124,
+        "method": 2
+    },
+    {
+        "question": "为什么在怀孕前进行口腔治疗很重要？",
+        "retrieved": [
+            80,
+            77,
+            315
+        ],
+        "expected": 125,
+        "method": 2
+    },
+    {
+        "question": "乙脑疫苗需要接种几剂次？接种的时间间隔是多久？",
+        "retrieved": [
+            102,
+            89,
+            332
+        ],
+        "expected": 125,
+        "method": 2
+    },
+    {
+        "question": "流感的症状有哪些？",
+        "retrieved": [
+            130,
+            54,
+            56
+        ],
+        "expected": 125,
+        "method": 2
+    },
+    {
+        "question": "噪声对人体有哪些危害？",
+        "retrieved": [
+            302,
+            131,
+            194
+        ],
+        "expected": 125,
+        "method": 2
+    },
+    {
+        "question": "创业带动就业补贴的办理流程是什么？",
+        "retrieved": [
+            269,
+            246,
+            214
+        ],
+        "expected": 125,
+        "method": 2
+    },
+    {
+        "question": "什么情况下健康码会变成黄码？",
+        "retrieved": [
+            165,
+            160,
+            132
+        ],
+        "expected": 125,
+        "method": 2
+    },
+    {
+        "question": "男女冠心病的患病率有什么差异？",
+        "retrieved": [
+            312,
+            86,
+            51
+        ],
+        "expected": 125,
+        "method": 2
+    },
+    {
+        "question": "申请创业带动就业补贴的条件是什么？",
+        "retrieved": [
+            269,
+            214,
+            322
+        ],
+        "expected": 126,
+        "method": 2
+    },
+    {
+        "question": "氰化物是什么？",
+        "retrieved": [
+            128,
+            306,
+            202
+        ],
+        "expected": 126,
+        "method": 2
+    },
+    {
+        "question": "生产经营单位的应急预案需要进行评估吗？评估的内容有哪些？",
+        "retrieved": [
+            128,
+            132,
+            137
+        ],
+        "expected": 126,
+        "method": 2
+    },
+    {
+        "question": "得了黑热病应该去哪里进行治疗？",
+        "retrieved": [
+            297,
+            187,
+            71
+        ],
+        "expected": 126,
+        "method": 2
+    },
+    {
+        "question": "什么是安全生产事故？",
+        "retrieved": [
+            318,
+            130,
+            230
+        ],
+        "expected": 126,
+        "method": 2
+    },
+    {
+        "question": "针对慢性病的健康教育的主要内容有哪些？",
+        "retrieved": [
+            151,
+            149,
+            172
+        ],
+        "expected": 126,
+        "method": 2
+    },
+    {
+        "question": "什么情况下健康码会变成红码？",
+        "retrieved": [
+            165,
+            160,
+            205
+        ],
+        "expected": 127,
+        "method": 2
+    },
+    {
+        "question": "在哪些地方可以接种到含白喉成分的疫苗？",
+        "retrieved": [
+            121,
+            331,
+            97
+        ],
+        "expected": 127,
+        "method": 2
+    },
+    {
+        "question": "接种疫苗后出现的一般反应应该如何处理？",
+        "retrieved": [
+            219,
+            93,
+            169
+        ],
+        "expected": 127,
+        "method": 2
+    },
+    {
+        "question": "急性肝炎患者多久可以恢复健康？慢性肝炎会有什么后果？",
+        "retrieved": [
+            169,
+            131,
+            75
+        ],
+        "expected": 127,
+        "method": 2
+    },
+    {
+        "question": "办理就业生活补助需要向哪个部门申报？",
+        "retrieved": [
+            209,
+            2,
+            52
+        ],
+        "expected": 127,
+        "method": 2
+    },
+    {
+        "question": "合理减体重的要求是什么？",
+        "retrieved": [
+            295,
+            192,
+            189
+        ],
+        "expected": 128,
+        "method": 2
+    },
+    {
+        "question": "一次性创业补贴可以在哪些地方办理？",
+        "retrieved": [
+            269,
+            227,
+            322
+        ],
+        "expected": 128,
+        "method": 2
+    },
+    {
+        "question": "膳食对癌症有什么影响？",
+        "retrieved": [
+            49,
+            184,
+            298
+        ],
+        "expected": 128,
+        "method": 2
+    },
+    {
+        "question": "哪些人可以享受就业生活补助政策？",
+        "retrieved": [
+            2,
+            163,
+            276
+        ],
+        "expected": 128,
+        "method": 2
+    },
+    {
+        "question": "“四上”企业指的是哪些类型的企业？",
+        "retrieved": [
+            224,
+            246,
+            85
+        ],
+        "expected": 129,
+        "method": 2
+    },
+    {
+        "question": "什么情况下会存在杀虫气雾剂中毒的危险？",
+        "retrieved": [
+            321,
+            137,
+            192
+        ],
+        "expected": 130,
+        "method": 2
+    },
+    {
+        "question": "硫酸二甲酯中毒的预防措施有哪些？",
+        "retrieved": [
+            121,
+            195,
+            308
+        ],
+        "expected": 130,
+        "method": 2
+    },
+    {
+        "question": "新生儿的睡眠时间是多少？",
+        "retrieved": [
+            284,
+            38,
+            95
+        ],
+        "expected": 130,
+        "method": 2
+    },
+    {
+        "question": "埃博拉病人的治疗方法有哪些？",
+        "retrieved": [
+            131,
+            122,
+            126
+        ],
+        "expected": 130,
+        "method": 2
+    },
+    {
+        "question": "流感是由什么引起的？",
+        "retrieved": [
+            54,
+            130,
+            136
+        ],
+        "expected": 131,
+        "method": 2
+    },
+    {
+        "question": "感染性病的人可能会出现哪些症状？",
+        "retrieved": [
+            308,
+            198,
+            83
+        ],
+        "expected": 131,
+        "method": 2
+    },
+    {
+        "question": "什么情况下健康码会变成“灰码”？",
+        "retrieved": [
+            132,
+            165,
+            197
+        ],
+        "expected": 131,
+        "method": 2
+    },
+    {
+        "question": "如何戒烟？",
+        "retrieved": [
+            287,
+            181,
+            102
+        ],
+        "expected": 131,
+        "method": 2
+    },
+    {
+        "question": "如何预防尖锐湿疣？",
+        "retrieved": [
+            321,
+            319,
+            177
+        ],
+        "expected": 131,
+        "method": 2
+    },
+    {
+        "question": "哪些昆虫能传播疾病？",
+        "retrieved": [
+            296,
+            299,
+            297
+        ],
+        "expected": 131,
+        "method": 2
+    },
+    {
+        "question": "哪些人可以享受创业带动就业补贴政策？",
+        "retrieved": [
+            322,
+            214,
+            269
+        ],
+        "expected": 132,
+        "method": 2
+    },
+    {
+        "question": "维生素C的功能是什么？缺乏维生素C会导致哪些症状？维生素C的主要食物来源有哪些？",
+        "retrieved": [
+            91,
+            304,
+            171
+        ],
+        "expected": 133,
+        "method": 2
+    },
+    {
+        "question": "室内环境检测结果能否准确判断对居民健康的影响？",
+        "retrieved": [
+            84,
+            230,
+            162
+        ],
+        "expected": 133,
+        "method": 2
+    },
+    {
+        "question": "急性出血性结膜炎是通过什么途径传播的？",
+        "retrieved": [
+            119,
+            170,
+            116
+        ],
+        "expected": 133,
+        "method": 2
+    },
+    {
+        "question": "就业困难人员社会保险补贴的申报条件是什么？",
+        "retrieved": [
+            267,
+            55,
+            2
+        ],
+        "expected": 133,
+        "method": 2
+    },
+    {
+        "question": "如何预防麻疹？",
+        "retrieved": [
+            83,
+            51,
+            49
+        ],
+        "expected": 134,
+        "method": 2
+    },
+    {
+        "question": "根据通知，对于高新技术企业的认定和奖励政策是怎样的？",
+        "retrieved": [
+            41,
+            277,
+            311
+        ],
+        "expected": 134,
+        "method": 2
+    },
+    {
+        "question": "谁是享受就业困难人员社会保险补贴政策的对象？",
+        "retrieved": [
+            269,
+            154,
+            208
+        ],
+        "expected": 134,
+        "method": 2
+    },
+    {
+        "question": "哪些人可以享受一次性就业补贴政策？",
+        "retrieved": [
+            2,
+            322,
+            269
+        ],
+        "expected": 135,
+        "method": 2
+    },
+    {
+        "question": "A群脑膜炎球菌疫苗的接种对象是哪些人？",
+        "retrieved": [
+            178,
+            67,
+            136
+        ],
+        "expected": 135,
+        "method": 2
+    },
+    {
+        "question": "哪些情况下不能接种麻腮风疫苗？",
+        "retrieved": [
+            59,
+            136,
+            182
+        ],
+        "expected": 135,
+        "method": 2
+    },
+    {
+        "question": "欧洲有哪些常见的疾病？",
+        "retrieved": [
+            146,
+            81,
+            41
+        ],
+        "expected": 135,
+        "method": 2
+    },
+    {
+        "question": "就业困难人员社会保险补贴的办理流程有哪些？",
+        "retrieved": [
+            267,
+            251,
+            2
+        ],
+        "expected": 135,
+        "method": 2
+    },
+    {
+        "question": "接种A群流脑多糖疫苗后需要注意什么？",
+        "retrieved": [
+            178,
+            187,
+            299
+        ],
+        "expected": 136,
+        "method": 2
+    },
+    {
+        "question": "是否有疫苗可以预防弓形虫病？",
+        "retrieved": [
+            61,
+            165,
+            180
+        ],
+        "expected": 136,
+        "method": 2
+    },
+    {
+        "question": "避孕药和避孕针是如何实现避孕的？",
+        "retrieved": [
+            55,
+            72,
+            110
+        ],
+        "expected": 136,
+        "method": 2
+    },
+    {
+        "question": "乙脑（日本脑炎）的预防方法有哪些？",
+        "retrieved": [
+            123,
+            66,
+            131
+        ],
+        "expected": 136,
+        "method": 2
+    },
+    {
+        "question": "哺乳期应该注意哪些事项？",
+        "retrieved": [
+            172,
+            194,
+            331
+        ],
+        "expected": 136,
+        "method": 2
+    },
+    {
+        "question": "登革热是通过哪种蚊子传播的？",
+        "retrieved": [
+            189,
+            45,
+            80
+        ],
+        "expected": 136,
+        "method": 2
+    },
+    {
+        "question": "新生儿出生后需要接种哪些疫苗？",
+        "retrieved": [
+            169,
+            146,
+            89
+        ],
+        "expected": 136,
+        "method": 2
+    },
+    {
+        "question": "申请就业创业服务补贴的条件是什么？",
+        "retrieved": [
+            269,
+            227,
+            246
+        ],
+        "expected": 136,
+        "method": 2
+    },
+    {
+        "question": "新生儿溶血病是如何发生的？",
+        "retrieved": [
+            60,
+            32,
+            37
+        ],
+        "expected": 137,
+        "method": 2
+    },
+    {
+        "question": "一次性就业补贴的申报条件有哪些？",
+        "retrieved": [
+            2,
+            269,
+            227
+        ],
+        "expected": 137,
+        "method": 2
+    },
+    {
+        "question": "生产经营单位应当编制什么？",
+        "retrieved": [
+            237,
+            222,
+            278
+        ],
+        "expected": 137,
+        "method": 2
+    },
+    {
+        "question": "高校毕业生社会保险补贴的办理流程是怎样的？",
+        "retrieved": [
+            154,
+            56,
+            267
+        ],
+        "expected": 137,
+        "method": 2
+    },
+    {
+        "question": "什么是成瘾行为？成瘾行为的特征是什么？",
+        "retrieved": [
+            70,
+            135,
+            89
+        ],
+        "expected": 138,
+        "method": 2
+    },
+    {
+        "question": "麻风病的潜伏期一般有多长？",
+        "retrieved": [
+            313,
+            299,
+            122
+        ],
+        "expected": 138,
+        "method": 2
+    },
+    {
+        "question": "白化病的主要特点有哪些？",
+        "retrieved": [
+            281,
+            179,
+            160
+        ],
+        "expected": 138,
+        "method": 2
+    },
+    {
+        "question": "应急预案编制前需要进行哪些工作？",
+        "retrieved": [
+            128,
+            148,
+            143
+        ],
+        "expected": 138,
+        "method": 2
+    },
+    {
+        "question": "更年期妇女可能会出现哪些症状？",
+        "retrieved": [
+            283,
+            181,
+            317
+        ],
+        "expected": 139,
+        "method": 2
+    },
+    {
+        "question": "腮腺炎疫苗应该在哪个部位接种？",
+        "retrieved": [
+            47,
+            175,
+            71
+        ],
+        "expected": 139,
+        "method": 2
+    },
+    {
+        "question": "怎样预防氨中毒？",
+        "retrieved": [
+            62,
+            332,
+            60
+        ],
+        "expected": 139,
+        "method": 2
+    },
+    {
+        "question": "沙洋县灵活就业人员社会保险补贴的申请对象有哪些？",
+        "retrieved": [
+            2,
+            276,
+            154
+        ],
+        "expected": 140,
+        "method": 2
+    },
+    {
+        "question": "退役士兵的安置地可以是哪些地方？",
+        "retrieved": [
+            220,
+            161,
+            219
+        ],
+        "expected": 140,
+        "method": 2
+    },
+    {
+        "question": "沙洋县2023年对小微企业和个体工商户的房租政策是什么？",
+        "retrieved": [
+            238,
+            132,
+            269
+        ],
+        "expected": 141,
+        "method": 2
+    },
+    {
+        "question": "什么是酮血症和酮尿症？",
+        "retrieved": [
+            54,
+            42,
+            331
+        ],
+        "expected": 142,
+        "method": 2
+    },
+    {
+        "question": "就业创业服务补贴的办理流程是怎样的？",
+        "retrieved": [
+            227,
+            149,
+            269
+        ],
+        "expected": 142,
+        "method": 2
+    },
+    {
+        "question": "如何预防登革热？",
+        "retrieved": [
+            136,
+            110,
+            144
+        ],
+        "expected": 142,
+        "method": 2
+    },
+    {
+        "question": "如果自己得了流感，应该如何防止感染他人？",
+        "retrieved": [
+            123,
+            130,
+            47
+        ],
+        "expected": 142,
+        "method": 2
+    },
+    {
+        "question": "艾滋病病毒可以通过哪些途径传播？",
+        "retrieved": [
+            172,
+            314,
+            316
+        ],
+        "expected": 142,
+        "method": 2
+    },
+    {
+        "question": "宝宝在这个阶段应该吃几次母乳？",
+        "retrieved": [
+            297,
+            201,
+            84
+        ],
+        "expected": 142,
+        "method": 2
+    },
+    {
+        "question": "放置宫内节育器后需要及时就医的情况有哪些？",
+        "retrieved": [
+            91,
+            106,
+            116
+        ],
+        "expected": 143,
+        "method": 2
+    },
+    {
+        "question": "接种A群脑膜炎球菌多糖疫苗有哪些注意事项？",
+        "retrieved": [
+            136,
+            178,
+            67
+        ],
+        "expected": 143,
+        "method": 2
+    },
+    {
+        "question": "哪些人容易患上糖尿病？",
+        "retrieved": [
+            130,
+            186,
+            190
+        ],
+        "expected": 143,
+        "method": 2
+    },
+    {
+        "question": "哪些情况下是禁止接种疫苗的？",
+        "retrieved": [
+            166,
+            128,
+            62
+        ],
+        "expected": 143,
+        "method": 2
+    },
+    {
+        "question": "宝宝在3-4个月大时如何与人进行交流？",
+        "retrieved": [
+            331,
+            93,
+            166
+        ],
+        "expected": 144,
+        "method": 2
+    },
+    {
+        "question": "乙脑的症状有哪些？",
+        "retrieved": [
+            124,
+            123,
+            116
+        ],
+        "expected": 144,
+        "method": 2
+    },
+    {
+        "question": "如何申请慢性病补助？",
+        "retrieved": [
+            149,
+            208,
+            151
+        ],
+        "expected": 144,
+        "method": 2
+    },
+    {
+        "question": "荆门市医保报销的条件是什么？需要准备哪些材料？",
+        "retrieved": [
+            98,
+            154,
+            149
+        ],
+        "expected": 145,
+        "method": 2
+    },
+    {
+        "question": "住房公积金贷款的办理流程是怎样的？",
+        "retrieved": [
+            2,
+            263,
+            137
+        ],
+        "expected": 145,
+        "method": 2
+    },
+    {
+        "question": "退伍军人的安置是指什么？",
+        "retrieved": [
+            309,
+            151,
+            215
+        ],
+        "expected": 145,
+        "method": 2
+    },
+    {
+        "question": "如何办理职工退休流程？",
+        "retrieved": [
+            211,
+            210,
+            157
+        ],
+        "expected": 146,
+        "method": 2
+    },
+    {
+        "question": "如何预防宝宝患病？",
+        "retrieved": [
+            89,
+            98,
+            92
+        ],
+        "expected": 146,
+        "method": 2
+    },
+    {
+        "question": "社会救助包括哪些内容？",
+        "retrieved": [
+            196,
+            118,
+            238
+        ],
+        "expected": 147,
+        "method": 2
+    },
+    {
+        "question": "为什么化妆品中使用防腐剂？",
+        "retrieved": [
+            50,
+            59,
+            94
+        ],
+        "expected": 148,
+        "method": 2
+    },
+    {
+        "question": "这篇文章提供了什么信息？",
+        "retrieved": [
+            31,
+            236,
+            84
+        ],
+        "expected": 148,
+        "method": 2
+    },
+    {
+        "question": "临时救助是为哪些家庭提供的？申请临时救助需要提交哪些材料？",
+        "retrieved": [
+            118,
+            276,
+            231
+        ],
+        "expected": 148,
+        "method": 2
+    },
+    {
+        "question": "引进劳动奖补的办理流程包括哪些步骤？",
+        "retrieved": [
+            151,
+            146,
+            74
+        ],
+        "expected": 148,
+        "method": 2
+    },
+    {
+        "question": "接种乙脑减毒活疫苗后需要注意什么？",
+        "retrieved": [
+            164,
+            87,
+            124
+        ],
+        "expected": 148,
+        "method": 2
+    },
+    {
+        "question": "哪些条件的高校毕业生可以申请就业补贴？",
+        "retrieved": [
+            322,
+            214,
+            56
+        ],
+        "expected": 149,
+        "method": 2
+    },
+    {
+        "question": "哪些人可以申请灵活就业社会保险补贴？如何办理相关登记？",
+        "retrieved": [
+            267,
+            2,
+            251
+        ],
+        "expected": 150,
+        "method": 2
+    },
+    {
+        "question": "应急预案由谁负责编制和实施？",
+        "retrieved": [
+            213,
+            148,
+            154
+        ],
+        "expected": 151,
+        "method": 2
+    },
+    {
+        "question": "我市的应急预案管理部门有哪些？",
+        "retrieved": [
+            128,
+            137,
+            136
+        ],
+        "expected": 153,
+        "method": 2
+    },
+    {
+        "question": "荆门市卫生健康委员会的机构职能有哪些？",
+        "retrieved": [
+            213,
+            222,
+            238
+        ],
+        "expected": 154,
+        "method": 2
+    },
+    {
+        "question": "一次性求职创业补贴的办理流程包括哪些步骤？",
+        "retrieved": [
+            66,
+            268,
+            156
+        ],
+        "expected": 154,
+        "method": 2
+    },
+    {
+        "question": "荆门市的低保和社会救助标准将有什么变化？",
+        "retrieved": [
+            41,
+            252,
+            225
+        ],
+        "expected": 154,
+        "method": 2
+    },
+    {
+        "question": "异地办理身份证的具体流程是什么？",
+        "retrieved": [
+            146,
+            151,
+            155
+        ],
+        "expected": 154,
+        "method": 2
+    },
+    {
+        "question": "大学生创业项目资金扶持的申报条件是什么？",
+        "retrieved": [
+            161,
+            126,
+            214
+        ],
+        "expected": 155,
+        "method": 2
+    },
+    {
+        "question": "如何办理道路货运运输从业资格证？",
+        "retrieved": [
+            254,
+            208,
+            215
+        ],
+        "expected": 155,
+        "method": 2
+    },
+    {
+        "question": "接种新冠疫苗时需要注意哪些事项？",
+        "retrieved": [
+            166,
+            44,
+            89
+        ],
+        "expected": 155,
+        "method": 2
+    },
+    {
+        "question": "如果出现中暑症状，应该采取哪些急救措施？",
+        "retrieved": [
+            44,
+            180,
+            48
+        ],
+        "expected": 155,
+        "method": 2
+    },
+    {
+        "question": "1～3岁的宝宝的身体发育状况如何？",
+        "retrieved": [
+            186,
+            308,
+            191
+        ],
+        "expected": 155,
+        "method": 2
+    },
+    {
+        "question": "发烧的孩子能接种疫苗吗？",
+        "retrieved": [
+            81,
+            44,
+            190
+        ],
+        "expected": 155,
+        "method": 2
+    },
+    {
+        "question": "哪些人可以申请法律援助？",
+        "retrieved": [
+            267,
+            41,
+            205
+        ],
+        "expected": 155,
+        "method": 2
+    },
+    {
+        "question": "接种含麻疹成分疫苗需要注意什么？",
+        "retrieved": [
+            51,
+            33,
+            146
+        ],
+        "expected": 156,
+        "method": 2
+    },
+    {
+        "question": "儿童在8月龄时需要接种哪些疫苗？",
+        "retrieved": [
+            44,
+            313,
+            117
+        ],
+        "expected": 157,
+        "method": 2
+    },
+    {
+        "question": "接种A群C群流脑多糖疫苗后需要注意什么？",
+        "retrieved": [
+            178,
+            283,
+            187
+        ],
+        "expected": 157,
+        "method": 2
+    },
+    {
+        "question": "哪些情况下可以提取住房公积金？",
+        "retrieved": [
+            210,
+            256,
+            2
+        ],
+        "expected": 157,
+        "method": 2
+    },
+    {
+        "question": "流脑疫苗应该在什么时候接种？",
+        "retrieved": [
+            316,
+            44,
+            169
+        ],
+        "expected": 157,
+        "method": 2
+    },
+    {
+        "question": "放射性皮肤疾病包括哪些类型？",
+        "retrieved": [
+            186,
+            296,
+            294
+        ],
+        "expected": 157,
+        "method": 2
+    },
+    {
+        "question": "开具无犯罪记录需要准备哪些材料？",
+        "retrieved": [
+            2,
+            246,
+            269
+        ],
+        "expected": 157,
+        "method": 2
+    },
+    {
+        "question": "狂犬病的潜伏期一般是多长时间？",
+        "retrieved": [
+            111,
+            290,
+            166
+        ],
+        "expected": 158,
+        "method": 2
+    },
+    {
+        "question": "道路危险货物运输驾驶员需要满足哪些条件？",
+        "retrieved": [
+            254,
+            208,
+            222
+        ],
+        "expected": 158,
+        "method": 2
+    },
+    {
+        "question": "退休后，职工医保参保人员需要满足哪些条件才可以不再缴费？",
+        "retrieved": [
+            63,
+            211,
+            266
+        ],
+        "expected": 158,
+        "method": 2
+    },
+    {
+        "question": "使用空调时需要注意哪些问题？",
+        "retrieved": [
+            172,
+            186,
+            295
+        ],
+        "expected": 158,
+        "method": 2
+    },
+    {
+        "question": "哪些人可以享受大学生创业项目资金扶持政策？",
+        "retrieved": [
+            214,
+            161,
+            60
+        ],
+        "expected": 158,
+        "method": 2
+    },
+    {
+        "question": "荆门市有哪些出租车公司？",
+        "retrieved": [
+            270,
+            255,
+            222
+        ],
+        "expected": 158,
+        "method": 2
+    },
+    {
+        "question": "办理食品经营许可证需要准备哪些材料？",
+        "retrieved": [
+            300,
+            246,
+            236
+        ],
+        "expected": 158,
+        "method": 2
+    },
+    {
+        "question": "宝宝粪便的特点与什么疾病有关？",
+        "retrieved": [
+            98,
+            191,
+            56
+        ],
+        "expected": 158,
+        "method": 2
+    },
+    {
+        "question": "新生儿如何办理参保登记？",
+        "retrieved": [
+            211,
+            151,
+            212
+        ],
+        "expected": 159,
+        "method": 2
+    },
+    {
+        "question": "氟乙酸盐和氟乙酰胺有什么用途？",
+        "retrieved": [
+            150,
+            54,
+            82
+        ],
+        "expected": 159,
+        "method": 2
+    },
+    {
+        "question": "宝宝烧烫伤后应该采取哪些急救措施？",
+        "retrieved": [
+            180,
+            307,
+            76
+        ],
+        "expected": 159,
+        "method": 2
+    },
+    {
+        "question": "公章在公司的作用是什么？",
+        "retrieved": [
+            236,
+            241,
+            237
+        ],
+        "expected": 159,
+        "method": 2
+    },
+    {
+        "question": "收养证的办理流程是怎样的？需要提交哪些材料？",
+        "retrieved": [
+            154,
+            236,
+            221
+        ],
+        "expected": 160,
+        "method": 2
+    },
+    {
+        "question": "手足口病的潜伏期是多久？",
+        "retrieved": [
+            195,
+            301,
+            199
+        ],
+        "expected": 160,
+        "method": 2
+    },
+    {
+        "question": "哪些情况下被视为工伤？",
+        "retrieved": [
+            217,
+            30,
+            207
+        ],
+        "expected": 160,
+        "method": 2
+    },
+    {
+        "question": "宝宝发热时应该怎么处理？",
+        "retrieved": [
+            297,
+            187,
+            201
+        ],
+        "expected": 161,
+        "method": 2
+    },
+    {
+        "question": "如何刺激新生儿的感官？",
+        "retrieved": [
+            62,
+            143,
+            104
+        ],
+        "expected": 161,
+        "method": 2
+    },
+    {
+        "question": "创业场租补贴的办理流程是怎样的？",
+        "retrieved": [
+            273,
+            174,
+            58
+        ],
+        "expected": 162,
+        "method": 2
+    },
+    {
+        "question": "为了减少室内污染对儿童的危害，我们应该注意哪些方面？",
+        "retrieved": [
+            305,
+            192,
+            68
+        ],
+        "expected": 162,
+        "method": 2
+    },
+    {
+        "question": "宝宝长尿布疹后需要去医院吗？",
+        "retrieved": [
+            173,
+            283,
+            157
+        ],
+        "expected": 162,
+        "method": 2
+    },
+    {
+        "question": "在湖北省，低保可以在哪里申请？",
+        "retrieved": [
+            264,
+            119,
+            207
+        ],
+        "expected": 163,
+        "method": 2
+    },
+    {
+        "question": "哪些疾病会影响婚育？",
+        "retrieved": [
+            280,
+            181,
+            203
+        ],
+        "expected": 164,
+        "method": 2
+    },
+    {
+        "question": "如何预防细菌性食物中毒？",
+        "retrieved": [
+            34,
+            285,
+            139
+        ],
+        "expected": 164,
+        "method": 2
+    },
+    {
+        "question": "办理营业执照时，需要提交哪些合法使用证明材料？",
+        "retrieved": [
+            52,
+            246,
+            238
+        ],
+        "expected": 164,
+        "method": 2
+    },
+    {
+        "question": "什么是投诉？",
+        "retrieved": [
+            224,
+            148,
+            145
+        ],
+        "expected": 164,
+        "method": 2
+    },
+    {
+        "question": "氨的性质和特点是什么？",
+        "retrieved": [
+            139,
+            101,
+            138
+        ],
+        "expected": 164,
+        "method": 2
+    },
+    {
+        "question": "狂犬病的发病特点有哪些？",
+        "retrieved": [
+            111,
+            105,
+            72
+        ],
+        "expected": 164,
+        "method": 2
+    },
+    {
+        "question": "接种乙肝疫苗需要注意什么？",
+        "retrieved": [
+            144,
+            75,
+            108
+        ],
+        "expected": 164,
+        "method": 2
+    },
+    {
+        "question": "性教育的主要内容有哪些方面？",
+        "retrieved": [
+            243,
+            288,
+            245
+        ],
+        "expected": 165,
+        "method": 2
+    },
+    {
+        "question": "百白破联合疫苗是用来预防哪些疾病的？",
+        "retrieved": [
+            193,
+            309,
+            51
+        ],
+        "expected": 165,
+        "method": 2
+    },
+    {
+        "question": "如何预防宝宝患病？",
+        "retrieved": [
+            89,
+            98,
+            92
+        ],
+        "expected": 166,
+        "method": 2
+    },
+    {
+        "question": "氟乙酸盐或氟乙酰胺中毒的症状有哪些？",
+        "retrieved": [
+            54,
+            82,
+            150
+        ],
+        "expected": 166,
+        "method": 2
+    },
+    {
+        "question": "发现汽油中毒病人应该采取哪些急救措施？",
+        "retrieved": [
+            307,
+            321,
+            58
+        ],
+        "expected": 167,
+        "method": 2
+    },
+    {
+        "question": "狂犬病疫苗接种后多久可以检测抗体？",
+        "retrieved": [
+            108,
+            170,
+            89
+        ],
+        "expected": 167,
+        "method": 2
+    },
+    {
+        "question": "子宫内膜癌可以通过哪些方式进行治疗？",
+        "retrieved": [
+            130,
+            66,
+            80
+        ],
+        "expected": 167,
+        "method": 2
+    },
+    {
+        "question": "健康行为的分类有哪些？",
+        "retrieved": [
+            132,
+            202,
+            314
+        ],
+        "expected": 167,
+        "method": 2
+    },
+    {
+        "question": "创业担保贷款的办理流程是怎样的？",
+        "retrieved": [
+            227,
+            149,
+            269
+        ],
+        "expected": 167,
+        "method": 2
+    },
+    {
+        "question": "弯曲菌病常见吗？",
+        "retrieved": [
+            198,
+            307,
+            306
+        ],
+        "expected": 168,
+        "method": 2
+    },
+    {
+        "question": "在哪些地方可以接种脊髓灰质炎疫苗？",
+        "retrieved": [
+            108,
+            53,
+            88
+        ],
+        "expected": 168,
+        "method": 2
+    },
+    {
+        "question": "哪些人符合申请创业场租补贴的条件？",
+        "retrieved": [
+            273,
+            41,
+            174
+        ],
+        "expected": 168,
+        "method": 2
+    },
+    {
+        "question": "百白破疫苗的接种对象是哪些？接种程序是怎样的？",
+        "retrieved": [
+            117,
+            121,
+            331
+        ],
+        "expected": 168,
+        "method": 2
+    },
+    {
+        "question": "接种疫苗会有风险吗？",
+        "retrieved": [
+            93,
+            121,
+            143
+        ],
+        "expected": 168,
+        "method": 2
+    },
+    {
+        "question": "哪些情况下不能接种白喉疫苗？",
+        "retrieved": [
+            331,
+            97,
+            121
+        ],
+        "expected": 168,
+        "method": 2
+    },
+    {
+        "question": "子宫肌瘤的治疗方法有哪些？",
+        "retrieved": [
+            156,
+            315,
+            42
+        ],
+        "expected": 169,
+        "method": 2
+    },
+    {
+        "question": "哪些人容易感染白喉？",
+        "retrieved": [
+            165,
+            331,
+            292
+        ],
+        "expected": 169,
+        "method": 2
+    },
+    {
+        "question": "易地建设（不修建）防空地下室需要提供哪些材料？",
+        "retrieved": [
+            234,
+            275,
+            206
+        ],
+        "expected": 170,
+        "method": 2
+    },
+    {
+        "question": "狂犬病疫苗应该在哪个部位注射？",
+        "retrieved": [
+            295,
+            44,
+            108
+        ],
+        "expected": 170,
+        "method": 2
+    },
+    {
+        "question": "为什么宝宝容易发生腹泻？",
+        "retrieved": [
+            165,
+            172,
+            123
+        ],
+        "expected": 170,
+        "method": 2
+    },
+    {
+        "question": "一次性创业补贴的办理流程是怎样的？",
+        "retrieved": [
+            227,
+            269,
+            246
+        ],
+        "expected": 170,
+        "method": 2
+    },
+    {
+        "question": "什么是地方性砷中毒？",
+        "retrieved": [
+            147,
+            70,
+            58
+        ],
+        "expected": 171,
+        "method": 2
+    },
+    {
+        "question": "如何测量新生儿的体温？",
+        "retrieved": [
+            100,
+            160,
+            38
+        ],
+        "expected": 171,
+        "method": 2
+    },
+    {
+        "question": "破伤风的潜伏期是多久？",
+        "retrieved": [
+            69,
+            188,
+            50
+        ],
+        "expected": 171,
+        "method": 2
+    },
+    {
+        "question": "盆腔炎性疾病的治疗方法有哪些？",
+        "retrieved": [
+            106,
+            312,
+            319
+        ],
+        "expected": 171,
+        "method": 2
+    },
+    {
+        "question": "青少年应该如何正确刷牙？",
+        "retrieved": [
+            179,
+            281,
+            168
+        ],
+        "expected": 171,
+        "method": 2
+    },
+    {
+        "question": "乙肝的传播途径有哪些？",
+        "retrieved": [
+            77,
+            159,
+            319
+        ],
+        "expected": 172,
+        "method": 2
+    },
+    {
+        "question": "谁可以享受创业场租补贴？",
+        "retrieved": [
+            41,
+            174,
+            273
+        ],
+        "expected": 172,
+        "method": 2
+    },
+    {
+        "question": "中暑发生时，我们应该采取哪些预防措施？",
+        "retrieved": [
+            44,
+            164,
+            155
+        ],
+        "expected": 172,
+        "method": 2
+    },
+    {
+        "question": "哪些情况可以接种新冠病毒疫苗？",
+        "retrieved": [
+            166,
+            89,
+            93
+        ],
+        "expected": 172,
+        "method": 2
+    },
+    {
+        "question": "宝宝出现哪些情况需要立即就医？",
+        "retrieved": [
+            98,
+            45,
+            319
+        ],
+        "expected": 173,
+        "method": 2
+    },
+    {
+        "question": "什么是预防接种？",
+        "retrieved": [
+            169,
+            75,
+            101
+        ],
+        "expected": 173,
+        "method": 2
+    },
+    {
+        "question": "接种新冠病毒疫苗前后，可以继续服用哪些药物？",
+        "retrieved": [
+            172,
+            169,
+            89
+        ],
+        "expected": 173,
+        "method": 2
+    },
+    {
+        "question": "怎样和宝宝交流？",
+        "retrieved": [
+            166,
+            172,
+            93
+        ],
+        "expected": 173,
+        "method": 2
+    },
+    {
+        "question": "戒烟药物能够报销吗？",
+        "retrieved": [
+            286,
+            153,
+            35
+        ],
+        "expected": 175,
+        "method": 2
+    },
+    {
+        "question": "我国主要使用哪些含麻疹成分的疫苗？",
+        "retrieved": [
+            51,
+            156,
+            146
+        ],
+        "expected": 175,
+        "method": 2
+    },
+    {
+        "question": "家长如何与宝宝玩耍？",
+        "retrieved": [
+            113,
+            285,
+            97
+        ],
+        "expected": 175,
+        "method": 2
+    },
+    {
+        "question": "接种水痘疫苗对健康儿童来说安全吗？",
+        "retrieved": [
+            282,
+            281,
+            202
+        ],
+        "expected": 175,
+        "method": 2
+    },
+    {
+        "question": "放射防护的基本目的是什么？",
+        "retrieved": [
+            180,
+            213,
+            284
+        ],
+        "expected": 175,
+        "method": 2
+    },
+    {
+        "question": "白喉疫苗接种在哪个部位？",
+        "retrieved": [
+            305,
+            188,
+            331
+        ],
+        "expected": 175,
+        "method": 2
+    },
+    {
+        "question": "风疹的典型症状是什么？",
+        "retrieved": [
+            71,
+            66,
+            122
+        ],
+        "expected": 176,
+        "method": 2
+    },
+    {
+        "question": "宝宝感冒了，应该怎么处理？",
+        "retrieved": [
+            71,
+            98,
+            166
+        ],
+        "expected": 176,
+        "method": 2
+    },
+    {
+        "question": "如何预防登革热？",
+        "retrieved": [
+            136,
+            110,
+            144
+        ],
+        "expected": 176,
+        "method": 2
+    },
+    {
+        "question": "如何避免道路交通伤害？",
+        "retrieved": [
+            203,
+            303,
+            199
+        ],
+        "expected": 176,
+        "method": 2
+    },
+    {
+        "question": "狂犬病疫苗应该如何保存？",
+        "retrieved": [
+            193,
+            105,
+            108
+        ],
+        "expected": 176,
+        "method": 2
+    },
+    {
+        "question": "地震时应该采取什么措施？",
+        "retrieved": [
+            45,
+            237,
+            284
+        ],
+        "expected": 177,
+        "method": 2
+    },
+    {
+        "question": "戒烟药物可以在哪些地方购买？",
+        "retrieved": [
+            53,
+            102,
+            35
+        ],
+        "expected": 177,
+        "method": 2
+    },
+    {
+        "question": "黄热病疫苗接种的时间要求是什么？",
+        "retrieved": [
+            88,
+            70,
+            280
+        ],
+        "expected": 177,
+        "method": 2
+    },
+    {
+        "question": "流行性斑疹伤寒是如何传播的？",
+        "retrieved": [
+            285,
+            78,
+            33
+        ],
+        "expected": 177,
+        "method": 2
+    },
+    {
+        "question": "儿童在3岁时需要接种哪种疫苗？",
+        "retrieved": [
+            44,
+            117,
+            192
+        ],
+        "expected": 178,
+        "method": 2
+    },
+    {
+        "question": "硫化氢的性质是什么？",
+        "retrieved": [
+            323,
+            310,
+            304
+        ],
+        "expected": 178,
+        "method": 2
+    },
+    {
+        "question": "儿童在6岁时需要接种哪些疫苗？",
+        "retrieved": [
+            89,
+            44,
+            117
+        ],
+        "expected": 178,
+        "method": 2
+    },
+    {
+        "question": "接种疫苗后可能会出现哪些一般反应？",
+        "retrieved": [
+            93,
+            33,
+            89
+        ],
+        "expected": 180,
+        "method": 2
+    },
+    {
+        "question": "接种狂犬病疫苗有哪些禁忌症？",
+        "retrieved": [
+            89,
+            51,
+            97
+        ],
+        "expected": 180,
+        "method": 2
+    },
+    {
+        "question": "如何预防大骨节病？",
+        "retrieved": [
+            306,
+            290,
+            39
+        ],
+        "expected": 181,
+        "method": 2
+    },
+    {
+        "question": "我国目前使用的脊髓灰质炎疫苗是什么？",
+        "retrieved": [
+            79,
+            88,
+            286
+        ],
+        "expected": 181,
+        "method": 2
+    },
+    {
+        "question": "如何对食物进行消毒？",
+        "retrieved": [
+            98,
+            104,
+            293
+        ],
+        "expected": 181,
+        "method": 2
+    },
+    {
+        "question": "什么是放射源？放射源可以分为哪两种类型？",
+        "retrieved": [
+            186,
+            294,
+            167
+        ],
+        "expected": 181,
+        "method": 2
+    },
+    {
+        "question": "怎样补充锌？",
+        "retrieved": [
+            82,
+            303,
+            35
+        ],
+        "expected": 181,
+        "method": 2
+    },
+    {
+        "question": "消毒剂可以按照什么标准进行分类？",
+        "retrieved": [
+            167,
+            106,
+            222
+        ],
+        "expected": 181,
+        "method": 2
+    },
+    {
+        "question": "狂犬病抗体结果阴性时应该怎么办？",
+        "retrieved": [
+            327,
+            108,
+            87
+        ],
+        "expected": 182,
+        "method": 2
+    },
+    {
+        "question": "机械伤害发生时应该采取哪些救护方法？",
+        "retrieved": [
+            283,
+            294,
+            302
+        ],
+        "expected": 182,
+        "method": 2
+    },
+    {
+        "question": "风疹是通过什么途径传播的？",
+        "retrieved": [
+            283,
+            165,
+            313
+        ],
+        "expected": 182,
+        "method": 2
+    },
+    {
+        "question": "安全生产管理协议应当包括哪些内容？",
+        "retrieved": [
+            222,
+            96,
+            238
+        ],
+        "expected": 182,
+        "method": 2
+    },
+    {
+        "question": "如何给宝宝换尿布？",
+        "retrieved": [
+            44,
+            73,
+            292
+        ],
+        "expected": 183,
+        "method": 2
+    },
+    {
+        "question": "如何进行单位社会保险补缴申报？",
+        "retrieved": [
+            287,
+            31,
+            39
+        ],
+        "expected": 183,
+        "method": 2
+    },
+    {
+        "question": "百日咳的主要症状有哪些？",
+        "retrieved": [
+            331,
+            181,
+            288
+        ],
+        "expected": 183,
+        "method": 2
+    },
+    {
+        "question": "为什么婚前要检查传染病？",
+        "retrieved": [
+            43,
+            305,
+            286
+        ],
+        "expected": 183,
+        "method": 2
+    },
+    {
+        "question": "发现有机磷杀虫剂中毒病人应该采取哪些急救措施？",
+        "retrieved": [
+            194,
+            302,
+            285
+        ],
+        "expected": 183,
+        "method": 2
+    },
+    {
+        "question": "百日咳的潜伏期是多久？",
+        "retrieved": [
+            332,
+            87,
+            284
+        ],
+        "expected": 183,
+        "method": 2
+    },
+    {
+        "question": "免疫有哪两种方式？分别是通过什么来实现的？",
+        "retrieved": [
+            2,
+            225,
+            163
+        ],
+        "expected": 184,
+        "method": 2
+    },
+    {
+        "question": "预防艾滋病母婴传播的措施有哪些？",
+        "retrieved": [
+            87,
+            142,
+            172
+        ],
+        "expected": 184,
+        "method": 2
+    },
+    {
+        "question": "哪个年龄段的人更容易得猩红热？",
+        "retrieved": [
+            308,
+            295,
+            320
+        ],
+        "expected": 184,
+        "method": 2
+    },
+    {
+        "question": "什么是城乡居民基本养老保险关系转移？",
+        "retrieved": [
+            147,
+            229,
+            145
+        ],
+        "expected": 185,
+        "method": 2
+    },
+    {
+        "question": "申领失业保险金的条件是什么？",
+        "retrieved": [
+            220,
+            221,
+            2
+        ],
+        "expected": 185,
+        "method": 2
+    },
+    {
+        "question": "根据通知，学校不能收取哪些费用？",
+        "retrieved": [
+            275,
+            162,
+            243
+        ],
+        "expected": 186,
+        "method": 2
+    },
+    {
+        "question": "接种肺炎球菌疫苗有哪些禁忌？",
+        "retrieved": [
+            89,
+            81,
+            294
+        ],
+        "expected": 186,
+        "method": 2
+    },
+    {
+        "question": "猩红热是如何感染上的？",
+        "retrieved": [
+            106,
+            320,
+            46
+        ],
+        "expected": 186,
+        "method": 2
+    },
+    {
+        "question": "百白破疫苗接种时通常在哪个部位注射？",
+        "retrieved": [
+            188,
+            295,
+            175
+        ],
+        "expected": 187,
+        "method": 2
+    },
+    {
+        "question": "撤销安全生产许可证的情况有哪些？",
+        "retrieved": [
+            222,
+            226,
+            238
+        ],
+        "expected": 187,
+        "method": 2
+    },
+    {
+        "question": "什么是放射性疾病和职业性放射性疾病？",
+        "retrieved": [
+            64,
+            293,
+            34
+        ],
+        "expected": 187,
+        "method": 2
+    },
+    {
+        "question": "如何预防婴儿窒息？",
+        "retrieved": [
+            38,
+            49,
+            297
+        ],
+        "expected": 187,
+        "method": 2
+    },
+    {
+        "question": "老年吸烟者戒烟有哪些好处？",
+        "retrieved": [
+            58,
+            112,
+            297
+        ],
+        "expected": 187,
+        "method": 2
+    },
+    {
+        "question": "每天应该摄入多少盐？",
+        "retrieved": [
+            53,
+            54,
+            108
+        ],
+        "expected": 188,
+        "method": 2
+    },
+    {
+        "question": "化学性食物中毒是由什么引起的？",
+        "retrieved": [
+            285,
+            156,
+            139
+        ],
+        "expected": 188,
+        "method": 2
+    },
+    {
+        "question": "接种百白破疫苗有哪些禁忌征？",
+        "retrieved": [
+            89,
+            331,
+            309
+        ],
+        "expected": 188,
+        "method": 2
+    },
+    {
+        "question": "百白破疫苗的作用是什么？",
+        "retrieved": [
+            331,
+            295,
+            51
+        ],
+        "expected": 188,
+        "method": 2
+    },
+    {
+        "question": "如何预防职业中毒？",
+        "retrieved": [
+            55,
+            298,
+            122
+        ],
+        "expected": 188,
+        "method": 2
+    },
+    {
+        "question": "二手烟对健康有哪些危害？",
+        "retrieved": [
+            68,
+            297,
+            112
+        ],
+        "expected": 188,
+        "method": 2
+    },
+    {
+        "question": "如何与孩子进行有效的交流？",
+        "retrieved": [
+            178,
+            146,
+            86
+        ],
+        "expected": 189,
+        "method": 2
+    },
+    {
+        "question": "如何调整宝宝的夜间喂奶时间？",
+        "retrieved": [
+            313,
+            81,
+            280
+        ],
+        "expected": 189,
+        "method": 2
+    },
+    {
+        "question": "什么是放射性核素外污染？",
+        "retrieved": [
+            179,
+            151,
+            298
+        ],
+        "expected": 189,
+        "method": 2
+    },
+    {
+        "question": "乳母在膳食上需要注意哪些方面？",
+        "retrieved": [
+            291,
+            192,
+            31
+        ],
+        "expected": 189,
+        "method": 2
+    },
+    {
+        "question": "发现氯气中毒病人应该采取哪些紧急处理措施？",
+        "retrieved": [
+            95,
+            90,
+            194
+        ],
+        "expected": 189,
+        "method": 2
+    },
+    {
+        "question": "如何委托他人办理住房公积金提取手续？",
+        "retrieved": [
+            255,
+            229,
+            291
+        ],
+        "expected": 189,
+        "method": 2
+    },
+    {
+        "question": "荆门公交集团IC卡中心城区营业厅的地址是什么？",
+        "retrieved": [
+            291,
+            269,
+            163
+        ],
+        "expected": 190,
+        "method": 2
+    },
+    {
+        "question": "百日咳的治疗措施有哪些？",
+        "retrieved": [
+            284,
+            159,
+            87
+        ],
+        "expected": 190,
+        "method": 2
+    },
+    {
+        "question": "水痘的症状有哪些？",
+        "retrieved": [
+            76,
+            302,
+            281
+        ],
+        "expected": 191,
+        "method": 2
+    },
+    {
+        "question": "母乳应该如何存放？",
+        "retrieved": [
+            87,
+            166,
+            294
+        ],
+        "expected": 191,
+        "method": 2
+    },
+    {
+        "question": "如何办理单位职工一般信息变更登记？",
+        "retrieved": [
+            184,
+            210,
+            287
+        ],
+        "expected": 191,
+        "method": 2
+    },
+    {
+        "question": "什么情况下应当注销已经颁发的安全生产许可证？",
+        "retrieved": [
+            222,
+            246,
+            187
+        ],
+        "expected": 191,
+        "method": 2
+    },
+    {
+        "question": "白喉是否需要进行疾病监测？",
+        "retrieved": [
+            188,
+            97,
+            169
+        ],
+        "expected": 191,
+        "method": 2
+    },
+    {
+        "question": "子宫肌瘤有哪些常见症状？",
+        "retrieved": [
+            42,
+            156,
+            139
+        ],
+        "expected": 192,
+        "method": 2
+    },
+    {
+        "question": "如何为单位增加险种登记？",
+        "retrieved": [
+            184,
+            287,
+            296
+        ],
+        "expected": 192,
+        "method": 2
+    },
+    {
+        "question": "使用杀虫剂时需要注意哪些事项？",
+        "retrieved": [
+            319,
+            194,
+            302
+        ],
+        "expected": 192,
+        "method": 2
+    },
+    {
+        "question": "斑疹伤寒病人有哪些主要表现？",
+        "retrieved": [
+            320,
+            78,
+            177
+        ],
+        "expected": 193,
+        "method": 2
+    },
+    {
+        "question": "什么是国家免疫规划？",
+        "retrieved": [
+            327,
+            114,
+            97
+        ],
+        "expected": 193,
+        "method": 2
+    },
+    {
+        "question": "在办公室中，我们应该如何避免感染呼吸道传染病？",
+        "retrieved": [
+            213,
+            130,
+            316
+        ],
+        "expected": 193,
+        "method": 2
+    },
+    {
+        "question": "煤气中毒的症状有哪些？",
+        "retrieved": [
+            109,
+            53,
+            89
+        ],
+        "expected": 193,
+        "method": 2
+    },
+    {
+        "question": "如何为单位职工办理险种减少或暂停？",
+        "retrieved": [
+            287,
+            296,
+            295
+        ],
+        "expected": 193,
+        "method": 2
+    },
+    {
+        "question": "百白破联合疫苗能够预防哪些疾病？",
+        "retrieved": [
+            51,
+            296,
+            75
+        ],
+        "expected": 193,
+        "method": 2
+    },
+    {
+        "question": "工程设备安装企业是否需要办理安全生产许可证？",
+        "retrieved": [
+            222,
+            230,
+            241
+        ],
+        "expected": 194,
+        "method": 2
+    },
+    {
+        "question": "什么情况下健康码会变成“灰码”？",
+        "retrieved": [
+            132,
+            165,
+            197
+        ],
+        "expected": 194,
+        "method": 2
+    },
+    {
+        "question": "在突发公共卫生事件发生时，居民应该如何调整自己的心理状态？",
+        "retrieved": [
+            298,
+            213,
+            36
+        ],
+        "expected": 194,
+        "method": 2
+    },
+    {
+        "question": "新发传染病是指什么？有哪些例子？",
+        "retrieved": [
+            316,
+            324,
+            304
+        ],
+        "expected": 194,
+        "method": 2
+    },
+    {
+        "question": "子宫脱垂时需要注意哪些事项？",
+        "retrieved": [
+            281,
+            68,
+            182
+        ],
+        "expected": 195,
+        "method": 2
+    },
+    {
+        "question": "细菌性痢疾是由什么引起的？它的临床表现有哪些？",
+        "retrieved": [
+            301,
+            308,
+            98
+        ],
+        "expected": 195,
+        "method": 2
+    },
+    {
+        "question": "化妆品微生物污染对健康有什么危害？",
+        "retrieved": [
+            327,
+            297,
+            165
+        ],
+        "expected": 195,
+        "method": 2
+    },
+    {
+        "question": "孕期保健的目的是什么？",
+        "retrieved": [
+            302,
+            321,
+            318
+        ],
+        "expected": 195,
+        "method": 2
+    },
+    {
+        "question": "弯曲菌病是如何感染的？",
+        "retrieved": [
+            198,
+            307,
+            306
+        ],
+        "expected": 195,
+        "method": 2
+    },
+    {
+        "question": "急性盆腔炎的治疗措施有哪些？",
+        "retrieved": [
+            323,
+            302,
+            312
+        ],
+        "expected": 195,
+        "method": 2
+    },
+    {
+        "question": "消防技术服务机构主要从事哪些业务？",
+        "retrieved": [
+            63,
+            222,
+            129
+        ],
+        "expected": 196,
+        "method": 2
+    },
+    {
+        "question": "消毒剂可以用于治疗疾病吗？",
+        "retrieved": [
+            167,
+            303,
+            330
+        ],
+        "expected": 198,
+        "method": 2
+    },
+    {
+        "question": "汽油的颜色是什么？它有什么特点？",
+        "retrieved": [
+            58,
+            325,
+            30
+        ],
+        "expected": 198,
+        "method": 2
+    },
+    {
+        "question": "选择配方奶粉时应该注意哪些方面？",
+        "retrieved": [
+            297,
+            281,
+            180
+        ],
+        "expected": 198,
+        "method": 2
+    },
+    {
+        "question": "空气常用消毒方法有哪些？",
+        "retrieved": [
+            190,
+            186,
+            284
+        ],
+        "expected": 199,
+        "method": 2
+    },
+    {
+        "question": "低焦油、淡味的卷烟是否危害较小？",
+        "retrieved": [
+            297,
+            186,
+            308
+        ],
+        "expected": 199,
+        "method": 2
+    },
+    {
+        "question": "什么是疾病的潜伏期？",
+        "retrieved": [
+            98,
+            309,
+            122
+        ],
+        "expected": 199,
+        "method": 2
+    },
+    {
+        "question": "流脑的诊断依据是什么？",
+        "retrieved": [
+            202,
+            156,
+            316
+        ],
+        "expected": 199,
+        "method": 2
+    },
+    {
+        "question": "什么是胎儿保健？",
+        "retrieved": [
+            302,
+            177,
+            106
+        ],
+        "expected": 199,
+        "method": 2
+    },
+    {
+        "question": "放射性是指什么？射线是指什么？",
+        "retrieved": [
+            293,
+            326,
+            179
+        ],
+        "expected": 199,
+        "method": 2
+    },
+    {
+        "question": "哪些人应该考虑去做艾滋病病毒抗体的检测？",
+        "retrieved": [
+            87,
+            316,
+            310
+        ],
+        "expected": 200,
+        "method": 2
+    },
+    {
+        "question": "脊髓灰质炎疑似病例的诊断标准是什么？",
+        "retrieved": [
+            286,
+            79,
+            175
+        ],
+        "expected": 200,
+        "method": 2
+    },
+    {
+        "question": "接种A群脑膜炎球菌多糖疫苗有哪些禁忌？",
+        "retrieved": [
+            178,
+            67,
+            136
+        ],
+        "expected": 200,
+        "method": 2
+    },
+    {
+        "question": "窒息性毒剂是如何引起死亡的？",
+        "retrieved": [
+            49,
+            294,
+            326
+        ],
+        "expected": 200,
+        "method": 2
+    },
+    {
+        "question": "领取《出生医学证明》需要提供哪些资料？",
+        "retrieved": [
+            246,
+            2,
+            212
+        ],
+        "expected": 200,
+        "method": 2
+    },
+    {
+        "question": "如何预防盆腔炎性疾病？",
+        "retrieved": [
+            106,
+            319,
+            323
+        ],
+        "expected": 200,
+        "method": 2
+    },
+    {
+        "question": "哪些情况下不能接种腮腺炎疫苗？",
+        "retrieved": [
+            165,
+            170,
+            175
+        ],
+        "expected": 201,
+        "method": 2
+    },
+    {
+        "question": "宝宝在3-4个月的阶段是否还需要母乳喂养？",
+        "retrieved": [
+            80,
+            173,
+            309
+        ],
+        "expected": 201,
+        "method": 2
+    },
+    {
+        "question": "孕晚期的保健重点有哪些？",
+        "retrieved": [
+            291,
+            308,
+            198
+        ],
+        "expected": 201,
+        "method": 2
+    },
+    {
+        "question": "如何预防盆腔炎性疾病？",
+        "retrieved": [
+            106,
+            319,
+            323
+        ],
+        "expected": 201,
+        "method": 2
+    },
+    {
+        "question": "接种A群C群流脑多糖疫苗有哪些禁忌？",
+        "retrieved": [
+            178,
+            283,
+            299
+        ],
+        "expected": 202,
+        "method": 2
+    },
+    {
+        "question": "如果我发现自己有发热、咳嗽等可疑症状，应该怎么处理？",
+        "retrieved": [
+            130,
+            194,
+            214
+        ],
+        "expected": 202,
+        "method": 2
+    },
+    {
+        "question": "《保障农民工工资支付条例》在加强保障农民工工资支付工作的监督管理方面有哪些规定？",
+        "retrieved": [
+            119,
+            301,
+            197
+        ],
+        "expected": 202,
+        "method": 2
+    },
+    {
+        "question": "疟疾的主要临床表现是什么？",
+        "retrieved": [
+            48,
+            316,
+            131
+        ],
+        "expected": 202,
+        "method": 2
+    },
+    {
+        "question": "农药中毒发生后应该采取哪些急救措施？",
+        "retrieved": [
+            166,
+            302,
+            298
+        ],
+        "expected": 203,
+        "method": 2
+    },
+    {
+        "question": "婚前医学检查的项目有哪些？",
+        "retrieved": [
+            148,
+            89,
+            43
+        ],
+        "expected": 203,
+        "method": 2
+    },
+    {
+        "question": "孕妇吸烟会对胎儿有哪些影响？",
+        "retrieved": [
+            53,
+            83,
+            153
+        ],
+        "expected": 203,
+        "method": 2
+    },
+    {
+        "question": "哪些食品能够引起食物中毒？",
+        "retrieved": [
+            34,
+            285,
+            139
+        ],
+        "expected": 204,
+        "method": 2
+    },
+    {
+        "question": "宝宝选择零食时需要注意哪些方面？",
+        "retrieved": [
+            192,
+            305,
+            285
+        ],
+        "expected": 204,
+        "method": 2
+    },
+    {
+        "question": "哪些工作场所可能会接触到硫化氢？",
+        "retrieved": [
+            323,
+            304,
+            305
+        ],
+        "expected": 204,
+        "method": 2
+    },
+    {
+        "question": "是否有针对寨卡病毒病的疫苗可以预防？",
+        "retrieved": [
+            156,
+            62,
+            59
+        ],
+        "expected": 204,
+        "method": 2
+    },
+    {
+        "question": "荆门市公共检验检测中心的机构职能有哪些？",
+        "retrieved": [
+            244,
+            222,
+            246
+        ],
+        "expected": 205,
+        "method": 2
+    },
+    {
+        "question": "办理新生儿出生登记需要提供哪些资料？",
+        "retrieved": [
+            212,
+            146,
+            28
+        ],
+        "expected": 207,
+        "method": 2
+    },
+    {
+        "question": "哪些人可以按照当地规定申请落户？",
+        "retrieved": [
+            212,
+            52,
+            309
+        ],
+        "expected": 207,
+        "method": 2
+    },
+    {
+        "question": "签收快件时需要注意哪些事项？",
+        "retrieved": [
+            300,
+            212,
+            274
+        ],
+        "expected": 208,
+        "method": 2
+    },
+    {
+        "question": "荆门市的水资源情况如何？",
+        "retrieved": [
+            41,
+            327,
+            148
+        ],
+        "expected": 208,
+        "method": 2
+    },
+    {
+        "question": "2021年荆门市的人口数量是多少？",
+        "retrieved": [
+            271,
+            268,
+            252
+        ],
+        "expected": 208,
+        "method": 2
+    },
+    {
+        "question": "沙洋县大学生创业有哪些政策？",
+        "retrieved": [
+            214,
+            220,
+            322
+        ],
+        "expected": 212,
+        "method": 2
+    },
+    {
+        "question": "办理危险化学品（不含仓储）经营许可申请一般需要多长时间？",
+        "retrieved": [
+            216,
+            222,
+            230
+        ],
+        "expected": 212,
+        "method": 2
+    },
+    {
+        "question": "非亲生父母是否可以享受个人所得税3岁以下婴幼儿照护专项附加扣除政策？",
+        "retrieved": [
+            73,
+            267,
+            213
+        ],
+        "expected": 212,
+        "method": 2
+    },
+    {
+        "question": "根据法律规定，男性和女性结婚的最小年龄分别是多少？",
+        "retrieved": [
+            276,
+            309,
+            209
+        ],
+        "expected": 213,
+        "method": 2
+    },
+    {
+        "question": "外国人在中国就业需要满足哪些条件？",
+        "retrieved": [
+            216,
+            236,
+            222
+        ],
+        "expected": 213,
+        "method": 2
+    },
+    {
+        "question": "什么情况下可以申请临时救助？在哪里可以进行申请？",
+        "retrieved": [
+            118,
+            276,
+            289
+        ],
+        "expected": 216,
+        "method": 2
+    },
+    {
+        "question": "公共服务内容有哪些？",
+        "retrieved": [
+            146,
+            154,
+            238
+        ],
+        "expected": 217,
+        "method": 2
+    },
+    {
+        "question": "请问各个快递公司的投诉电话是什么？",
+        "retrieved": [
+            246,
+            214,
+            236
+        ],
+        "expected": 219,
+        "method": 2
+    },
+    {
+        "question": "申请宅基地需要经过哪些环节？",
+        "retrieved": [
+            230,
+            57,
+            267
+        ],
+        "expected": 220,
+        "method": 2
+    },
+    {
+        "question": "公共场所服务人员在工作期间应该选择什么样的口罩？",
+        "retrieved": [
+            93,
+            86,
+            45
+        ],
+        "expected": 221,
+        "method": 2
+    },
+    {
+        "question": "申请无线电频率需要提交哪些材料？",
+        "retrieved": [
+            217,
+            212,
+            222
+        ],
+        "expected": 221,
+        "method": 2
+    },
+    {
+        "question": "普通护照办理的基本流程是什么？",
+        "retrieved": [
+            218,
+            152,
+            258
+        ],
+        "expected": 222,
+        "method": 2
+    },
+    {
+        "question": "如何办理快递经营许可证？",
+        "retrieved": [
+            262,
+            289,
+            246
+        ],
+        "expected": 223,
+        "method": 2
+    },
+    {
+        "question": "支持科技创新平台建设的奖励政策是什么？",
+        "retrieved": [
+            311,
+            41,
+            300
+        ],
+        "expected": 224,
+        "method": 2
+    },
+    {
+        "question": "市会计管理局的职责是什么？",
+        "retrieved": [
+            222,
+            223,
+            220
+        ],
+        "expected": 224,
+        "method": 2
+    },
+    {
+        "question": "荆门市的气候特点是什么？",
+        "retrieved": [
+            41,
+            72,
+            98
+        ],
+        "expected": 224,
+        "method": 2
+    },
+    {
+        "question": "特种设备使用登记需要提交哪些材料？",
+        "retrieved": [
+            226,
+            225,
+            237
+        ],
+        "expected": 224,
+        "method": 2
+    },
+    {
+        "question": "申报高新技术企业发展奖励的材料和办理流程是什么？",
+        "retrieved": [
+            277,
+            311,
+            154
+        ],
+        "expected": 225,
+        "method": 2
+    },
+    {
+        "question": "机关事业单位养老保险的实施时间是什么时候？",
+        "retrieved": [
+            56,
+            146,
+            147
+        ],
+        "expected": 226,
+        "method": 2
+    },
+    {
+        "question": "根据《气象灾害防御条例》，违反规定的行为有哪些？",
+        "retrieved": [
+            278,
+            233,
+            235
+        ],
+        "expected": 227,
+        "method": 2
+    },
+    {
+        "question": "特种设备作业人员考核（首次申请）需要准备哪些材料？",
+        "retrieved": [
+            226,
+            232,
+            236
+        ],
+        "expected": 227,
+        "method": 2
+    },
+    {
+        "question": "企业职工退休的规定是什么？",
+        "retrieved": [
+            145,
+            157,
+            211
+        ],
+        "expected": 227,
+        "method": 2
+    },
+    {
+        "question": "工业产品生产许可证办证目录包括哪些产品？",
+        "retrieved": [
+            239,
+            230,
+            223
+        ],
+        "expected": 227,
+        "method": 2
+    },
+    {
+        "question": "申报科技型中小企业发展奖励需要准备哪些材料？",
+        "retrieved": [
+            277,
+            41,
+            85
+        ],
+        "expected": 227,
+        "method": 2
+    },
+    {
+        "question": "我市对稳定就业岗位有什么补助政策？",
+        "retrieved": [
+            163,
+            154,
+            269
+        ],
+        "expected": 228,
+        "method": 2
+    },
+    {
+        "question": "根据《行政复议法》，哪些情况下可以申请行政复议？",
+        "retrieved": [
+            157,
+            223,
+            269
+        ],
+        "expected": 228,
+        "method": 2
+    },
+    {
+        "question": "市农业综合开发办公室的职责是什么？",
+        "retrieved": [
+            222,
+            150,
+            237
+        ],
+        "expected": 228,
+        "method": 2
+    },
+    {
+        "question": "特种设备使用登记（气瓶）所需的材料有哪些？",
+        "retrieved": [
+            236,
+            226,
+            225
+        ],
+        "expected": 228,
+        "method": 2
+    },
+    {
+        "question": "什么是临时救助？救助金额有限制吗？",
+        "retrieved": [
+            118,
+            221,
+            289
+        ],
+        "expected": 228,
+        "method": 2
+    },
+    {
+        "question": "购买自住住房提取住房公积金需要满足哪些条件？",
+        "retrieved": [
+            2,
+            255,
+            247
+        ],
+        "expected": 229,
+        "method": 2
+    },
+    {
+        "question": "租房提取公积金的条件是什么？需要准备哪些资料？",
+        "retrieved": [
+            263,
+            210,
+            2
+        ],
+        "expected": 229,
+        "method": 2
+    },
+    {
+        "question": "申报科技创新平台建设奖励的资料包括哪些？办理流程是怎样的？办理时限是多久？",
+        "retrieved": [
+            265,
+            273,
+            311
+        ],
+        "expected": 230,
+        "method": 2
+    },
+    {
+        "question": "市财政投资评审中心的主要职责是什么？",
+        "retrieved": [
+            311,
+            230,
+            150
+        ],
+        "expected": 231,
+        "method": 2
+    },
+    {
+        "question": "食用农产品合格证开具是否需要通过检测？",
+        "retrieved": [
+            235,
+            241,
+            242
+        ],
+        "expected": 232,
+        "method": 2
+    },
+    {
+        "question": "移动式压力容器充装许可（首次申请）需要提交哪些材料？",
+        "retrieved": [
+            230,
+            224,
+            241
+        ],
+        "expected": 232,
+        "method": 2
+    },
+    {
+        "question": "《中华人民共和国气象法》是在哪个时间实施的？",
+        "retrieved": [
+            233,
+            223,
+            209
+        ],
+        "expected": 232,
+        "method": 2
+    },
+    {
+        "question": "荆门市教育局的主要职责是什么？",
+        "retrieved": [
+            154,
+            275,
+            238
+        ],
+        "expected": 232,
+        "method": 2
+    },
+    {
+        "question": "修建防空地下室需要提供哪些材料？",
+        "retrieved": [
+            234,
+            237,
+            206
+        ],
+        "expected": 232,
+        "method": 2
+    },
+    {
+        "question": "特种设备安装、改造、维修单位资质许可（换证申请）所需的材料有哪些？",
+        "retrieved": [
+            225,
+            226,
+            236
+        ],
+        "expected": 233,
+        "method": 2
+    },
+    {
+        "question": "什么是职业病？",
+        "retrieved": [
+            232,
+            30,
+            78
+        ],
+        "expected": 233,
+        "method": 2
+    },
+    {
+        "question": "特种设备使用登记需要提交哪些材料？",
+        "retrieved": [
+            226,
+            225,
+            237
+        ],
+        "expected": 233,
+        "method": 2
+    },
+    {
+        "question": "在荆门市内，婚姻登记应该在哪里办理？",
+        "retrieved": [
+            279,
+            209,
+            273
+        ],
+        "expected": 234,
+        "method": 2
+    },
+    {
+        "question": "新生儿如何参加城乡居民医疗保险？",
+        "retrieved": [
+            212,
+            211,
+            147
+        ],
+        "expected": 234,
+        "method": 2
+    },
+    {
+        "question": "市市场监督管理局的机构职能有哪些？",
+        "retrieved": [
+            222,
+            214,
+            150
+        ],
+        "expected": 234,
+        "method": 2
+    },
+    {
+        "question": "外国人在中国长期居住可以参加医保吗？需要提供哪些证明资料？",
+        "retrieved": [
+            154,
+            236,
+            218
+        ],
+        "expected": 235,
+        "method": 2
+    },
+    {
+        "question": "特种设备安装、改造、维修单位首次申请资质许可需要提交哪些材料？",
+        "retrieved": [
+            225,
+            226,
+            236
+        ],
+        "expected": 235,
+        "method": 2
+    },
+    {
+        "question": "荆门市门诊特殊慢性病申办的流程是怎样的？",
+        "retrieved": [
+            278,
+            208,
+            151
+        ],
+        "expected": 235,
+        "method": 2
+    },
+    {
+        "question": "最低生活保障申请可以由哪些机构受理？",
+        "retrieved": [
+            233,
+            84,
+            154
+        ],
+        "expected": 236,
+        "method": 2
+    },
+    {
+        "question": "城市管理的范围包括哪些方面？",
+        "retrieved": [
+            245,
+            141,
+            215
+        ],
+        "expected": 236,
+        "method": 2
+    },
+    {
+        "question": "特种设备使用登记需要提交哪些材料？",
+        "retrieved": [
+            226,
+            225,
+            237
+        ],
+        "expected": 236,
+        "method": 2
+    },
+    {
+        "question": "承担国家法定计量检定机构任务授权所需材料有哪些？",
+        "retrieved": [
+            231,
+            233,
+            225
+        ],
+        "expected": 237,
+        "method": 2
+    },
+    {
+        "question": "我市对符合产业发展规划的现代服务业项目有哪些方面的支持措施？",
+        "retrieved": [
+            154,
+            245,
+            300
+        ],
+        "expected": 237,
+        "method": 2
+    },
+    {
+        "question": "参保人员如何查询打印基本医疗保险信息？",
+        "retrieved": [
+            212,
+            211,
+            56
+        ],
+        "expected": 237,
+        "method": 2
+    },
+    {
+        "question": "为什么要设立城市管理委员会？",
+        "retrieved": [
+            222,
+            153,
+            236
+        ],
+        "expected": 237,
+        "method": 2
+    },
+    {
+        "question": "哪些工业项目可以获得基础设施建设补助？补助金额是多少？",
+        "retrieved": [
+            311,
+            222,
+            223
+        ],
+        "expected": 238,
+        "method": 2
+    },
+    {
+        "question": "不同地区的高龄津贴发放标准是怎样的？",
+        "retrieved": [
+            2,
+            28,
+            157
+        ],
+        "expected": 238,
+        "method": 2
+    },
+    {
+        "question": "《荆门市城市管理条例》适用于哪些区域？",
+        "retrieved": [
+            240,
+            237,
+            235
+        ],
+        "expected": 238,
+        "method": 2
+    },
+    {
+        "question": "根据人才政策支持，对哪些人员给予补贴？",
+        "retrieved": [
+            74,
+            150,
+            277
+        ],
+        "expected": 238,
+        "method": 2
+    },
+    {
+        "question": "办理安全条件审查时，需要提供的“规划许可相关文件”是指什么？",
+        "retrieved": [
+            230,
+            222,
+            300
+        ],
+        "expected": 239,
+        "method": 2
+    },
+    {
+        "question": "压力容器安装改造维修许可所需的材料有哪些？",
+        "retrieved": [
+            230,
+            241,
+            223
+        ],
+        "expected": 239,
+        "method": 2
+    },
+    {
+        "question": "市场监管行政许可的申请流程是怎样的？",
+        "retrieved": [
+            234,
+            246,
+            214
+        ],
+        "expected": 239,
+        "method": 2
+    },
+    {
+        "question": "哪些工业产品需要办理生产许可证？",
+        "retrieved": [
+            230,
+            223,
+            222
+        ],
+        "expected": 239,
+        "method": 2
+    },
+    {
+        "question": "对于固定资产投资1亿元以上的工业项目，可以享受哪些政策支持？",
+        "retrieved": [
+            311,
+            2,
+            163
+        ],
+        "expected": 239,
+        "method": 2
+    },
+    {
+        "question": "参保单位如何查询打印基本医疗保险信息？",
+        "retrieved": [
+            212,
+            211,
+            56
+        ],
+        "expected": 241,
+        "method": 2
+    },
+    {
+        "question": "城乡居民未在集中登记、缴费期参保缴费是否可以补办？",
+        "retrieved": [
+            211,
+            147,
+            151
+        ],
+        "expected": 241,
+        "method": 2
+    },
+    {
+        "question": "计量标准器具核准（新建）所需的材料有哪些？",
+        "retrieved": [
+            222,
+            225,
+            224
+        ],
+        "expected": 241,
+        "method": 2
+    },
+    {
+        "question": "市农业技术推广中心的主要职能是什么？",
+        "retrieved": [
+            222,
+            150,
+            97
+        ],
+        "expected": 242,
+        "method": 2
+    },
+    {
+        "question": "没有身份证是否可以办理医保参保？",
+        "retrieved": [
+            211,
+            63,
+            210
+        ],
+        "expected": 242,
+        "method": 2
+    },
+    {
+        "question": "压力管道安装许可（换证申请）需要提交哪些材料？",
+        "retrieved": [
+            225,
+            241,
+            226
+        ],
+        "expected": 242,
+        "method": 2
+    },
+    {
+        "question": "工业产品生产许可证的办理流程包括哪些环节？",
+        "retrieved": [
+            230,
+            300,
+            223
+        ],
+        "expected": 242,
+        "method": 2
+    },
+    {
+        "question": "气瓶充装单位资质许可（首次申请）需要提交哪些材料？",
+        "retrieved": [
+            231,
+            232,
+            236
+        ],
+        "expected": 242,
+        "method": 2
+    },
+    {
+        "question": "当一个企业或个人的送检样品不在检验机构的资质范围内时，检验机构会采取什么措施？",
+        "retrieved": [
+            246,
+            244,
+            245
+        ],
+        "expected": 242,
+        "method": 2
+    },
+    {
+        "question": "市场上有哪些问题水果？",
+        "retrieved": [
+            167,
+            239,
+            241
+        ],
+        "expected": 242,
+        "method": 2
+    },
+    {
+        "question": "一次性创业补贴的申报条件有哪些？",
+        "retrieved": [
+            227,
+            269,
+            322
+        ],
+        "expected": 242,
+        "method": 2
+    },
+    {
+        "question": "办理身份证需要多久才能领取？",
+        "retrieved": [
+            141,
+            220,
+            63
+        ],
+        "expected": 242,
+        "method": 2
+    },
+    {
+        "question": "单位职工如何办理养老保险？",
+        "retrieved": [
+            147,
+            56,
+            145
+        ],
+        "expected": 243,
+        "method": 2
+    },
+    {
+        "question": "这个机构的设置有哪些部门？",
+        "retrieved": [
+            146,
+            222,
+            322
+        ],
+        "expected": 243,
+        "method": 2
+    },
+    {
+        "question": "哪些人可以办理灵活就业人员参保？",
+        "retrieved": [
+            2,
+            210,
+            63
+        ],
+        "expected": 244,
+        "method": 2
+    },
+    {
+        "question": "如何进行单位社会保险缴费申报？",
+        "retrieved": [
+            287,
+            39,
+            34
+        ],
+        "expected": 244,
+        "method": 2
+    },
+    {
+        "question": "如果我购买的食品存在安全问题，应该怎么处理？",
+        "retrieved": [
+            214,
+            130,
+            219
+        ],
+        "expected": 244,
+        "method": 2
+    },
+    {
+        "question": "变更姓名需要哪些材料？",
+        "retrieved": [
+            214,
+            162,
+            210
+        ],
+        "expected": 245,
+        "method": 2
+    },
+    {
+        "question": "谁可以享受创业担保贷款？",
+        "retrieved": [
+            269,
+            227,
+            322
+        ],
+        "expected": 245,
+        "method": 2
+    },
+    {
+        "question": "灵活就业人员如何参加职工社保？",
+        "retrieved": [
+            206,
+            2,
+            251
+        ],
+        "expected": 245,
+        "method": 2
+    },
+    {
+        "question": "哪些人可以享受一次性创业补贴？",
+        "retrieved": [
+            322,
+            269,
+            227
+        ],
+        "expected": 246,
+        "method": 2
+    },
+    {
+        "question": "农药中毒会导致哪些危害？",
+        "retrieved": [
+            55,
+            298,
+            167
+        ],
+        "expected": 246,
+        "method": 2
+    },
+    {
+        "question": "如何办理失业登记？",
+        "retrieved": [
+            2,
+            56,
+            163
+        ],
+        "expected": 246,
+        "method": 2
+    },
+    {
+        "question": "异地公积金贷款的额度是如何计算的？",
+        "retrieved": [
+            253,
+            163,
+            2
+        ],
+        "expected": 247,
+        "method": 2
+    },
+    {
+        "question": "租房提取所需资料有哪些？",
+        "retrieved": [
+            210,
+            263,
+            2
+        ],
+        "expected": 247,
+        "method": 2
+    },
+    {
+        "question": "担保期内的担保人有哪些办理解除的方式？",
+        "retrieved": [
+            163,
+            145,
+            248
+        ],
+        "expected": 247,
+        "method": 2
+    },
+    {
+        "question": "职工退休后，如何提取公积金？",
+        "retrieved": [
+            210,
+            256,
+            2
+        ],
+        "expected": 248,
+        "method": 2
+    },
+    {
+        "question": "在本地购房申请公积金贷款需要提供哪些材料？",
+        "retrieved": [
+            263,
+            272,
+            249
+        ],
+        "expected": 248,
+        "method": 2
+    },
+    {
+        "question": "办理跨省通办道路运输从业资格证补发需要提交哪些申请资料？",
+        "retrieved": [
+            254,
+            247,
+            256
+        ],
+        "expected": 248,
+        "method": 2
+    },
+    {
+        "question": "在异地购房申请公积金贷款时，需要做哪些准备？",
+        "retrieved": [
+            163,
+            2,
+            85
+        ],
+        "expected": 248,
+        "method": 2
+    },
+    {
+        "question": "什么是死亡提取条件？",
+        "retrieved": [
+            256,
+            249,
+            2
+        ],
+        "expected": 248,
+        "method": 2
+    },
+    {
+        "question": "途中甩客时，应该如何处理？",
+        "retrieved": [
+            253,
+            45,
+            35
+        ],
+        "expected": 248,
+        "method": 2
+    },
+    {
+        "question": "申请参加出租汽车驾驶员从业资格考试的条件是什么？",
+        "retrieved": [
+            247,
+            222,
+            215
+        ],
+        "expected": 249,
+        "method": 2
+    },
+    {
+        "question": "购买住房提取公积金的条件是什么？",
+        "retrieved": [
+            2,
+            210,
+            247
+        ],
+        "expected": 249,
+        "method": 2
+    },
+    {
+        "question": "出境定居需要准备哪些资料？",
+        "retrieved": [
+            246,
+            2,
+            152
+        ],
+        "expected": 249,
+        "method": 2
+    },
+    {
+        "question": "如何解除异地缴存贷款的担保人身份？",
+        "retrieved": [
+            163,
+            248,
+            247
+        ],
+        "expected": 249,
+        "method": 2
+    },
+    {
+        "question": "个人征信报告的有效期是多久？",
+        "retrieved": [
+            130,
+            220,
+            215
+        ],
+        "expected": 250,
+        "method": 2
+    },
+    {
+        "question": "在荆门没有自有住房的情况下，如何办理租房提取？",
+        "retrieved": [
+            2,
+            208,
+            229
+        ],
+        "expected": 250,
+        "method": 2
+    },
+    {
+        "question": "办理公积金提取业务可以使用哪些身份证件？",
+        "retrieved": [
+            210,
+            163,
+            300
+        ],
+        "expected": 250,
+        "method": 2
+    },
+    {
+        "question": "商贷可以提前还款并提取额度吗？提取额度的限制是什么？",
+        "retrieved": [
+            255,
+            256,
+            253
+        ],
+        "expected": 250,
+        "method": 2
+    },
+    {
+        "question": "办理台湾通行证需要准备哪些资料？",
+        "retrieved": [
+            246,
+            238,
+            222
+        ],
+        "expected": 251,
+        "method": 2
+    },
+    {
+        "question": "办理港澳通行证需要准备哪些资料？",
+        "retrieved": [
+            218,
+            245,
+            238
+        ],
+        "expected": 251,
+        "method": 2
+    },
+    {
+        "question": "办理护照需要准备哪些资料？",
+        "retrieved": [
+            258,
+            218,
+            155
+        ],
+        "expected": 251,
+        "method": 2
+    },
+    {
+        "question": "提取住房公积金需要提供哪些资料？",
+        "retrieved": [
+            210,
+            256,
+            2
+        ],
+        "expected": 253,
+        "method": 2
+    },
+    {
+        "question": "灵活就业人员办理开户需要提供哪些资料？",
+        "retrieved": [
+            63,
+            2,
+            262
+        ],
+        "expected": 253,
+        "method": 2
+    },
+    {
+        "question": "申请“商转公”直转需要满足哪些条件？",
+        "retrieved": [
+            253,
+            70,
+            137
+        ],
+        "expected": 254,
+        "method": 2
+    },
+    {
+        "question": "申请公积金贷款需要办理哪些手续？",
+        "retrieved": [
+            163,
+            2,
+            249
+        ],
+        "expected": 254,
+        "method": 2
+    },
+    {
+        "question": "按年还商贷可以提取多少额度？",
+        "retrieved": [
+            255,
+            256,
+            257
+        ],
+        "expected": 254,
+        "method": 2
+    },
+    {
+        "question": "荆门缴存公积金，办理租房提取的上限是多少？",
+        "retrieved": [
+            210,
+            229,
+            2
+        ],
+        "expected": 254,
+        "method": 2
+    },
+    {
+        "question": "物业费提取的时间和范围是怎样的？",
+        "retrieved": [
+            2,
+            256,
+            257
+        ],
+        "expected": 254,
+        "method": 2
+    },
+    {
+        "question": "职工身份证信息变更可以通过哪些方式进行办理？",
+        "retrieved": [
+            210,
+            211,
+            269
+        ],
+        "expected": 254,
+        "method": 2
+    },
+    {
+        "question": "大修提取的条件有哪些？",
+        "retrieved": [
+            256,
+            249,
+            255
+        ],
+        "expected": 254,
+        "method": 2
+    },
+    {
+        "question": "在司乘纠纷中，应该如何处理？",
+        "retrieved": [
+            162,
+            270,
+            255
+        ],
+        "expected": 254,
+        "method": 2
+    },
+    {
+        "question": "办理跨省通办道路运输从业资格证变更需要提交哪些申请资料？",
+        "retrieved": [
+            254,
+            247,
+            249
+        ],
+        "expected": 255,
+        "method": 2
+    },
+    {
+        "question": "申请荆门公积金贷款需要满足哪些条件？",
+        "retrieved": [
+            2,
+            163,
+            254
+        ],
+        "expected": 255,
+        "method": 2
+    },
+    {
+        "question": "租房提取额度的上限是多少？",
+        "retrieved": [
+            210,
+            254,
+            253
+        ],
+        "expected": 255,
+        "method": 2
+    },
+    {
+        "question": "钟祥市出租车的白天和夜间运价分别是多少？",
+        "retrieved": [
+            250,
+            253,
+            249
+        ],
+        "expected": 256,
+        "method": 2
+    },
+    {
+        "question": "申请公积金贷款需要经过哪些流程？",
+        "retrieved": [
+            2,
+            248,
+            210
+        ],
+        "expected": 256,
+        "method": 2
+    },
+    {
+        "question": "如何查询个人公积金信息？",
+        "retrieved": [
+            163,
+            250,
+            276
+        ],
+        "expected": 256,
+        "method": 2
+    },
+    {
+        "question": "在荆门地区，父母购房可以提取我的公积金吗？",
+        "retrieved": [
+            2,
+            263,
+            249
+        ],
+        "expected": 257,
+        "method": 2
+    },
+    {
+        "question": "按年还商贷提取所需资料有哪些？",
+        "retrieved": [
+            255,
+            256,
+            248
+        ],
+        "expected": 257,
+        "method": 2
+    },
+    {
+        "question": "租房提取的条件是什么？提取的时间和范围是怎样的？",
+        "retrieved": [
+            210,
+            263,
+            208
+        ],
+        "expected": 257,
+        "method": 2
+    },
+    {
+        "question": "遇到司机多收费的情况，应该如何处理？",
+        "retrieved": [
+            250,
+            270,
+            253
+        ],
+        "expected": 257,
+        "method": 2
+    },
+    {
+        "question": "沙洋县办理户口簿和身份证的收费标准分别是多少？",
+        "retrieved": [
+            2,
+            269,
+            209
+        ],
+        "expected": 259,
+        "method": 2
+    },
+    {
+        "question": "异地办理身份证需要准备哪些材料？",
+        "retrieved": [
+            155,
+            163,
+            154
+        ],
+        "expected": 259,
+        "method": 2
+    },
+    {
+        "question": "荆门市创业担保贷款的贷款标准是怎样的？需要准备哪些材料？",
+        "retrieved": [
+            227,
+            269,
+            209
+        ],
+        "expected": 259,
+        "method": 2
+    },
+    {
+        "question": "口罩防护级别是越高越好吗？",
+        "retrieved": [
+            86,
+            216,
+            213
+        ],
+        "expected": 260,
+        "method": 2
+    },
+    {
+        "question": "道路运输驾驶员如何跨省进行从业资格证的年审？",
+        "retrieved": [
+            254,
+            161,
+            256
+        ],
+        "expected": 260,
+        "method": 2
+    },
+    {
+        "question": "哪些学校是由区教育局直接管理的？哪些学校是由市教育局直接管理的？",
+        "retrieved": [
+            154,
+            311,
+            275
+        ],
+        "expected": 261,
+        "method": 2
+    },
+    {
+        "question": "国务院客户端小程序可以帮助我们查询哪些信息？",
+        "retrieved": [
+            311,
+            280,
+            40
+        ],
+        "expected": 263,
+        "method": 2
+    },
+    {
+        "question": "食品标签的内容有哪些，我们应该如何正确阅读食品标签？",
+        "retrieved": [
+            132,
+            28,
+            53
+        ],
+        "expected": 263,
+        "method": 2
+    },
+    {
+        "question": "公租房的保障方式有哪些？",
+        "retrieved": [
+            10,
+            208,
+            84
+        ],
+        "expected": 263,
+        "method": 2
+    },
+    {
+        "question": "领取失业金会对以后的就业产生影响吗？",
+        "retrieved": [
+            220,
+            163,
+            2
+        ],
+        "expected": 263,
+        "method": 2
+    },
+    {
+        "question": "国有建设用地使用权注销登记的办理流程是什么？",
+        "retrieved": [
+            272,
+            206,
+            210
+        ],
+        "expected": 263,
+        "method": 2
+    },
+    {
+        "question": "办理老年人福利补贴需要满足哪些条件？",
+        "retrieved": [
+            2,
+            238,
+            269
+        ],
+        "expected": 264,
+        "method": 2
+    },
+    {
+        "question": "申请社保卡后需要等待多久才能领取？在哪里可以申领社保卡？",
+        "retrieved": [
+            63,
+            212,
+            155
+        ],
+        "expected": 265,
+        "method": 2
+    },
+    {
+        "question": "单位如何参加职工医保？",
+        "retrieved": [
+            211,
+            210,
+            118
+        ],
+        "expected": 266,
+        "method": 2
+    },
+    {
+        "question": "哪些情况下不能接种新冠病毒疫苗？",
+        "retrieved": [
+            166,
+            93,
+            89
+        ],
+        "expected": 268,
+        "method": 2
+    },
+    {
+        "question": "目前需要接种新冠病毒疫苗的人群有哪些？在哪些地方可以接种？",
+        "retrieved": [
+            108,
+            89,
+            93
+        ],
+        "expected": 268,
+        "method": 2
+    },
+    {
+        "question": "失业保险金申请的受理条件是什么？",
+        "retrieved": [
+            220,
+            221,
+            163
+        ],
+        "expected": 268,
+        "method": 2
+    },
+    {
+        "question": "来沙洋发展的人才可以享受哪些政策？",
+        "retrieved": [
+            222,
+            150,
+            213
+        ],
+        "expected": 269,
+        "method": 2
+    },
+    {
+        "question": "社保补贴的发放方法是什么？",
+        "retrieved": [
+            2,
+            267,
+            147
+        ],
+        "expected": 271,
+        "method": 2
+    },
+    {
+        "question": "如何查询医保缴费记录？",
+        "retrieved": [
+            211,
+            63,
+            206
+        ],
+        "expected": 272,
+        "method": 2
+    },
+    {
+        "question": "参保人员的医疗保险缴费途径有哪些？",
+        "retrieved": [
+            151,
+            147,
+            145
+        ],
+        "expected": 272,
+        "method": 2
+    },
+    {
+        "question": "建设工程竣工后，建设单位需要进行什么步骤来验收？",
+        "retrieved": [
+            272,
+            225,
+            241
+        ],
+        "expected": 273,
+        "method": 2
+    },
+    {
+        "question": "国有建设用地使用权首次登记的申请材料有哪些？",
+        "retrieved": [
+            206,
+            263,
+            272
+        ],
+        "expected": 275,
+        "method": 2
+    },
+    {
+        "question": "装修是否可以提取住房公积金？",
+        "retrieved": [
+            2,
+            256,
+            137
+        ],
+        "expected": 276,
+        "method": 2
+    },
+    {
+        "question": "如何能够取得长期护理证？",
+        "retrieved": [
+            149,
+            258,
+            153
+        ],
+        "expected": 278,
+        "method": 2
+    },
+    {
+        "question": "屈家岭管理区的高龄补贴发放对象标准是什么？",
+        "retrieved": [
+            2,
+            157,
+            238
+        ],
+        "expected": 28,
+        "method": 2
+    },
+    {
+        "question": "我市对符合主导产业发展规划的工业项目有什么用地奖励政策？",
+        "retrieved": [
+            311,
+            241,
+            238
+        ],
+        "expected": 28,
+        "method": 2
+    }
+]
