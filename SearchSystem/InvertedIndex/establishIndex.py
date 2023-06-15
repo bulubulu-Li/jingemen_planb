@@ -49,6 +49,10 @@ def createIndex(directname):
     tools.writeToFile(wordList, tools.projectpath + 'wordList.json')
 
 def createIndex_zh(directname):
+    # if establishindex in config is false, read from exist file, else generate
+    if tools.getConfig("establishIndex") == False:
+        return
+    
     invertedIndex = {}
     path = tools.projectpath + directname
     path = tools.reuterspath
@@ -95,6 +99,8 @@ def createIndex_zh(directname):
     #将数据写入文件中
     tools.writeToFile_zh(invertedIndex, tools.projectpath + 'invertIndex_zh.json')
     tools.writeToFile_zh(wordList, tools.projectpath + 'wordList_zh.json')
+    tools.setConfig("establishIndex", False)
+
 
 
 #获取文档名中的文档的id

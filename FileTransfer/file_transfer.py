@@ -81,7 +81,7 @@ def transfer_wx():
                 "page_content":json_text["content"],
                 "metadata":{
                     "url":json_text["url"],
-                    "title": "wx/"+filename,
+                    "source": "wx/"+filename,
                 }
             })
         filename=store_file("wx",content)
@@ -99,7 +99,7 @@ def transfer_json():
                     "page_content":item['kinfoName']+'\n\n'+item['kinfoContent'],
                     "metadata":{
                         "url":"https://www.jingmen.gov.cn/col/col18658/index.html?kinfoGuid="+item['kinfoGuid'],
-                        "title": "json/"+filename,
+                        "source": "json/"+filename,
                     }
                 })
         filename=store_file("json",content)
