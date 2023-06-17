@@ -240,6 +240,8 @@ def retrieve_files(question_file,searchType):
                     if searchType!=7:
                         # 形式：[[97-3,7.445],...]
                         resFull=[[tools.showDocID(x[DOC_ID]),x[SCORE]] for x in res]
+                        if len(resFull)>10:
+                            resFull=resFull[:10]
                         # 形式 970003
                         res=[x[DOC_ID] for x in res[:3]]
                         # 形式：97-3
@@ -274,7 +276,7 @@ def retrieve_files(question_file,searchType):
                                 "question":question["question"],
                                 "expected":int(json_data["doc ID"]),
                                 "retrieved":show,
-                                "score":'<hr>'.join([f'doc_Id: {x[DOC_ID]}, score: {str(x[SCORE])}' for x in resFull]),
+                                "score":'<hr>'.join([f'doc_Id: {x[0]}, score: {x[1]:.4f}' for x in resFull]),
                                 "expected_content":item["content"],
                                 # TODO 这里需要提供实际retrieve的内容
                                 "retrieved_title":'<hr>'.join(fullContent["retrieved_title"]),
