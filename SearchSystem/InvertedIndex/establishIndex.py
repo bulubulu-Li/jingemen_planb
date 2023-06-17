@@ -17,7 +17,7 @@ def createIndex(directname):
         #然后，保存jingmen数据为html
         #然后就没啥大问题了
         content = PreprocessFile.preProcess(path + '/' + file)
-        docId = getDocID(file)#文档name必须是数字
+        docId = tools.getDocID(file)#文档name必须是数字
 
         num = 0 #word在文档中的位置
         for word in content:
@@ -69,7 +69,7 @@ def createIndex_zh(directname):
         if file.find('.') == -1:
             continue
         content = PreprocessFile.preProcess_zh(path + '/' + file)
-        docId = getDocID(file)#文档name必须是数字
+        docId = tools.getDocID(file)#文档name必须是 xxx-xx
         
         num = 0 #word在文档中的位置
         for word in content:
@@ -103,11 +103,8 @@ def createIndex_zh(directname):
 
 
 
-#获取文档名中的文档的id
-def getDocID(filename):
-    end = filename.find('.')
-    docId = filename[0:end]
-    return int(docId)
+
+
 
 def sortTheDict(dict):
     sdict =  { k:dict[k] for k in sorted(dict.keys())}

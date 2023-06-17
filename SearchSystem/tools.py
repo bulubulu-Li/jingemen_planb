@@ -1,6 +1,5 @@
 import json
 import os
-
 import yaml
 
 projectpath = os.getcwd()
@@ -27,10 +26,21 @@ def writeToFile_zh(item,filename):
     file.close()
 
 #获取文档名中的文档的id
+# 由于是拼接的，因此把大文档的id乘以10000，加上文档内序号的id
 def getDocID(filename):
     end = filename.find('.')
     docId = filename[0:end]
-    return int(docId)
+    docID = docId.split('-')
+
+    return int(docID[0])*10000+int(docID[1])
+
+# 展示id，形式为xxx-xx
+def showDocID(id):
+    return str(id//10000) + '-' + str(id%10000)
+
+# 主id，形式为xxx
+def mainDocID(id):
+    return id//10000
 
 def getWholeDocList():
     files = os.listdir(reuterspath)

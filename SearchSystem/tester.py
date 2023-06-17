@@ -10,6 +10,7 @@ import numpy as np
 
 # try to extract key from tools.secret, if false, print
 DOC_ID=1
+SCORE=0
 question_num=0
 # 建立一个错误数组，长度为7
 failure_num = [0 for i in range(7)]
@@ -221,7 +222,7 @@ def generate_questions(file):
             },
             ...
         ]
-    }
+    }  
 '''
 def retrieve_files(question_file,searchType):
     failures =[]
@@ -237,9 +238,16 @@ def retrieve_files(question_file,searchType):
                 for question in item["questions"]:
                     res=main.searching(question["question"],searchType)
                     if searchType!=7:
+                        # 形式：[[97-3,7.445],...]
+                        resFull=[[tools.showDocID(x[DOC_ID]),x[SCORE]] for x in res]
+                        # 形式 970003
                         res=[x[DOC_ID] for x in res[:3]]
+                        # 形式：97-3
+                        show=[tools.showDocID(x) for x in res]
+                        # 形式：97
+                        mainFile=[tools.mainDocID(x) for x in res]
                         print(res)
-                        if int(json_data["doc ID"]) not in res:
+                        if int(json_data["doc ID"]) not in mainFile:
                             fullContent={
                                 "retrieved_title":[],
                                 "retrieved_content":[]
@@ -247,12 +255,12 @@ def retrieve_files(question_file,searchType):
                             failure_num[searchType]+=1
                             failures.append({
                                 "question":question["question"],
-                                "retrieved":res,
+                                "retrieved":show,
                                 "expected":int(json_data["doc ID"]),
                                 "method":searchType
                             })
                             # open the file in res and collect the first page_content
-                            for i in res:
+                            for i in show:
                                 with open(f'{tools.reuterspath}/{i}.json', 'r', encoding='utf-8') as f2:
                                     content_list=json.load(f2)
                                     print(content_list)
@@ -264,8 +272,9 @@ def retrieve_files(question_file,searchType):
 
                             failuresFull.append({
                                 "question":question["question"],
-                                "retrieved":res,
                                 "expected":int(json_data["doc ID"]),
+                                "retrieved":show,
+                                "score":'<hr>'.join([f'doc_Id: {x[DOC_ID]}, score: {str(x[SCORE])}' for x in resFull]),
                                 "expected_content":item["content"],
                                 # TODO 这里需要提供实际retrieve的内容
                                 "retrieved_title":'<hr>'.join(fullContent["retrieved_title"]),
@@ -312,8 +321,8 @@ def evaluate_accuracy():
     print(f"Percentage of failures: {fn.tolist()}")
 
 
-
-# generate_questions(tools.reuterspath)
+# 文档分为切分为每一个小文档的文档和一整个大文档
+# generate_questions(f'{tools.reuterspath}\\wholeFiles')
 retrieve_files(question_file,1)
 retrieve_files(question_file,2)
 evaluate_accuracy()

@@ -63,7 +63,7 @@ def searching(statement,choice,loop=False ):
         DOCLIST = searchWord.searchWords(INDEX, WORDSET)
         SORTEDDOCLIST = sortDoc.sortScoreDocList(INDEX, FILENUM, WORDSET, DOCLIST)
         for doc in SORTEDDOCLIST:
-            print("doc ID: ", doc[1], " score: ", "%.4f" % doc[0])
+            print("doc ID: ",tools.showDocID(doc[1]), " score: ", "%.4f" % doc[0])
         if loop==False:
             return SORTEDDOCLIST
 
@@ -80,7 +80,7 @@ def searching(statement,choice,loop=False ):
         #取top20
         SORTEDDOCLIST = sortDoc.TopKScore(20, INDEX, FILENUM, WORDSET, DOCLIST)
         for doc in SORTEDDOCLIST:
-            print("doc ID: ", doc[1], " score: ", "%.4f" % doc[0])
+            print("doc ID: ", tools.showDocID(doc[1]), " score: ", "%.4f" % doc[0])
         if loop==False:
             return SORTEDDOCLIST
     #Bool 查询

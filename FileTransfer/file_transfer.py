@@ -32,13 +32,14 @@ def store_file(fileType,content):
         item["metadata"]["doc ID"]=counter
         # set fileType
         item["metadata"]["filetype"]=fileType
-        
-    filename=f'{counter}.json'
+    
+    for i,item in enumerate(content):     
+        filename=f'{counter}-{i}.json'
+        json_data=json.dumps([item],ensure_ascii=False)
+        with open(reuterspath+filename, 'w',encoding='utf-8') as f:
+            f.write(json_data)
+
     counter+=1
-    # transfer content into json
-    content=json.dumps(content,ensure_ascii=False)
-    with open(reuterspath+filename, 'w',encoding='utf-8') as f:
-        f.write(content)
     return filename
 
 def transfer_doc():
