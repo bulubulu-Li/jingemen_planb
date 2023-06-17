@@ -129,6 +129,7 @@ wf-idf 和 tf-idf比较：
 - 结果为几个json和html
 - `failure_x`为第x个召回方法的简化错误信息
 - `failureFull_x`为第x个召回方法的完整错误信息
+- ![Alt text](img/image3.png)
 
 
 
