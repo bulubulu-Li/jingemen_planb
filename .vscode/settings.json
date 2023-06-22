@@ -1,0 +1,8 @@
+{
+    "python.analysis.extraPaths": [
+        "./SearchSystem/Tools"
+    ],
+    "githubPullRequests.ignoredPullRequestBranches": [
+        "master"
+    ]
+}

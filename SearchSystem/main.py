@@ -30,7 +30,7 @@ print("loading the wordnet...")
  
 PATH = tools.reuterspath
 FILES = os.listdir(tools.reuterspath)
-FILENUM = len(FILES)
+FILENUM = len(FILES)-3
 
 LOOP = True
 print("=================Searching System=================")

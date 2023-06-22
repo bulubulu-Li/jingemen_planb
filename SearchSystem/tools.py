@@ -5,6 +5,9 @@ import yaml
 projectpath = os.getcwd()
 projectpath = projectpath.replace('/',"\\")
 projectpath += "\\"
+while(not projectpath.endswith("SearchSystem\\")):
+    print(projectpath)
+    projectpath = os.path.dirname(projectpath)
 reuterspath = projectpath.replace("SearchSystem","Reuters_zh")
 config={}
 secret={}
@@ -21,7 +24,7 @@ def writeToFile(item,filename):
 def writeToFile_zh(item,filename):
     # 将数据写入到文件中
     file = open(filename,'w',encoding='utf-8')
-    str = json.JSONEncoder().encode(item)
+    str = json.dumps(item, ensure_ascii=False)
     file.write(str)
     file.close()
 
@@ -40,7 +43,14 @@ def showDocID(id):
 
 # 主id，形式为xxx
 def mainDocID(id):
-    return id//10000
+    # if id is a int
+    if isinstance(id,int):
+        return id//10000
+    # if id is a str
+    elif isinstance(id,str):
+        return int(id.split('-')[0])
+
+        
 
 def getWholeDocList():
     files = os.listdir(reuterspath)

@@ -69,6 +69,10 @@ def createIndex_zh(directname):
         if file.find('.') == -1:
             continue
         content = PreprocessFile.preProcess_zh(path + '/' + file)
+        # skip empty files
+        if len(content)==0:
+            continue
+
         docId = tools.getDocID(file)#文档name必须是 xxx-xx
         
         num = 0 #word在文档中的位置

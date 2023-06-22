@@ -32,6 +32,16 @@ def store_file(fileType,content):
         item["metadata"]["doc ID"]=counter
         # set fileType
         item["metadata"]["filetype"]=fileType
+
+    # skip files who's type is not json
+    if fileType!="json":
+        filename=f'{counter}-0.json'
+        with open(reuterspath+filename, 'w',encoding='utf-8') as f:
+            # make the file empty
+            f.write("")
+            
+        counter+=1
+        return
     
     for i,item in enumerate(content):     
         filename=f'{counter}-{i}.json'
