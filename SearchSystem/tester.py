@@ -8,10 +8,12 @@ import tools
 import pandas as pd
 import numpy as np
 import jieba
+import cProfile
 
 # try to extract key from tools.secret, if false, print
 DOC_ID=1
 SCORE=0
+WORD_LIST=2
 question_num=0
 # 建立一个错误数组，长度为7
 failure_num = [0 for i in range(7)]
@@ -241,14 +243,14 @@ def retrieve_files(question_file,searchType):
             for item in questions:
                 print(f"Retrieving {filename} {item['content']}")
                 for question in item["questions"]:
-                    res=main.searching(question["question"],searchType)
+                    serching_res=main.searching(question["question"],searchType)
                     if searchType!=7:
                         # 形式：[[97-3,7.445],...]
-                        resFull=[[tools.showDocID(x[DOC_ID]),x[SCORE]] for x in res]
+                        resFull=[[tools.showDocID(x[DOC_ID]),x[SCORE],x[WORD_LIST]] for x in serching_res]
                         if len(resFull)>10:
                             resFull=resFull[:10]
                         # 形式 970003
-                        res=[x[DOC_ID] for x in res[:3]]
+                        res=[x[DOC_ID] for x in serching_res[:3]]
                         # 形式：97-3
                         show=[tools.showDocID(x) for x in res]
                         # 形式：97
@@ -281,7 +283,9 @@ def retrieve_files(question_file,searchType):
                                 "question":question["question"],
                                 "expected":int(json_data["doc ID"]),
                                 "retrieved":show,
-                                "score":'<hr>'.join([f'doc_Id: {x[0]}, score: {x[1]:.4f}' for x in resFull]),
+                                "score":'<hr>'.join([f'doc_Id: {x[0]}, score: {x[1]:.3f}' for x in resFull]),
+                                # word_list has this structure:{"word":word,"tf":tf,"df":df,"wf":wf,"idf":idf,"score":wf*idf}
+                                "word_list":'<hr>'.join("<br>".join(f'{x["word"]}: score:{x["score"]:.3f} tf: {x["tf"]:.3f}, df: {x["df"]:.3f}, wf: {x["wf"]:.3f}, idf: {x["idf"]:.3f}]'for x in y[2]["word_list"]) for y in resFull),
                                 "expected_content":item["content"],
                                 # TODO 这里需要提供实际retrieve的内容
                                 "retrieved_title":'<hr>'.join(fullContent["retrieved_title"]),
@@ -367,6 +371,7 @@ def extract_failure_retrieve():
                     "expected": case["expected"],
                     "retrieved": case["retrieved"],
                     "score": case["score"],
+                    "word_list":case["word_list"],
                     "expected_content": case["expected_content"],
                     "retrieved_title": case["retrieved_title"],
                     "retrieved_content": case["retrieved_content"],
@@ -393,6 +398,7 @@ def extract_failure_retrieve():
                         "in_list": -1,
                         "retrieved": case["retrieved"],
                         "score": case["score"],
+                        "word_list":case["word_list"],
                         "expected_content": case["expected_content"],
                         "retrieved_title": case["retrieved_title"],
                         "retrieved_content": case["retrieved_content"],
@@ -411,6 +417,7 @@ def extract_failure_retrieve():
                             "in_list": i,
                             "retrieved": case["retrieved"],
                             "score": case["score"],
+                            "word_list":case["word_list"],
                             "expected_content": case["expected_content"],
                             "retrieved_title": case["retrieved_title"],
                             "retrieved_content": case["retrieved_content"],
@@ -425,25 +432,33 @@ def extract_failure_retrieve():
             with open('bad_case/failureUpdate_'+index+'.json', 'w', encoding='utf-8') as f1:
                 json.dump(json_data, f1, ensure_ascii=False, indent=4)
             
-            # 转换为HTML
+            # 转换为HTML和csv
             df = pd.DataFrame(json_data)
             html = df.to_html(escape=False)
             with open('bad_case/failureUpdate_'+index+'.html', 'w', encoding='utf-8') as f1:
                 f1.write(html)
+            df = pd.json_normalize(json_data)
+            df.to_csv('bad_case/failureUpdate_'+index+'.csv', encoding='utf-8-sig')
 
             with open('bad_case/worstCases_'+index+'_fail.json', 'w', encoding='utf-8') as f1:
                 json.dump(fail_files, f1, ensure_ascii=False, indent=4)
 
-            # 转换为HTML
+            # 转换为HTML和csv
             df = pd.DataFrame(fail_files)
             html = df.to_html(escape=False)
             with open('bad_case/worstCases_'+index+'_fail.html', 'w', encoding='utf-8') as f1:
                 f1.write(html)
+            df = pd.json_normalize(fail_files)
+            df.to_csv('bad_case/worstCases_'+index+'.csv', encoding='utf-8-sig')
 
 
 # 文档分为切分为每一个小文档的文档和一整个大文档
 # generate_questions(f'{tools.reuterspath}\\wholeFiles')
-# retrieve_files(question_file,1)
+
+# profiler = cProfile.Profile()
+# num=1
+# profiler.runctx('retrieve_files(question_file, num)', globals(), locals())
+
 # retrieve_files(question_file,2)
 extract_failure_retrieve()  
 evaluate_accuracy()

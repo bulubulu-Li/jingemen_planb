@@ -57,6 +57,7 @@ def createIndex_zh(directname):
     path = tools.projectpath + directname
     path = tools.reuterspath
     files = os.listdir(path)
+    wordCount={}
 
     #单词:docid:[pos]
     for file in files:
@@ -74,6 +75,7 @@ def createIndex_zh(directname):
             continue
 
         docId = tools.getDocID(file)#文档name必须是 xxx-xx
+        wordCount[docId]=len(content)
         
         num = 0 #word在文档中的位置
         for word in content:
@@ -103,6 +105,7 @@ def createIndex_zh(directname):
     #将数据写入文件中
     tools.writeToFile_zh(invertedIndex, tools.projectpath + 'invertIndex_zh.json')
     tools.writeToFile_zh(wordList, tools.projectpath + 'wordList_zh.json')
+    tools.writeToFile_zh(wordCount, tools.projectpath + 'wordCount_zh.json')
     tools.setConfig("establishIndex", False)
 
 

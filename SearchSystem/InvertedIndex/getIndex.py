@@ -25,4 +25,10 @@ def getWordList_zh():
     wordList = json.JSONDecoder().decode(wordStr)
     return wordList
 
+def getWordCount_zh():
+    file = open(tools.projectpath + 'wordCount_zh.json', 'r',encoding='utf-8')
+    wordStr = file.read()
+    wordCount = json.JSONDecoder().decode(wordStr)
+    return wordCount
+
 # print(getWordList())

@@ -1,22 +1,23 @@
 from scoreQuery import getScore
 
-def getScoreDocList(index,fileNum, words,docList):
+def getScoreDocList(index,fileNum, words,docList,wordCount):
     scoreDocList = []
     for doc in docList:
-        score = getScore.get_wfidf_Score(index,fileNum,doc,words)
+        scores = getScore.get_wfidf_Score(index,fileNum,doc,words,wordCount)
+        score=scores["score"]
         #scoreDocList 是score和doc的list
-        scoreDocList.append([score,doc])
+        scoreDocList.append([score,doc,scores])
     #print(scoreDocList)
     return scoreDocList
 
 #从大到小得到sortedDocList
-def sortScoreDocList(index,fileNum,words,docList):
-    scoreDocList = getScoreDocList(index,fileNum,words,docList)
+def sortScoreDocList(index,fileNum,words,docList,wordCount):
+    scoreDocList = getScoreDocList(index,fileNum,words,docList,wordCount)
     return sorted(scoreDocList,reverse = True)
 
 #堆排序实现的top K查询
-def TopKScore(K,index,fileNum,words,docList):
-    scoreDocList = getScoreDocList(index, fileNum, words, docList)
+def TopKScore(K,index,fileNum,words,docList,wordCount):
+    scoreDocList = getScoreDocList(index, fileNum, words, docList,wordCount)
     # print(scoreDocList)
     N = len(scoreDocList)
     if N is 0:

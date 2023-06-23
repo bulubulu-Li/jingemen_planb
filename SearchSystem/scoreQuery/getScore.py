@@ -19,18 +19,22 @@ def get_wfidf(index, fileNum, docID, word):
     idf = cmath.log10(fileNum / df).real
     return wf * idf
 
-def get_wfidf_Score(index,fileNum,docID,wordList):
+def get_wfidf_Score(index,fileNum,docID,wordList,wordCount):
     score = 0
     docID = str(docID)
+    # [0,0,{"score":0,"word_list":[{"word":word,"tf":tf,"df":df,"wf":wf,"idf":idf,"score":wf*idf},...]}]
+    scores={"score":0,"word_list":[]}
     for word in wordList:
         if word not in index or docID not in index[word]:
             continue
-        tf = len(index[word][docID])
+        tf = len(index[word][docID])/wordCount[docID]*1000
         df = len(index[word])
         wf = 1 + cmath.log10(tf).real
         idf = cmath.log10(fileNum / df).real
+        scores["word_list"].append({"word":word,"tf":tf,"df":df,"wf":wf,"idf":idf,"score":wf*idf}) 
         score += wf * idf
-    return score
+    scores["score"]=score
+    return scores
 
 def get_tfidf_Score(index,fileNum,docID,wordList):
     score = 0

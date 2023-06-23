@@ -26,6 +26,7 @@ WORDLIST = getIndex.getWordList_zh()
 print("getting index...")
 INDEX = getIndex.getIndex_zh()
 print("loading the wordnet...")
+WORDCOUNT = getIndex.getWordCount_zh()
 # stemming.lemmatize_sentence("a", False)
  
 PATH = tools.reuterspath
@@ -61,9 +62,9 @@ def searching(statement,choice,loop=False ):
         WORDSET = set(INPUTWORDS)
 
         DOCLIST = searchWord.searchWords(INDEX, WORDSET)
-        SORTEDDOCLIST = sortDoc.sortScoreDocList(INDEX, FILENUM, WORDSET, DOCLIST)
-        for doc in SORTEDDOCLIST:
-            print("doc ID: ",tools.showDocID(doc[1]), " score: ", "%.4f" % doc[0])
+        SORTEDDOCLIST = sortDoc.sortScoreDocList(INDEX, FILENUM, WORDSET, DOCLIST,WORDCOUNT)
+        # for doc in SORTEDDOCLIST:
+        #     print("doc ID: ",tools.showDocID(doc[1]), " score: ", "%.3f" % doc[0])
         if loop==False:
             return SORTEDDOCLIST
 
@@ -78,9 +79,9 @@ def searching(statement,choice,loop=False ):
         # print(DOCLIST)
         #根据tf-idf计算分数
         #取top20
-        SORTEDDOCLIST = sortDoc.TopKScore(20, INDEX, FILENUM, WORDSET, DOCLIST)
+        SORTEDDOCLIST = sortDoc.TopKScore(20, INDEX, FILENUM, WORDSET, DOCLIST,WORDCOUNT)
         for doc in SORTEDDOCLIST:
-            print("doc ID: ", tools.showDocID(doc[1]), " score: ", "%.4f" % doc[0])
+            print("doc ID: ", tools.showDocID(doc[1]), " score: ", "%.3f" % doc[0])
         if loop==False:
             return SORTEDDOCLIST
     #Bool 查询
