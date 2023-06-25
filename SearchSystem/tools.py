@@ -37,9 +37,23 @@ def getDocID(filename):
 
     return int(docID[0])*10000+int(docID[1])
 
+def getDocID_qq(filename):
+    end = filename.find('.')
+    docId = filename[0:end]
+    docID = docId.split('-')
+
+    return int(docID[0])*10000+int(docID[1])+1000
+
+def getDocID_qa(filename):
+    end = filename.find('.')
+    docId = filename[0:end]
+    docID = docId.split('-')
+
+    return int(docID[0])*10000+int(docID[1])
+
 # 展示id，形式为xxx-xx
 def showDocID(id):
-    return str(id//10000) + '-' + str(id%10000)
+    return str(id//10000) + '-' + str(id%100)
 
 # 主id，形式为xxx
 def mainDocID(id):

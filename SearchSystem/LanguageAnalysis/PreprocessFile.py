@@ -12,7 +12,19 @@ def preProcess(filename):
     return words
 
 
-def preProcess_zh(filename):
+def preProcess_qq_zh(filename):
+    # if file is empty, return []
+    if os.path.getsize(filename) == 0:
+        return []
+        
+    file = open(filename, 'r', encoding='utf-8')
+    content = json.load(file)
+    words=[]
+    for page in content:
+        words+=jieba.cut(page["title"])
+    return words
+
+def preProcess_qa_zh(filename):
     # if file is empty, return []
     if os.path.getsize(filename) == 0:
         return []

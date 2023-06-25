@@ -111,7 +111,8 @@ def transfer_json():
                     "metadata":{
                         "url":"https://www.jingmen.gov.cn/col/col18658/index.html?kinfoGuid="+item['kinfoGuid'],
                         "source": "json/"+filename,
-                    }
+                    },
+                    "title":item['kinfoName']
                 })
         filename=store_file("json",content)
 
