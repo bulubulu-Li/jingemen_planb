@@ -250,7 +250,7 @@ def retrieve_files(question_file,searchType):
                         if len(resFull)>10:
                             resFull=resFull[:10]
                         # 形式 970003
-                        res=[x[DOC_ID] for x in serching_res[:3]]
+                        res=[x[DOC_ID] for x in serching_res[:10]]
                         # 形式：97-3
                         show=[tools.showDocID(x) for x in res]
                         # 形式：97
@@ -283,9 +283,9 @@ def retrieve_files(question_file,searchType):
                                 "question":question["question"],
                                 "expected":int(json_data["doc ID"]),
                                 "retrieved":show,
-                                "score":'<hr>'.join([f'doc_Id: {x[0]}, score: {x[1]:.3f}' for x in resFull]),
+                                # "score":'<hr>'.join([f'doc_Id: {x[0]}, score: {x[1]:.3f}' for x in resFull]),
                                 # word_list has this structure:{"word":word,"tf":tf,"df":df,"wf":wf,"idf":idf,"score":wf*idf}
-                                "word_list":'<hr>'.join("<br>".join(f'{x["word"]}: score:{x["score"]:.3f} tf: {x["tf"]:.3f}, df: {x["df"]:.3f}, wf: {x["wf"]:.3f}, idf: {x["idf"]:.3f}]'for x in y[2]["word_list"]) for y in resFull),
+                                "socre_detail":'<hr>'.join(f"doc_ID: {y[0]}, doc_score: {y[1]}<br>"+"<br>".join(f'{x["word"]}: score:{x["score"]:.3f} tf: {x["tf"]:.3f}, df: {x["df"]:.3f}, wf: {x["wf"]:.3f}, idf: {x["idf"]:.3f}' for x in y[2]["word_list"]) for y in resFull),
                                 "expected_content":item["content"],
                                 # TODO 这里需要提供实际retrieve的内容
                                 "retrieved_title":'<hr>'.join(fullContent["retrieved_title"]),
@@ -370,8 +370,8 @@ def extract_failure_retrieve():
                     "split_question":list(jieba.cut(case['question'])),
                     "expected": case["expected"],
                     "retrieved": case["retrieved"],
-                    "score": case["score"],
-                    "word_list":case["word_list"],
+                    # "score": case["score"],
+                    "socre_detail":case["socre_detail"],
                     "expected_content": case["expected_content"],
                     "retrieved_title": case["retrieved_title"],
                     "retrieved_content": case["retrieved_content"],
@@ -385,8 +385,15 @@ def extract_failure_retrieve():
                 # if the expected doc_id is in the "score" doc_Id, then in_list is the rank, otherwise is -1
                 # change score into a dict list with key "doc_Id" and "score"
                 expacted=case['expected']
-                score_list= case['score'].split('<hr>')
-                score_list = [score.split(', score: ') for score in score_list]
+                score_list= case['socre_detail'].split('<hr>')
+                print("score_list")
+                print(score_list)
+                score_list = [score.split('<br>')[0] for score in score_list]
+                print("score_list #")
+                print(score_list)
+                score_list = [score.split(', doc_score: ') for score in score_list]
+                print("score_list , doc_score: ")
+                print(score_list)
                 score_list = [{'doc_Id': score[0].split(': ')[1], 'score': float(score[1])} for score in score_list]
                 doc_list = [tools.mainDocID(doc['doc_Id']) for doc in score_list]
 
@@ -397,8 +404,8 @@ def extract_failure_retrieve():
                         "expected": case["expected"],
                         "in_list": -1,
                         "retrieved": case["retrieved"],
-                        "score": case["score"],
-                        "word_list":case["word_list"],
+                        # "score": case["score"],
+                        "socre_detail":case["socre_detail"],
                         "expected_content": case["expected_content"],
                         "retrieved_title": case["retrieved_title"],
                         "retrieved_content": case["retrieved_content"],
@@ -416,8 +423,8 @@ def extract_failure_retrieve():
                             "expected": case["expected"],
                             "in_list": i,
                             "retrieved": case["retrieved"],
-                            "score": case["score"],
-                            "word_list":case["word_list"],
+                            # "score": case["score"],
+                            "socre_detail":case["socre_detail"],
                             "expected_content": case["expected_content"],
                             "retrieved_title": case["retrieved_title"],
                             "retrieved_content": case["retrieved_content"],
@@ -455,9 +462,10 @@ def extract_failure_retrieve():
 # 文档分为切分为每一个小文档的文档和一整个大文档
 # generate_questions(f'{tools.reuterspath}\\wholeFiles')
 
-# profiler = cProfile.Profile()
-# num=1
-# profiler.runctx('retrieve_files(question_file, num)', globals(), locals())
+profiler = cProfile.Profile()
+num=1
+profiler.runctx('retrieve_files(question_file, num)', globals(), locals())
+
 
 # retrieve_files(question_file,2)
 extract_failure_retrieve()  
