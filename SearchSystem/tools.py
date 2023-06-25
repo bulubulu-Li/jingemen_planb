@@ -76,6 +76,13 @@ def getWholeDocList():
         fileList.append(getDocID(file))
     return sorted(fileList)
 
+def getRetrieveMethod(id):
+    if id%10000 >= 1000:
+        return 'qa'
+    else:
+        return 'qq'
+
+
 def initConfig():
     global config
     global secret

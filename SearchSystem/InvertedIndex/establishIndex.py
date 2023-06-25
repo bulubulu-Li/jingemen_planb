@@ -69,8 +69,8 @@ def createIndex_zh(directname):
     for file in files:
         print("analyzing file: ", file)
 
-        contents = PreprocessFile.preProcess_qa_zh(path + '/' + file)
-        titles = PreprocessFile.preProcess_qq_zh(path + '/' + file)
+        contents = PreprocessFile.preProcess_zh_qa(path + '/' + file)
+        titles = PreprocessFile.preProcess_zh_qq(path + '/' + file)
         # skip empty files
         if len(contents)==0:
             continue
@@ -137,9 +137,9 @@ def createIndex_zh(directname):
     wordList_qa = getWordList(invertedIndex_qa)
     printIndex(invertedIndex_qa)
     #将数据写入文件中
-    tools.writeToFile_zh(invertedIndex_qa, tools.projectpath + 'invertIndex_qa_zh.json')
-    tools.writeToFile_zh(wordList_qa, tools.projectpath + 'wordList_qa_zh.json')
-    tools.writeToFile_zh(wordCount_qa, tools.projectpath + 'wordCount_qa_zh.json')
+    tools.writeToFile_zh(invertedIndex_qa, tools.projectpath + 'invertIndex_zh_qa.json')
+    tools.writeToFile_zh(wordList_qa, tools.projectpath + 'wordList_zh_qa.json')
+    tools.writeToFile_zh(wordCount_qa, tools.projectpath + 'wordCount_zh_qa.json')
 
     #处理qq的index和wordCount
     #给倒排索引中的词项排序
@@ -148,9 +148,9 @@ def createIndex_zh(directname):
     wordList_qq = getWordList(invertedIndex_qq)
     printIndex(invertedIndex_qq)
     #将数据写入文件中
-    tools.writeToFile_zh(invertedIndex_qq, tools.projectpath + 'invertIndex_qq_zh.json')
-    tools.writeToFile_zh(wordList_qq, tools.projectpath + 'wordList_qq_zh.json')
-    tools.writeToFile_zh(wordCount_qq, tools.projectpath + 'wordCount_qq_zh.json')
+    tools.writeToFile_zh(invertedIndex_qq, tools.projectpath + 'invertIndex_zh_qq.json')
+    tools.writeToFile_zh(wordList_qq, tools.projectpath + 'wordList_zh_qq.json')
+    tools.writeToFile_zh(wordCount_qq, tools.projectpath + 'wordCount_zh_qq.json')
 
 
     # 处理完整的index和wordCount

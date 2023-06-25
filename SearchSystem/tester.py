@@ -246,7 +246,7 @@ def retrieve_files(question_file,searchType):
                     serching_res=main.searching(question["question"],searchType)
                     if searchType!=7:
                         # 形式：[[97-3,7.445],...]
-                        resFull=[[tools.showDocID(x[DOC_ID]),x[SCORE],x[WORD_LIST]] for x in serching_res]
+                        resFull=[[x[DOC_ID],x[SCORE],x[WORD_LIST]] for x in serching_res]
                         if len(resFull)>10:
                             resFull=resFull[:10]
                         # 形式 970003
@@ -285,7 +285,7 @@ def retrieve_files(question_file,searchType):
                                 "retrieved":show,
                                 # "score":'<hr>'.join([f'doc_Id: {x[0]}, score: {x[1]:.3f}' for x in resFull]),
                                 # word_list has this structure:{"word":word,"tf":tf,"df":df,"wf":wf,"idf":idf,"score":wf*idf}
-                                "socre_detail":'<hr>'.join(f"doc_ID: {y[0]}, doc_score: {y[1]}<br>"+"<br>".join(f'{x["word"]}: score:{x["score"]:.3f} tf: {x["tf"]:.3f}, df: {x["df"]:.3f}, wf: {x["wf"]:.3f}, idf: {x["idf"]:.3f}' for x in y[2]["word_list"]) for y in resFull),
+                                "socre_detail":'<hr>'.join(f"method: {tools.getRetrieveMethod(y[0])}, doc_ID: {tools.showDocID(y[0])}, doc_score: {y[1]}<br>"+"<br>".join(f'{x["word"]}: score:{x["score"]:.3f} tf: {x["tf"]:.3f}, df: {x["df"]:.3f}, wf: {x["wf"]:.3f}, idf: {x["idf"]:.3f}' for x in y[2]["word_list"]) for y in resFull),
                                 "expected_content":item["content"],
                                 # TODO 这里需要提供实际retrieve的内容
                                 "retrieved_title":'<hr>'.join(fullContent["retrieved_title"]),

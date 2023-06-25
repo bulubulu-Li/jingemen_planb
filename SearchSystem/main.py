@@ -23,10 +23,16 @@ establishIndex.createIndex_zh(DIRECTNAME)
 
 print("getting word list...")
 WORDLIST = getIndex.getWordList_zh()
+
 print("getting index...")
 INDEX = getIndex.getIndex_zh()
+INDEX_QQ = getIndex.getIndex_zh_qq()
+INDEX_QA = getIndex.getIndex_zh_qa()
+
 print("loading the wordnet...")
 WORDCOUNT = getIndex.getWordCount_zh()
+WORDCOUNT_QQ = getIndex.getWordCount_zh_qq()
+WORDCOUNT_QA = getIndex.getWordCount_zh_qa()
 # stemming.lemmatize_sentence("a", False)
  
 PATH = tools.reuterspath
@@ -56,54 +62,99 @@ def searching(statement,choice,loop=False ):
     # 查询排序
     print("searching...")
     STATEMENT = statement
+    # 倒排全部查找
     if choice == 1: 
         INPUTWORDS=preCheck_zh(STATEMENT)
 
         WORDSET = set(INPUTWORDS)
 
         DOCLIST = searchWord.searchWords(INDEX, WORDSET)
-        SORTEDDOCLIST = sortDoc.sortScoreDocList(INDEX, FILENUM, WORDSET, DOCLIST,WORDCOUNT)
+        SORTEDDOCLIST = sortDoc.TopKScore(20, INDEX, FILENUM, WORDSET, DOCLIST,WORDCOUNT)
+        # for doc in SORTEDDOCLIST:
+        #     print("doc ID: ",tools.showDocID(doc[1]), " score: ", "%.3f" % doc[0])
+        if loop==False:
+            return SORTEDDOCLIST
+        
+    # 倒排qq查找
+    if choice == 2: 
+        INPUTWORDS=preCheck_zh(STATEMENT)
+
+        WORDSET = set(INPUTWORDS)
+
+        DOCLIST = searchWord.searchWords(INDEX_QQ, WORDSET)
+        SORTEDDOCLIST = sortDoc.TopKScore(20, INDEX_QQ, FILENUM, WORDSET, DOCLIST,WORDCOUNT_QQ)
+        # for doc in SORTEDDOCLIST:
+        #     print("doc ID: ",tools.showDocID(doc[1]), " score: ", "%.3f" % doc[0])
+        if loop==False:
+            return SORTEDDOCLIST
+        
+    # 倒排qa查找
+    if choice == 3: 
+        INPUTWORDS=preCheck_zh(STATEMENT)
+
+        WORDSET = set(INPUTWORDS)
+
+        DOCLIST = searchWord.searchWords(INDEX_QA, WORDSET)
+        SORTEDDOCLIST = sortDoc.TopKScore(20, INDEX_QA, FILENUM, WORDSET, DOCLIST,WORDCOUNT_QA)
         # for doc in SORTEDDOCLIST:
         #     print("doc ID: ",tools.showDocID(doc[1]), " score: ", "%.3f" % doc[0])
         if loop==False:
             return SORTEDDOCLIST
 
-
-    #TOP K 查询
-    elif choice == 2:
+    # qq qa 各召回一部分
+    if choice == 4:
         INPUTWORDS=preCheck_zh(STATEMENT)
 
         WORDSET = set(INPUTWORDS)
 
-        DOCLIST = searchWord.searchWords(INDEX, WORDSET)
-        # print(DOCLIST)
-        #根据tf-idf计算分数
-        #取top20
-        SORTEDDOCLIST = sortDoc.TopKScore(20, INDEX, FILENUM, WORDSET, DOCLIST,WORDCOUNT)
-        for doc in SORTEDDOCLIST:
-            print("doc ID: ", tools.showDocID(doc[1]), " score: ", "%.3f" % doc[0])
+        DOCLIST_QQ = searchWord.searchWords(INDEX_QQ, WORDSET)
+        SORTEDDOCLIST_QQ = sortDoc.TopKScore(10, INDEX_QQ, FILENUM, WORDSET, DOCLIST_QQ,WORDCOUNT_QQ)
+
+        DOCLIST_QA = searchWord.searchWords(INDEX_QA, WORDSET)
+        SORTEDDOCLIST_QA = sortDoc.TopKScore(10, INDEX_QA, FILENUM, WORDSET, DOCLIST_QA,WORDCOUNT_QA)
+
+        SORTEDDOCLIST = SORTEDDOCLIST_QQ + SORTEDDOCLIST_QA
+
         if loop==False:
             return SORTEDDOCLIST
-    #Bool 查询
-    elif choice == 3:
-        INPUTWORDS=preCheck_zh(STATEMENT)
 
-        DOCLIST = BoolSearchDel.BoolSearch(INPUTWORDS, INDEX)
-        print(len(DOCLIST),"DOCs :")
-        print(DOCLIST)
-    #短语查询
-    elif choice == 4:
-        INPUTWORDS=preCheck_zh(STATEMENT)
 
-        WORDSET = set(INPUTWORDS)
 
-        PHRASEDOCLIST = searchWord.searchPhrase(INDEX, WORDSET, INPUTWORDS)
-        if 0 == len(PHRASEDOCLIST):
-            print("Doesn't find \"", INPUTWORDS, '"')
-        else:
-            for key in PHRASEDOCLIST:
-                print('docID: ', key, "   num: ", len(PHRASEDOCLIST[key]))
-                print('    location: ', PHRASEDOCLIST[key])
+    # #TOP K 查询
+    # elif choice == 2:
+    #     INPUTWORDS=preCheck_zh(STATEMENT)
+
+    #     WORDSET = set(INPUTWORDS)
+
+    #     DOCLIST = searchWord.searchWords(INDEX, WORDSET)
+    #     # print(DOCLIST)
+    #     #根据tf-idf计算分数
+    #     #取top20
+    #     SORTEDDOCLIST = sortDoc.TopKScore(20, INDEX, FILENUM, WORDSET, DOCLIST,WORDCOUNT)
+    #     for doc in SORTEDDOCLIST:
+    #         print("doc ID: ", tools.showDocID(doc[1]), " score: ", "%.3f" % doc[0])
+    #     if loop==False:
+    #         return SORTEDDOCLIST
+    # #Bool 查询
+    # elif choice == 3:
+    #     INPUTWORDS=preCheck_zh(STATEMENT)
+
+    #     DOCLIST = BoolSearchDel.BoolSearch(INPUTWORDS, INDEX)
+    #     print(len(DOCLIST),"DOCs :")
+    #     print(DOCLIST)
+    # #短语查询
+    # elif choice == 4:
+    #     INPUTWORDS=preCheck_zh(STATEMENT)
+
+    #     WORDSET = set(INPUTWORDS)
+
+    #     PHRASEDOCLIST = searchWord.searchPhrase(INDEX, WORDSET, INPUTWORDS)
+    #     if 0 == len(PHRASEDOCLIST):
+    #         print("Doesn't find \"", INPUTWORDS, '"')
+    #     else:
+    #         for key in PHRASEDOCLIST:
+    #             print('docID: ', key, "   num: ", len(PHRASEDOCLIST[key]))
+    #             print('    location: ', PHRASEDOCLIST[key])
     #模糊查询
     elif choice == 5:
         list = searchWord.wildcardSearch(STATEMENT, INDEX, WORDLIST)

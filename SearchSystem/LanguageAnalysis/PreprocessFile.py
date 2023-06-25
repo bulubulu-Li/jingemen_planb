@@ -12,7 +12,7 @@ def preProcess(filename):
     return words
 
 
-def preProcess_qq_zh(filename):
+def preProcess_zh_qq(filename):
     # if file is empty, return []
     if os.path.getsize(filename) == 0:
         return []
@@ -24,7 +24,7 @@ def preProcess_qq_zh(filename):
         words+=jieba.cut(page["title"])
     return words
 
-def preProcess_qa_zh(filename):
+def preProcess_zh_qa(filename):
     # if file is empty, return []
     if os.path.getsize(filename) == 0:
         return []
