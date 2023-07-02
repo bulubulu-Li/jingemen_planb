@@ -1,3 +1,4 @@
+import copy
 import os
 import tools
 from LanguageAnalysis import PreprocessFile
@@ -86,7 +87,7 @@ def createIndex_zh(directname):
             if word not in invertedIndex_qa:
                 docList = {}
                 docList[docId_qa] = [num]
-                invertedIndex_qa[word] = docList
+                invertedIndex_qa[word] = copy.deepcopy(docList)
             else:
                 if docId_qa not in invertedIndex_qa[word]:
                     invertedIndex_qa[word][docId_qa] = [num]
@@ -105,7 +106,7 @@ def createIndex_zh(directname):
             if word not in invertedIndex_qq:
                 docList = {}
                 docList[docId_qq] = [num]
-                invertedIndex_qq[word] = docList
+                invertedIndex_qq[word] = (docList)
             else:
                 if docId_qq not in invertedIndex_qq[word]:
                     invertedIndex_qq[word][docId_qq] = [num]
@@ -117,13 +118,13 @@ def createIndex_zh(directname):
     # 合并qq和qa的index和wordCount为完整的版本
     for word in invertedIndex_qa:
         if word not in invertedIndex:
-            invertedIndex[word]=invertedIndex_qa[word]
+            invertedIndex[word]=copy.deepcopy(invertedIndex_qa[word])
         else:
             invertedIndex[word].update(invertedIndex_qa[word])
     
     for word in invertedIndex_qq:
         if word not in invertedIndex:
-            invertedIndex[word]=invertedIndex_qq[word]
+            invertedIndex[word]=copy.deepcopy(invertedIndex_qq[word])
         else:
             invertedIndex[word].update(invertedIndex_qq[word])
     
