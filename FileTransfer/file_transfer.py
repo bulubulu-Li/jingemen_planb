@@ -28,8 +28,8 @@ def get_file_path(fileType,fileName):
 def store_file(fileType,content):
     global counter
     # add metadata "doc ID"=counter into every item of content
-    for item in content:
-        item["metadata"]["doc ID"]=counter
+    for i,item in enumerate(content):
+        item["metadata"]["doc ID"]=f'{counter}-{i}'
         # set fileType
         item["metadata"]["filetype"]=fileType
 

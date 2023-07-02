@@ -54,14 +54,15 @@ def preCheck(statement):
     return INPUTWORDS
 
 def preCheck_zh(statement):
-    print("分词...")
+    # print("分词...")
     INPUTWORDS = jieba.cut(statement)
     return INPUTWORDS
 
-def searching(statement,choice,loop=False ):
+def searching(statement,choice,loop=False,expectList=[] ):
     # 查询排序
-    print("searching...")
+    # print("searching...")
     STATEMENT = statement
+    source=[]
     # 倒排全部查找
     if choice == 1: 
         INPUTWORDS=preCheck_zh(STATEMENT)
@@ -70,10 +71,14 @@ def searching(statement,choice,loop=False ):
 
         DOCLIST = searchWord.searchWords(INDEX, WORDSET)
         SORTEDDOCLIST = sortDoc.TopKScore(20, INDEX, FILENUM, WORDSET, DOCLIST,WORDCOUNT)
-        # for doc in SORTEDDOCLIST:
-        #     print("doc ID: ",tools.showDocID(doc[1]), " score: ", "%.3f" % doc[0])
+        # print(SORTEDDOCLIST)
+        for x in SORTEDDOCLIST:
+            if x in expectList:
+                source.append(x)
         if loop==False:
-            return SORTEDDOCLIST
+            return SORTEDDOCLIST, source
+        for doc in SORTEDDOCLIST:
+            print("doc ID: ",tools.showDocID(doc[1]), " score: ", "%.3f" % doc[0])
         
     # 倒排qq查找
     if choice == 2: 
@@ -83,10 +88,13 @@ def searching(statement,choice,loop=False ):
 
         DOCLIST = searchWord.searchWords(INDEX_QQ, WORDSET)
         SORTEDDOCLIST = sortDoc.TopKScore(20, INDEX_QQ, FILENUM, WORDSET, DOCLIST,WORDCOUNT_QQ)
-        # for doc in SORTEDDOCLIST:
-        #     print("doc ID: ",tools.showDocID(doc[1]), " score: ", "%.3f" % doc[0])
+        for x in SORTEDDOCLIST:
+            if x in expectList:
+                source.append(x)
         if loop==False:
-            return SORTEDDOCLIST
+            return SORTEDDOCLIST, source
+        for doc in SORTEDDOCLIST:
+            print("doc ID: ",tools.showDocID(doc[1]), " score: ", "%.3f" % doc[0])
         
     # 倒排qa查找
     if choice == 3: 
@@ -96,10 +104,13 @@ def searching(statement,choice,loop=False ):
 
         DOCLIST = searchWord.searchWords(INDEX_QA, WORDSET)
         SORTEDDOCLIST = sortDoc.TopKScore(20, INDEX_QA, FILENUM, WORDSET, DOCLIST,WORDCOUNT_QA)
-        # for doc in SORTEDDOCLIST:
-        #     print("doc ID: ",tools.showDocID(doc[1]), " score: ", "%.3f" % doc[0])
+        for x in SORTEDDOCLIST:
+            if x in expectList:
+                source.append(x)
         if loop==False:
-            return SORTEDDOCLIST
+            return SORTEDDOCLIST, source
+        for doc in SORTEDDOCLIST:
+            print("doc ID: ",tools.showDocID(doc[1]), " score: ", "%.3f" % doc[0])
 
     # qq qa 各召回一部分
     if choice == 4:
@@ -114,9 +125,13 @@ def searching(statement,choice,loop=False ):
         SORTEDDOCLIST_QA = sortDoc.TopKScore(10, INDEX_QA, FILENUM, WORDSET, DOCLIST_QA,WORDCOUNT_QA)
 
         SORTEDDOCLIST = SORTEDDOCLIST_QQ + SORTEDDOCLIST_QA
+        SORTEDDOCLIST=sorted(SORTEDDOCLIST,key=lambda x:x[0],reverse=True)
 
+        for x in SORTEDDOCLIST:
+            if x in expectList:
+                source.append(x)
         if loop==False:
-            return SORTEDDOCLIST
+            return SORTEDDOCLIST, source
 
 
 
@@ -167,37 +182,41 @@ def searching(statement,choice,loop=False ):
         resultlist = searchWord.searchSynonymsWord(INDEX,INPUTWORDS[0])
 
     elif choice == 7:
+        retrieve_res=chain.Retrieve(STATEMENT,PATH)
+        res=[x["matedata"]["docID"] for x in retrieve_res]
+        if loop==False:
+            return res,[]
         print(chain.Retrieve(STATEMENT,PATH))
 
 
+if __name__ == '__main__':
+    while LOOP:
+        print("searching operation: ")
+        print("[1]qa mix qq [2]qq [3]qa [4]qa + qq [5]wildcard [6]synonyms [7]LLM [88]exit")
+        print("your choice(int):")
+        try:
+            choice = int(input())
+            if choice == 88:
+                break
+        except :
+            print()
+            continue
 
-# while LOOP:
-#     print("searching operation: ")
-#     print("[1] Overall [2]TOP K [3]BOOL [4]Phrase [5]wildcard [6]synonyms [7]LLM [8]exit")
-#     print("your choice(int):")
-#     try:
-#         choice = int(input())
-#         if choice == 8:
-#             break
-#     except :
-#         print()
-#         continue
+        if choice >= 1 and choice <= 7:
+            print("input the query statement:")
+            STATEMENT = input()
+            if STATEMENT == "EXIT":
+                break
 
-#     if choice >= 1 and choice <= 7:
-#         print("input the query statement:")
-#         STATEMENT = input()
-#         if STATEMENT == "EXIT":
-#             break
-
-#         #查询排序
-#         searching(STATEMENT,choice)
+            #查询排序
+            searching(STATEMENT,choice,True)
 
 
-#     else:
-#         print("Invalid choice! Please observe these choices carefully!")
-#     print()
+        else:
+            print("Invalid choice! Please observe these choices carefully!")
+        print()
 
-# print("ByeBye!")
+    print("ByeBye!")
 
 
 # establishVSM.createVSM(INDEX,WORDLIST,'test')

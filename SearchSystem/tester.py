@@ -1,3 +1,4 @@
+import copy
 import os
 import json
 import re
@@ -208,6 +209,32 @@ def generate_questions(file):
                 time.sleep(3)
             dump_question(file,textName,result)          
 
+def update_questions():
+    # for questions items in questions folde
+    json_data=""
+    mainID=""
+    for questionListFile in os.listdir(f'{tools.reuterspath}/questions'):
+        with open(f'{tools.reuterspath}/questions/{questionListFile}', 'r', encoding='utf-8') as f:
+            json_data=json.load(f)
+            mainID=json_data["doc ID"]
+            for i, item in enumerate(json_data["question_list"]):
+                # add a more precision doc ID to each question, by check if the pagecontent equel to 
+                for filename in os.listdir(tools.reuterspath):
+                    # skip folder
+                    if os.path.isdir(f'{tools.reuterspath}/{filename}'):
+                        continue
+                    # skip empty file
+                    if os.path.getsize(f'{tools.reuterspath}/{filename}')==0:
+                        continue
+                    print(f"deal with {filename}")
+                    if filename.split('-')[0]==str(mainID):
+                        with open(f'{tools.reuterspath}/{filename}', 'r', encoding='utf-8') as f2:
+                            json_data2=json.load(f2)
+                            if json_data2[0]["page_content"]==item["content"]:
+                                json_data["question_list"][i]["doc ID"]=filename.split('.')[0]
+                                break
+        dump_question(tools.reuterspath,mainID,json_data)
+
 '''
     the structure of a question file is like this:
     {
@@ -230,6 +257,7 @@ def generate_questions(file):
 def retrieve_files(question_file,searchType):
     failures =[]
     failuresFull=[]
+    worstCases=[]
     global failure_num
     for filename in os.listdir(question_file):
         with open( f'{question_file}/{filename}' ,'r',encoding='utf-8')as f:
@@ -241,22 +269,27 @@ def retrieve_files(question_file,searchType):
             questions = json_data["question_list"]
             # 看看retrieve的第一条的结果是不是想要的东西
             for item in questions:
-                print(f"Retrieving {filename} {item['content']}")
+                print(f"Retrieving {filename} Method {searchType}")
                 for question in item["questions"]:
-                    serching_res=main.searching(question["question"],searchType)
+                    searching_res,expectList=main.searching(question["question"],searchType,expectList=[tools.getDocID_qq(item["doc ID"]),tools.getDocID_qq(item["doc ID"])])
                     if searchType!=7:
                         # 形式：[[97-3,7.445],...]
-                        resFull=[[x[DOC_ID],x[SCORE],x[WORD_LIST]] for x in serching_res]
+                        resFull=[[x[DOC_ID],x[SCORE],x[WORD_LIST]] for x in searching_res]
                         if len(resFull)>10:
                             resFull=resFull[:10]
                         # 形式 970003
-                        res=[x[DOC_ID] for x in serching_res[:10]]
+                        res=[x[DOC_ID] for x in searching_res[:10]]
                         # 形式：97-3
                         show=[tools.showDocID(x) for x in res]
                         # 形式：97
-                        mainFile=[tools.mainDocID(x) for x in res]
-                        print(res)
-                        if int(json_data["doc ID"]) not in mainFile:
+                        mainFile_temp=[tools.mainDocID(x) for x in res]
+                        mainFile=[]
+                        # delete same elements in mainFile
+                        for i in mainFile_temp:
+                            if i not in mainFile:
+                                mainFile.append(i)
+                        # print(res)
+                        if int(json_data["doc ID"]) not in mainFile[:3]:
                             fullContent={
                                 "retrieved_title":[],
                                 "retrieved_content":[]
@@ -272,64 +305,174 @@ def retrieve_files(question_file,searchType):
                             for i in show:
                                 with open(f'{tools.reuterspath}/{i}.json', 'r', encoding='utf-8') as f2:
                                     content_list=json.load(f2)
-                                    print(content_list)
+                                    # print(content_list)
                                     try:
                                         fullContent["retrieved_title"].append(content_list[0]["metadata"]["title"])
                                     except:
                                         fullContent["retrieved_title"].append(content_list[0]["metadata"]["source"])
                                     fullContent["retrieved_content"].append(content_list[0]["page_content"])
+                            word_detail=[]
+                            for y in resFull:
+                                word_temp=[]
+                                for i in y[2]["word_list"]:
+                                    word_temp.append({
+                                        "word":i["word"],
+                                        "score":f'{i["score"]:.3f}',
+                                        "tf":f'{i["tf"]:.3f}',
+                                        "df":f'{i["df"]:.3f}',
+                                        "wf":f'{i["wf"]:.3f}',
+                                        "idf":f'{i["idf"]:.3f}'
+                                    })
+                                word_detail.append(word_temp)
+                            
+                            expect_word_detail=[]
+                            for y in expectList:
+                                word_temp=[]
+                                for i in y[2]["word_list"]:
+                                    word_temp.append({
+                                        "word":i["word"],
+                                        "score":f'{i["score"]:.3f}',
+                                        "tf":f'{i["tf"]:.3f}',
+                                        "df":f'{i["df"]:.3f}',
+                                        "wf":f'{i["wf"]:.3f}',
+                                        "idf":f'{i["idf"]:.3f}'
+                                    })
+                                expect_word_detail.append(word_temp)
+                            expect_detail={
+                                "retrieve_method":[tools.getRetrieveMethod(x[0]) for x in expectList],
+                                "doc_score":[f'{x[1]:.3f}' for x in expectList],
+                                "doc_ID":[tools.showDocID(x[0]) for x in expectList],
+                                "word_detail":copy.deepcopy(expect_word_detail),
+                            }
 
-                            failuresFull.append({
-                                "question":question["question"],
-                                "expected":int(json_data["doc ID"]),
-                                "retrieved":show,
-                                # "score":'<hr>'.join([f'doc_Id: {x[0]}, score: {x[1]:.3f}' for x in resFull]),
-                                # word_list has this structure:{"word":word,"tf":tf,"df":df,"wf":wf,"idf":idf,"score":wf*idf}
-                                "socre_detail":'<hr>'.join(f"method: {tools.getRetrieveMethod(y[0])}, doc_ID: {tools.showDocID(y[0])}, doc_score: {y[1]}<br>"+"<br>".join(f'{x["word"]}: score:{x["score"]:.3f} tf: {x["tf"]:.3f}, df: {x["df"]:.3f}, wf: {x["wf"]:.3f}, idf: {x["idf"]:.3f}' for x in y[2]["word_list"]) for y in resFull),
-                                "expected_content":item["content"],
-                                # TODO 这里需要提供实际retrieve的内容
-                                "retrieved_title":'<hr>'.join(fullContent["retrieved_title"]),
-                                "retrieved_content":'<hr>'.join(fullContent["retrieved_content"]),
-                                "method":searchType
-                            })
+                            score_detail={
+                                "retrieve_method":[tools.getRetrieveMethod(x[0]) for x in resFull],
+                                "retrieved":copy.deepcopy(show),
+                                # "doc_ID":[tools.showDocID(x[0]) for x in resFull],
+                                "doc_score":[f'{x[1]:.3f}' for x in resFull],
+                                "retrieved_title":copy.deepcopy(fullContent["retrieved_title"]),
+                                "word_detail":copy.deepcopy(word_detail),
+                                "retrieved_content":copy.deepcopy(fullContent["retrieved_content"])
+                            }
+                            try:
+                                temp={
+                                    "question":question["question"],
+                                    "split_question":list(jieba.cut(question["question"])),
+                                    "expected":item["doc ID"],
+                                    "expected_detail":copy.deepcopy(expect_detail),
+                                    "in_list":mainFile.index(int(json_data["doc ID"]))+1,
+                                    # "score":'<hr>'.join([f'doc_Id: {x[0]}, score: {x[1]:.3f}' for x in resFull]),
+                                    # word_list has this structure:{"word":word,"tf":tf,"df":df,"wf":wf,"idf":idf,"score":wf*idf}
+                                    "expected_content":item["content"],
+                                    "score_detail":copy.deepcopy(score_detail),
+                                    # TODO 这里需要提供实际retrieve的内容,
+                                    "method":searchType
+                                }
+                                failuresFull.append(temp)
+                            except:
+                                temp={
+                                    "question":question["question"],
+                                    "split_question":list(jieba.cut(question["question"])),
+                                    "expected":item["doc ID"],
+                                    "expected_detail":copy.deepcopy(expect_detail),
+                                    "in_list":-99,
+                                    # "score":'<hr>'.join([f'doc_Id: {x[0]}, score: {x[1]:.3f}' for x in resFull]),
+                                    # word_list has this structure:{"word":word,"tf":tf,"df":df,"wf":wf,"idf":idf,"score":wf*idf}
+                                    "expected_content":item["content"],
+                                    "score_detail":copy.deepcopy(score_detail),
+                                    # TODO 这里需要提供实际retrieve的内容,
+                                    "method":searchType
+                                }
+                                failuresFull.append(temp)
+                                # 删除temp的in_list 这个key
+                                del temp["in_list"]
+                                worstCases.append(temp)
+
+
 
     with open(f'bad_case/failure_{searchType}.json', 'w',encoding='utf-8') as f:
         json.dump(failures, f,ensure_ascii=False, indent=4)
     with open(f'bad_case/failureFull_{searchType}.json', 'w',encoding='utf-8') as f:
         json.dump(failuresFull, f,ensure_ascii=False, indent=4)
+    with open(f'bad_case/worstCases_{searchType}.json', 'w',encoding='utf-8') as f:
+        json.dump(worstCases, f,ensure_ascii=False, indent=4)
     
     # 转换为HTML
-    df = pd.DataFrame(failures)
-    html = df.to_html(escape=False)
+    html = to_html(failures)
     # 写入HTML文件
     with open(f'bad_case/failure_{searchType}.html', 'w',encoding='utf-8') as f:
         f.write(html)
 
     # 转换为HTML
-    df = pd.DataFrame(failuresFull)
-    html = df.to_html(escape=False)
+    html = to_html(failuresFull)
     # 写入HTML文件
     with open(f'bad_case/failureFull_{searchType}.html', 'w',encoding='utf-8') as f:
         f.write(html)
 
+    # 转换为HTML
+    html = to_html(worstCases)
+    # 写入HTML文件
+    with open(f'bad_case/worstCases_{searchType}.html', 'w',encoding='utf-8') as f:
+        f.write(html)
+
+# 目的是处理score_detail and the word_list with in it
+def to_html(json_data_input):
+    # copy json_date_input to json_data
+    json_data=copy.deepcopy(json_data_input)
+    for j,item in enumerate(json_data):
+        # if item don't have key score_detail,break
+        if "score_detail" not in item:
+            break
+        for i,v in enumerate(item["score_detail"]["word_detail"]):
+            item["score_detail"]["word_detail"][i]=pd.DataFrame(v).to_html(escape=False).replace('\n','')
+        for i,v in enumerate(item["expected_detail"]["word_detail"]):
+            item["expected_detail"]["word_detail"][i]=pd.DataFrame(v).to_html(escape=False).replace('\n','')
+        item["score_detail"]=pd.DataFrame(item["score_detail"]).to_html(escape=False).replace('\n','')
+        item["expected_detail"]=pd.DataFrame(item["expected_detail"]).to_html(escape=False).replace('\n','')
+        json_data[j]=item
+        # print("item is ",item["score_detail"])
+    return pd.DataFrame(json_data).to_html(escape=False)
+
+# def to_xlsx(json_data):
+    
+    
 def evaluate_accuracy():
     # for questions in questions fold, count number
     global failure_num
     global question_num
     global question_file
     failure_num=[0,0,0,0,0,0,0,0]
+    worst_num=[0,0,0,0,0,0,0,0]
     question_num=0
-    for filename in os.listdir(question_file):
+    for filename in os.listdir(question_file):  
         with open( f'{question_file}/{filename}' ,'r',encoding='utf-8')as f:
             json_data = json.load(f)
             questions = json_data["question_list"]
             question_num+=len(questions)
             # 看看retrieve的第一条的结果是不是想要的东西
+    # get file in bad_case
+    bad_case_path = os.path.join(tools.projectpath, 'bad_case')
+    full_cases=[x for x in os.listdir(bad_case_path) if x.endswith('.json') and x.startswith('failureFull')]
+    worst_cases=[x for x in os.listdir(bad_case_path) if x.endswith('.json') and x.startswith('worstCases')]
+    # calculate item numbers in full or worst cases file, by loading to json and count the lenth of list
+    for file in full_cases:
+        method=int(file.split('_')[1].split('.')[0])
+        with open(f'bad_case/{file}','r',encoding='utf-8') as f:
+            json_data=json.load(f)
+            failure_num[method]+=len(json_data)
+    for file in worst_cases:
+        method=int(file.split('_')[1].split('.')[0])
+        with open(f'bad_case/{file}','r',encoding='utf-8') as f:
+            json_data=json.load(f)
+            worst_num[method]+=len(json_data)
     print(f"Total number of questions generated: {question_num}")
     print(f"Total number of failures: {failure_num}")
     fn=np.array(failure_num)
-    fn=fn/2
-    print(f"Percentage of failures: {fn.tolist()}")
+    fn=fn/question_num
+    wn=np.array(worst_num)
+    wn=wn/question_num
+    print(f"Percentage of failures: {[f'{x*100:.3f}%' for x in fn.tolist()]}")
+    print(f"Percentage of worst: {[f'{x*100:.3f}%' for x in wn.tolist()]}")
 
 def extract_failure_retrieve():
     # 打开 ./bad_case 文件夹，读取所有文件名, 取出其中 .json 文件
@@ -371,7 +514,7 @@ def extract_failure_retrieve():
                     "expected": case["expected"],
                     "retrieved": case["retrieved"],
                     # "score": case["score"],
-                    "socre_detail":case["socre_detail"],
+                    "score_detail":case["score_detail"],
                     "expected_content": case["expected_content"],
                     "retrieved_title": case["retrieved_title"],
                     "retrieved_content": case["retrieved_content"],
@@ -385,7 +528,7 @@ def extract_failure_retrieve():
                 # if the expected doc_id is in the "score" doc_Id, then in_list is the rank, otherwise is -1
                 # change score into a dict list with key "doc_Id" and "score"
                 expacted=case['expected']
-                score_list= case['socre_detail'].split('<hr>')
+                score_list= case['score_detail'].split('<hr>')
                 print("score_list")
                 print(score_list)
                 score_list = [score.split('<br>')[0] for score in score_list]
@@ -405,7 +548,7 @@ def extract_failure_retrieve():
                         "in_list": -1,
                         "retrieved": case["retrieved"],
                         # "score": case["score"],
-                        "socre_detail":case["socre_detail"],
+                        "score_detail":case["score_detail"],
                         "expected_content": case["expected_content"],
                         "retrieved_title": case["retrieved_title"],
                         "retrieved_content": case["retrieved_content"],
@@ -424,7 +567,7 @@ def extract_failure_retrieve():
                             "in_list": i,
                             "retrieved": case["retrieved"],
                             # "score": case["score"],
-                            "socre_detail":case["socre_detail"],
+                            "score_detail":case["score_detail"],
                             "expected_content": case["expected_content"],
                             "retrieved_title": case["retrieved_title"],
                             "retrieved_content": case["retrieved_content"],
@@ -462,11 +605,16 @@ def extract_failure_retrieve():
 # 文档分为切分为每一个小文档的文档和一整个大文档
 # generate_questions(f'{tools.reuterspath}\\wholeFiles')
 
-profiler = cProfile.Profile()
-num=1
-profiler.runctx('retrieve_files(question_file, num)', globals(), locals())
+# profiler = cProfile.Profile()
+# num=1
+# profiler.runctx('retrieve_files(question_file, num)', globals(), locals())
 
 
-# retrieve_files(question_file,2)
-extract_failure_retrieve()  
+retrieve_files(question_file,1)
+retrieve_files(question_file,2)
+retrieve_files(question_file,3)
+retrieve_files(question_file,4)
+# # extract_failure_retrieve()  
 evaluate_accuracy()
+
+# update_questions()

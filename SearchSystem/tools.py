@@ -31,22 +31,19 @@ def writeToFile_zh(item,filename):
 #获取文档名中的文档的id
 # 由于是拼接的，因此把大文档的id乘以10000，加上文档内序号的id
 def getDocID(filename):
-    end = filename.find('.')
-    docId = filename[0:end]
+    docId = filename.split('.')[0]
     docID = docId.split('-')
 
     return int(docID[0])*10000+int(docID[1])
 
 def getDocID_qq(filename):
-    end = filename.find('.')
-    docId = filename[0:end]
+    docId = filename.split('.')[0]
     docID = docId.split('-')
 
     return int(docID[0])*10000+int(docID[1])+1000
 
 def getDocID_qa(filename):
-    end = filename.find('.')
-    docId = filename[0:end]
+    docId = filename.split('.')[0]
     docID = docId.split('-')
 
     return int(docID[0])*10000+int(docID[1])
@@ -77,11 +74,24 @@ def getWholeDocList():
     return sorted(fileList)
 
 def getRetrieveMethod(id):
-    if id%10000 >= 1000:
+    method= id%10000
+    method//=1000
+
+    if method==0:
+        return 'qq'
+    elif method==1:
         return 'qa'
     else:
-        return 'qq'
+        return 'qa + qq'
 
+def setRetrieveMethod(id,method):
+    if method == 'qa':
+        id = id//10000*10000 + 1000 + id%1000
+    elif method == 'qq':
+        id = id//10000*10000 + id%1000
+    else:
+        id = id//10000*10000 + 2000 + id%1000
+    return id
 
 def initConfig():
     global config

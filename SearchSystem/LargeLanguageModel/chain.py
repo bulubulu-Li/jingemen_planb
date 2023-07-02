@@ -11,6 +11,7 @@ from langchain.vectorstores import Chroma
 from langchain.document_loaders import PyPDFLoader
 from langchain.document_loaders import Docx2txtLoader
 from rouge import Rouge
+import tools
 
 import openai as BaseOpenAI
 
@@ -52,6 +53,9 @@ class chain_loader(BaseLoader):
         for filename in os.listdir(path=path):
             # skip folder
             if os.path.isdir(f'{path}/{filename}'):
+                continue
+            # skip empty file
+            if os.path.getsize(f'{path}/{filename}') == 0:
                 continue
             f = open(f'{path}/{filename}', 'r',encoding='utf-8')
             content = json.load(f)
@@ -96,8 +100,14 @@ def embedding(path):
     global text_splitter
     global docsearch
     global persist_directory
+
     
     embeddings = OpenAIEmbeddings(openai_api_key=getApiKey())
+
+    if tools.getConfig("new_embedding")==False:
+        docsearch=Chroma(persist_directory=persist_directory,embedding_function=embeddings)
+        return
+    
     loader = chain_loader()
     split_docs = loader.load(path)
     print(f'embeding start')
@@ -106,6 +116,8 @@ def embedding(path):
             docsearch=Chroma.from_documents(split_docs,embeddings, persist_directory=persist_directory)
         else:
             docsearch.add_documents(split_docs)    
+
+    tools.setConfig("new_embedding",False)
 
 def Retrieve(question,path):
     global docsearch
@@ -116,6 +128,8 @@ def Retrieve(question,path):
         embedding(path)
         print("embedding finished")
         chain_type_kwargs = {"prompt": PROMPT}
+        # retrieve 5 items each time
         chain = RetrievalQA.from_chain_type(llm=OpenAI(model_name="gpt-3.5-turbo",max_tokens=500,temperature=0), chain_type="stuff", retriever=docsearch.as_retriever(), chain_type_kwargs=chain_type_kwargs,verbose=True,return_source_documents=True)
 
-    return chain({'query': question})
+    # return chain({'query': question})
+    return chain._get_docs(question)
