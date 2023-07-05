@@ -58,6 +58,16 @@ def preCheck_zh(statement):
     INPUTWORDS = jieba.cut(statement)
     return INPUTWORDS
 
+def check_expect(doclist,expectlist):
+    # print("check_expect...")
+    res=[]
+    docs=[x[1] for x in doclist]
+    for i,doc in enumerate(docs):
+        if doc in expectlist:
+            res.append(doclist[i])
+            res[-1].append(i)
+    return res
+
 def searching(statement,choice,loop=False,expectList=[] ):
     # 查询排序
     # print("searching...")
@@ -70,11 +80,9 @@ def searching(statement,choice,loop=False,expectList=[] ):
         WORDSET = set(INPUTWORDS)
 
         DOCLIST = searchWord.searchWords(INDEX, WORDSET)
-        SORTEDDOCLIST = sortDoc.TopKScore(20, INDEX, FILENUM, WORDSET, DOCLIST,WORDCOUNT)
+        SORTEDDOCLIST = sortDoc.TopKScore(40, INDEX, FILENUM, WORDSET, DOCLIST,WORDCOUNT)
         # print(SORTEDDOCLIST)
-        for x in SORTEDDOCLIST:
-            if x in expectList:
-                source.append(x)
+        source=check_expect(SORTEDDOCLIST,expectList)
         if loop==False:
             return SORTEDDOCLIST, source
         for doc in SORTEDDOCLIST:
@@ -87,10 +95,8 @@ def searching(statement,choice,loop=False,expectList=[] ):
         WORDSET = set(INPUTWORDS)
 
         DOCLIST = searchWord.searchWords(INDEX_QQ, WORDSET)
-        SORTEDDOCLIST = sortDoc.TopKScore(20, INDEX_QQ, FILENUM, WORDSET, DOCLIST,WORDCOUNT_QQ)
-        for x in SORTEDDOCLIST:
-            if x in expectList:
-                source.append(x)
+        SORTEDDOCLIST = sortDoc.TopKScore(40, INDEX_QQ, FILENUM, WORDSET, DOCLIST,WORDCOUNT_QQ)
+        source=check_expect(SORTEDDOCLIST,expectList)
         if loop==False:
             return SORTEDDOCLIST, source
         for doc in SORTEDDOCLIST:
@@ -103,10 +109,8 @@ def searching(statement,choice,loop=False,expectList=[] ):
         WORDSET = set(INPUTWORDS)
 
         DOCLIST = searchWord.searchWords(INDEX_QA, WORDSET)
-        SORTEDDOCLIST = sortDoc.TopKScore(20, INDEX_QA, FILENUM, WORDSET, DOCLIST,WORDCOUNT_QA)
-        for x in SORTEDDOCLIST:
-            if x in expectList:
-                source.append(x)
+        SORTEDDOCLIST = sortDoc.TopKScore(40, INDEX_QA, FILENUM, WORDSET, DOCLIST,WORDCOUNT_QA)
+        source=check_expect(SORTEDDOCLIST,expectList)
         if loop==False:
             return SORTEDDOCLIST, source
         for doc in SORTEDDOCLIST:
@@ -119,17 +123,15 @@ def searching(statement,choice,loop=False,expectList=[] ):
         WORDSET = set(INPUTWORDS)
 
         DOCLIST_QQ = searchWord.searchWords(INDEX_QQ, WORDSET)
-        SORTEDDOCLIST_QQ = sortDoc.TopKScore(10, INDEX_QQ, FILENUM, WORDSET, DOCLIST_QQ,WORDCOUNT_QQ)
+        SORTEDDOCLIST_QQ = sortDoc.TopKScore(20, INDEX_QQ, FILENUM, WORDSET, DOCLIST_QQ,WORDCOUNT_QQ)
 
         DOCLIST_QA = searchWord.searchWords(INDEX_QA, WORDSET)
-        SORTEDDOCLIST_QA = sortDoc.TopKScore(10, INDEX_QA, FILENUM, WORDSET, DOCLIST_QA,WORDCOUNT_QA)
+        SORTEDDOCLIST_QA = sortDoc.TopKScore(20, INDEX_QA, FILENUM, WORDSET, DOCLIST_QA,WORDCOUNT_QA)
 
         SORTEDDOCLIST = SORTEDDOCLIST_QQ + SORTEDDOCLIST_QA
         SORTEDDOCLIST=sorted(SORTEDDOCLIST,key=lambda x:x[0],reverse=True)
 
-        for x in SORTEDDOCLIST:
-            if x in expectList:
-                source.append(x)
+        source=check_expect(SORTEDDOCLIST,expectList)
         if loop==False:
             return SORTEDDOCLIST, source
 

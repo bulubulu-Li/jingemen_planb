@@ -340,8 +340,9 @@ def retrieve_files(question_file,searchType):
                                 expect_word_detail.append(word_temp)
                             expect_detail={
                                 "retrieve_method":[tools.getRetrieveMethod(x[0]) for x in expectList],
-                                "doc_score":[f'{x[1]:.3f}' for x in expectList],
-                                "doc_ID":[tools.showDocID(x[0]) for x in expectList],
+                                "doc_score":[f'{x[0]:.3f}' for x in expectList],
+                                # "doc_ID":[tools.showDocID(x[0]) for x in expectList],
+                                "rank":[int(x[3]) for x in expectList],
                                 "word_detail":copy.deepcopy(expect_word_detail),
                             }
 
@@ -360,7 +361,7 @@ def retrieve_files(question_file,searchType):
                                     "split_question":list(jieba.cut(question["question"])),
                                     "expected":item["doc ID"],
                                     "expected_detail":copy.deepcopy(expect_detail),
-                                    "in_list":mainFile.index(int(json_data["doc ID"]))+1,
+                                    "in_list":int(mainFile.index(int(json_data["doc ID"]))),
                                     # "score":'<hr>'.join([f'doc_Id: {x[0]}, score: {x[1]:.3f}' for x in resFull]),
                                     # word_list has this structure:{"word":word,"tf":tf,"df":df,"wf":wf,"idf":idf,"score":wf*idf}
                                     "expected_content":item["content"],
@@ -468,9 +469,9 @@ def evaluate_accuracy():
     print(f"Total number of questions generated: {question_num}")
     print(f"Total number of failures: {failure_num}")
     fn=np.array(failure_num)
-    fn=fn/question_num
+    fn=1-fn/question_num
     wn=np.array(worst_num)
-    wn=wn/question_num
+    wn=1-wn/question_num
     print(f"Percentage of failures: {[f'{x*100:.3f}%' for x in fn.tolist()]}")
     print(f"Percentage of worst: {[f'{x*100:.3f}%' for x in wn.tolist()]}")
 
