@@ -13,6 +13,7 @@ while(not projectpath.endswith("SearchSystem\\")):
 indexpath = projectpath + "index\\"
 reuterspath = projectpath.replace("SearchSystem","Reuters_zh")
 questionspath = reuterspath+"questions\\"
+invertedindexpath =  reuterspath+"invertedIndex\\"
 config={}
 secret={}
 print("projectpath:",projectpath)
@@ -65,6 +66,17 @@ def readFile_zh(filename,method='index'):
         item = json.JSONDecoder().decode(str)
         file.close()
     return item
+
+def listFile_zh(subpath='',method='index'):
+    # 列出文件夹中的文件
+    if method=='index':
+        files = os.listdir(indexpath+subpath)
+    elif method=='question':
+        files = os.listdir(questionspath+subpath)
+    elif method=='reuter':
+        files = os.listdir(reuterspath+subpath)
+    return files
+
 #获取文档名中的文档的id
 # 由于是拼接的，因此把大文档的id乘以10000，加上文档内序号的id
 def getDocID(filename):
