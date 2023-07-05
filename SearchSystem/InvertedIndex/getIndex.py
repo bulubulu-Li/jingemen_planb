@@ -14,57 +14,30 @@ def getWordList():
     return wordList
 
 def getIndex_zh():
-    file = open(tools.projectpath + 'invertIndex_zh.json', 'r',encoding='utf-8')
-    indexStr = file.read()
-    index = json.JSONDecoder().decode(indexStr)
-    return index
+    return tools.readFile_zh('invertIndex_zh.json','index')
 
 def getIndex_zh_qq():
-    file = open(tools.projectpath + 'invertIndex_zh_qq.json', 'r',encoding='utf-8')
-    indexStr = file.read()
-    index = json.JSONDecoder().decode(indexStr)
-    return index
-
+    return tools.readFile_zh('invertIndex_zh_qq.json', 'index')
+    
 def getIndex_zh_qa():
-    file = open(tools.projectpath + 'invertIndex_zh_qa.json', 'r',encoding='utf-8')
-    indexStr = file.read()
-    index = json.JSONDecoder().decode(indexStr)
-    return index
+    return tools.readFile_zh('invertIndex_zh_qa.json', 'index')
 
 def getWordList_zh():
-    file = open(tools.projectpath + 'wordList_zh.json', 'r',encoding='utf-8')
-    wordStr = file.read()
-    wordList = json.JSONDecoder().decode(wordStr)
-    return wordList
+    return tools.readFile_zh('wordList_zh.json','index')
 
 def getWordList_zh_qq():
-    file = open(tools.projectpath + 'wordList_zh_qq.json', 'r',encoding='utf-8')
-    wordStr = file.read()
-    wordList = json.JSONDecoder().decode(wordStr)
-    return wordList
+    return tools.readFile_zh('wordList_zh_qq.json', 'index')
 
 def getWordList_zh_qa():
-    file = open(tools.projectpath + 'wordList_zh_qa.json', 'r',encoding='utf-8')
-    wordStr = file.read()
-    wordList = json.JSONDecoder().decode(wordStr)
-    return wordList
+    return tools.readFile_zh('wordList_zh_qa.json', 'index')
 
 def getWordCount_zh():
-    file = open(tools.projectpath + 'wordCount_zh.json', 'r',encoding='utf-8')
-    wordStr = file.read()
-    wordCount = json.JSONDecoder().decode(wordStr)
-    return wordCount
+    return tools.readFile_zh('wordCount_zh.json', 'index')
 
 def getWordCount_zh_qq():
-    file = open(tools.projectpath + 'wordCount_zh_qq.json', 'r',encoding='utf-8')
-    wordStr = file.read()
-    wordCount = json.JSONDecoder().decode(wordStr)
-    return wordCount
+    return tools.readFile_zh('wordCount_zh_qq.json', 'index')
 
 def getWordCount_zh_qa():
-    file = open(tools.projectpath + 'wordCount_zh_qa.json', 'r',encoding='utf-8')
-    wordStr = file.read()
-    wordCount = json.JSONDecoder().decode(wordStr)
-    return wordCount
+    return tools.readFile_zh('wordCount_zh_qa.json', 'index')
 
 # print(getWordList())

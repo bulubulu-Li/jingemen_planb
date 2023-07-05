@@ -49,13 +49,12 @@ def createIndex(directname):
     tools.writeToFile(invertedIndex, tools.projectpath + 'invertIndex.json')
     tools.writeToFile(wordList, tools.projectpath + 'wordList.json')
 
-def createIndex_zh(directname):
+def createIndex_zh():
     # if establishindex in config is false, read from exist file, else generate
     if tools.getConfig("establishIndex") == False:
         return
     
     # assign path
-    path = tools.projectpath + directname
     path = tools.reuterspath
     files = os.listdir(path)
     files=[file for file in files if file.find('.')!=-1]  # skip folder
@@ -138,9 +137,9 @@ def createIndex_zh(directname):
     wordList_qa = getWordList(invertedIndex_qa)
     printIndex(invertedIndex_qa)
     #将数据写入文件中
-    tools.writeToFile_zh(invertedIndex_qa, tools.projectpath + 'invertIndex_zh_qa.json')
-    tools.writeToFile_zh(wordList_qa, tools.projectpath + 'wordList_zh_qa.json')
-    tools.writeToFile_zh(wordCount_qa, tools.projectpath + 'wordCount_zh_qa.json')
+    tools.writeToFile_zh(invertedIndex_qa, 'invertIndex_zh_qa.json')
+    tools.writeToFile_zh(wordList_qa,  'wordList_zh_qa.json')
+    tools.writeToFile_zh(wordCount_qa, 'wordCount_zh_qa.json')
 
     #处理qq的index和wordCount
     #给倒排索引中的词项排序
@@ -149,9 +148,9 @@ def createIndex_zh(directname):
     wordList_qq = getWordList(invertedIndex_qq)
     printIndex(invertedIndex_qq)
     #将数据写入文件中
-    tools.writeToFile_zh(invertedIndex_qq, tools.projectpath + 'invertIndex_zh_qq.json')
-    tools.writeToFile_zh(wordList_qq, tools.projectpath + 'wordList_zh_qq.json')
-    tools.writeToFile_zh(wordCount_qq, tools.projectpath + 'wordCount_zh_qq.json')
+    tools.writeToFile_zh(invertedIndex_qq,  'invertIndex_zh_qq.json')
+    tools.writeToFile_zh(wordList_qq, 'wordList_zh_qq.json')
+    tools.writeToFile_zh(wordCount_qq, 'wordCount_zh_qq.json')
 
 
     # 处理完整的index和wordCount
@@ -161,9 +160,9 @@ def createIndex_zh(directname):
     wordList = getWordList(invertedIndex)
     printIndex(invertedIndex)
     #将数据写入文件中
-    tools.writeToFile_zh(invertedIndex, tools.projectpath + 'invertIndex_zh.json')
-    tools.writeToFile_zh(wordList, tools.projectpath + 'wordList_zh.json')
-    tools.writeToFile_zh(wordCount, tools.projectpath + 'wordCount_zh.json')
+    tools.writeToFile_zh(invertedIndex, 'invertIndex_zh.json')
+    tools.writeToFile_zh(wordList, 'wordList_zh.json')
+    tools.writeToFile_zh(wordCount, 'wordCount_zh.json')
 
     # set establishIndex in config to false
     tools.setConfig("establishIndex", False)

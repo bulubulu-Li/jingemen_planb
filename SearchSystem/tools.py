@@ -1,5 +1,7 @@
+import hashlib
 import json
 import os
+import time
 import yaml
 
 projectpath = os.getcwd()
@@ -8,11 +10,17 @@ projectpath += "\\"
 while(not projectpath.endswith("SearchSystem\\")):
     print(projectpath)
     projectpath = os.path.dirname(projectpath)
+indexpath = projectpath + "index\\"
 reuterspath = projectpath.replace("SearchSystem","Reuters_zh")
+questionspath = reuterspath+"questions\\"
 config={}
 secret={}
 print("projectpath:",projectpath)
+print("indexpath:",indexpath)
 print("Reuters path",reuterspath)
+renew_path=[indexpath+x for x in os.listdir(indexpath) if x.endswith(".json")]
+# sort renew_path by alphabet
+renew_path.sort()
 
 def writeToFile(item,filename):
     # 将数据写入到文件中
@@ -21,13 +29,42 @@ def writeToFile(item,filename):
     file.write(str)
     file.close()
 
-def writeToFile_zh(item,filename):
+def writeToFile_zh(item,filename,method='index'):
     # 将数据写入到文件中
-    file = open(filename,'w',encoding='utf-8')
-    str = json.dumps(item, ensure_ascii=False)
-    file.write(str)
-    file.close()
+    if method=='index':
+        file = open(indexpath+filename,'w',encoding='utf-8')
+        str = json.dumps(item, ensure_ascii=False)
+        file.write(str)
+        file.close()
+    elif method=='question':
+        file = open(questionspath+filename,'w',encoding='utf-8')
+        str = json.dumps(item, ensure_ascii=False)
+        file.write(str)
+        file.close()
+    elif method=='reuter':
+        file = open(reuterspath+filename,'w',encoding='utf-8')
+        str = json.dumps(item, ensure_ascii=False)
+        file.write(str)
+        file.close()
 
+def readFile_zh(filename,method='index'):
+    # 读取文件中的数据
+    if method=='index':
+        file = open(indexpath+filename,'r',encoding='utf-8')
+        str = file.read()
+        item = json.JSONDecoder().decode(str)
+        file.close()
+    elif method=='question':
+        file = open(questionspath+filename,'r',encoding='utf-8')
+        str = file.read()
+        item = json.JSONDecoder().decode(str)
+        file.close()
+    elif method=='reuter':
+        file = open(reuterspath+filename,'r',encoding='utf-8')
+        str = file.read()
+        item = json.JSONDecoder().decode(str)
+        file.close()
+    return item
 #获取文档名中的文档的id
 # 由于是拼接的，因此把大文档的id乘以10000，加上文档内序号的id
 def getDocID(filename):
@@ -103,6 +140,8 @@ def initConfig():
         # set"OPENAI_API_KEY" in secret as environment variable
         os.environ["OPENAI_API_KEY"]=secret["OPENAI_API_KEY"]
         print(os.getenv("OPENAI_API_KEY"))
+    # 看看是否需要建立索引
+    check_renew_index()
 
 
 def getConfig(str):
@@ -115,6 +154,25 @@ def setConfig(str,value):
     with open(projectpath + 'SearchConfig.yaml','w') as f:
         yaml.dump(config,f)
 
+def check_renew_index():
+    global renew_path
+    start_time = time.time()
+    hasher = hashlib.new('sha256')
+    for file_path in renew_path:
+        with open(file_path, 'rb') as f:
+            while True:
+                data = f.read(65536)
+                if not data:
+                    break
+                hasher.update(data)
+        end_time = time.time()
+        print(f"计算 {file_path} 的哈希值用时：{end_time - start_time} 秒。")
+    if hasher.hexdigest() == getConfig("index_hash"):
+        return
+    setConfig("index_hash",hasher.hexdigest())
+    setConfig("establishIndex",True)
+
 print("getting file list...")
 wholeDocList = getWholeDocList()
 initConfig()
+

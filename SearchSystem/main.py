@@ -19,7 +19,7 @@ import jieba
 DIRECTNAME = 'Reuters_zh'
 
 #建立索引
-establishIndex.createIndex_zh(DIRECTNAME)
+establishIndex.createIndex_zh()
 
 print("getting word list...")
 WORDLIST = getIndex.getWordList_zh()
