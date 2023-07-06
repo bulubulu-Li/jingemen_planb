@@ -3,6 +3,7 @@ import os
 import tools
 from LanguageAnalysis import PreprocessFile
 import jieba
+from DataManager import BaseDataManager
 
 def createIndex(directname):
     invertedIndex = {}
@@ -54,10 +55,8 @@ def createIndex_zh():
     if tools.getConfig("establishIndex") == False:
         return
     
-    # assign path
-    path = tools.reuterspath
-    files = os.listdir(path)
-    files=[file for file in files if file.find('.')!=-1]  # skip folder
+
+    files = BaseDataManager()
 
     invertedIndex = {}  # 完整的index
     invertedIndex_qa = {} # qa的index
@@ -69,15 +68,16 @@ def createIndex_zh():
     for file in files:
         print("analyzing file: ", file)
 
-        contents = PreprocessFile.preProcess_zh_qa(path + '/' + file)
-        titles = PreprocessFile.preProcess_zh_qq(path + '/' + file)
+        contents = PreprocessFile.preProcess_zh_qa(file)
+        titles = PreprocessFile.preProcess_zh_qq(file)
         # skip empty files
         if len(contents)==0:
             continue
 
+
         # 处理qa
         # docId = tools.getDocID(file)#文档name必须是 xxx-xx
-        docId_qa=tools.getDocID_qa(file)
+        docId_qa=file.docId_qa
         wordCount_qa[docId_qa]=len(contents)
         num = 0 #word在文档中的位置
 
@@ -96,7 +96,7 @@ def createIndex_zh():
             num += 1
         
         # 处理qq
-        docId_qq=tools.getDocID_qq(file)
+        docId_qq=file.docId_qq
         wordCount_qq[docId_qq]=len(titles)
         num = 0 #word在文档中的位置
 

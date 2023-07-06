@@ -3,6 +3,8 @@ import tools
 from LanguageAnalysis import stemming
 import jieba
 import json
+from DataManager import DataForm,BaseDataManager
+from langchain.document_loaders import DiffbotLoader
 
 
 def preProcess(filename):
@@ -12,29 +14,11 @@ def preProcess(filename):
     return words
 
 
-def preProcess_zh_qq(filename):
-    # if file is empty, return []
-    if os.path.getsize(filename) == 0:
-        return []
-        
-    file = open(filename, 'r', encoding='utf-8')
-    content = json.load(file)
-    words=[]
-    for page in content:
-        words+=jieba.cut(page["title"])
-    return words
+def preProcess_zh_qq(dataItem:DataForm):
+    return jieba.cut(dataItem.title)
 
-def preProcess_zh_qa(filename):
-    # if file is empty, return []
-    if os.path.getsize(filename) == 0:
-        return []
-        
-    file = open(filename, 'r', encoding='utf-8')
-    content = json.load(file)
-    words=[]
-    for page in content:
-        words+=jieba.cut(page["page_content"])
-    return words
+def preProcess_zh_qa(dataItem:DataForm):
+    return jieba.cut(dataItem.title+'\n\n'+dataItem.page_content)
 
 
 def processDirectory(directname):
