@@ -11,17 +11,18 @@ from langchain.vectorstores import Chroma
 from langchain.document_loaders import PyPDFLoader
 from langchain.document_loaders import Docx2txtLoader
 from rouge import Rouge
-import tools
+import SearchSystem.tools as tools
 
 import openai as BaseOpenAI
 
 from langchain.document_loaders.base import BaseLoader
 from langchain.docstore.document import Document
-
+from SearchSystem.DataManager import BaseDataManager, DataForm
 from langchain.prompts import PromptTemplate
 prompt_template = """
 你现在是一个经验丰富，十分严谨的12345热线工作人员，负责解答市民的各种问题。现在，你会得到一份 背景知识 ，里面包括了回答市民问题所需要相关的知识。
-你必须礼貌，准确，严谨，无遗漏地根据这份知识来回答用户的问题，尽量使用这份知识的原文，不要遗漏原文的每一句话。
+你必须礼貌，准确，严谨，无遗漏地根据这份知识来回答用户的问题，尽量使用这份知识的原文，不要遗漏原文的每一句话。按照给的资料的顺序，在使用到参考文献的地方标出参考文献角标，如[1]。
+不要列出参考文献列表。
 如果你不知道答案，只回答"未找到答案"，不要编造答案。如果你的答案不是来自 背景知识 ，只回答"未找到答案"，不要根据你已有的知识回答。
 你必须使用中文回答。
 
@@ -40,7 +41,7 @@ embeddings = None
 text_splitter = CharacterTextSplitter( separator = "。",chunk_size=300, chunk_overlap=0)
 doc_splitter =CharacterTextSplitter(separator = "。\n\n",chunk_size=150, chunk_overlap=0)
 docsearch=None
-persist_directory = 'db'
+persist_directory = tools.searchSystemPath('db')
 chain=None
 
 # 标准json的loader，内部完成了split text
@@ -48,30 +49,23 @@ class chain_loader(BaseLoader):
 
     def __init__(self) -> None:
         super().__init__()
-    def load(self, path: str) -> list:
+    def load(self) -> list:
         docs = []
-        for filename in os.listdir(path=path):
-            # skip folder
-            if os.path.isdir(f'{path}/{filename}'):
-                continue
-            # skip empty file
-            if os.path.getsize(f'{path}/{filename}') == 0:
-                continue
-            f = open(f'{path}/{filename}', 'r',encoding='utf-8')
-            content = json.load(f)
-            # for each item in content, generate a doc
-            for item in content:
-                doc=Document(page_content=item["page_content"] ,metadata=item["metadata"])
-                if len(doc.page_content) > 1000:
-                    print(f'{path}/{filename} is too long, {doc}')
-                # split text if filetype is doc 
-                if item["metadata"]["filetype"]=="doc":
-                    print(f"splitting doc {path}/{filename}")
-                    docs.extend(doc_splitter.split_documents([doc]))  
-                else:
-                    print(f"splitting {item['metadata']['filetype']} {path}/{filename}")
-                    docs.extend(text_splitter.split_documents([doc]))
-
+        datamanager=BaseDataManager()
+        for item in datamanager:
+            meta=item.metadata
+            meta["docId"]=item.docId
+            meta["title"]=item.title
+            doc=Document(page_content=item.title+"\n\n"+item.page_content ,metadata=meta)
+            if len(doc.page_content) > 1000:
+                print(f'{item.title} is too long, {doc}')
+            # split text if filetype is doc 
+            # if item["metadata"]["filetype"]=="doc":
+            #     print(f"splitting doc {path}/{filename}")
+            #     docs.extend(doc_splitter.split_documents([doc]))  
+            else:
+                print(f"splitting {item.metadata['filetype']} {item.docId}")
+                docs.extend(text_splitter.split_documents([doc]))
         return docs
 
 def getApiKey():
@@ -95,7 +89,7 @@ def getDocID(filename):
     docId = filename[0:end]
     return int(docId)
 
-def embedding(path):
+def embedding():
     global embeddings 
     global text_splitter
     global docsearch
@@ -109,7 +103,7 @@ def embedding(path):
         return
     
     loader = chain_loader()
-    split_docs = loader.load(path)
+    split_docs = loader.load()
     print(f'embeding start')
     if len(split_docs) > 0:
         if docsearch is None:
@@ -119,17 +113,24 @@ def embedding(path):
 
     tools.setConfig("new_embedding",False)
 
-def Retrieve(question,path):
-    global docsearch
+def init():
     global chain
-    global PROMPT
+    print('chain init!!!')
     if chain is None:
         print("chain is None,start embedding")
-        embedding(path)
+        embedding()
         print("embedding finished")
         chain_type_kwargs = {"prompt": PROMPT}
         # retrieve 5 items each time
-        chain = RetrievalQA.from_chain_type(llm=OpenAI(model_name="gpt-3.5-turbo",max_tokens=500,temperature=0), chain_type="stuff", retriever=docsearch.as_retriever(), chain_type_kwargs=chain_type_kwargs,verbose=True,return_source_documents=True)
+        chain = RetrievalQA.from_chain_type(llm=OpenAI(model_name="gpt-3.5-turbo-16k-0613",max_tokens=500,temperature=0), chain_type="stuff",retriever=docsearch.as_retriever(search_kwargs={'k':5}), chain_type_kwargs=chain_type_kwargs,verbose=True,return_source_documents=True)
 
-    # return chain({'query': question})
-    return chain._get_docs(question)
+
+def Retrieve(question):
+    global docsearch
+    global chain
+    global PROMPT
+
+    return chain({'query': question})
+    # return chain._get_docs(question)
+
+init()

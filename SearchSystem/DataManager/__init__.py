@@ -1,3 +1,3 @@
-from dataManager import BaseDataManager, DataForm
+from SearchSystem.DataManager.dataManager import BaseDataManager, DataForm,DocIdManager
 
-__all__= ['BaseDataManager', 'DataForm']
+__all__= ['BaseDataManager', 'DataForm','DocIdManager']

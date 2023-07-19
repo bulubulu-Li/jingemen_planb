@@ -28,7 +28,7 @@ import math
 import os
 import json
 from typing import Any
-import tools
+import SearchSystem.tools as tools
 
 
 class DocIdManager:
@@ -61,6 +61,27 @@ class DocIdManager:
         return id%self.docOffset
 
 class DataForm:
+    """
+    用于规范数据的格式
+    - page_content:str
+    - title:str
+    - docId:int
+    - metadata:dict
+    - questions:list[str]
+    - docIdManager:DocIdManager
+    {
+        "page_content": "学校在校外实践基地开展研学活动是按照省、市关于组织中小学生开展研学实践教育活动的有关要求进行的，是年度教育教学工作的重要内容之一。",
+        "title": "校外实践基地开展研学活动符合政策吗",
+        "doc ID": 98,
+        "metadata": {
+            "url": "https://www.jingmen.gov.cn/col/col18658/index.html?kinfoGuid=8ab50925-8809-4a61-b236-34ea1a86655c",
+            "filetype": "json"
+        },
+        "questions": [
+            "在校外基地开展研学活动可以吗？"
+        ]
+    }
+    """
     page_content:str
     title:str
     docId:int
@@ -70,40 +91,40 @@ class DataForm:
     
 
 
-    def __init__(self,dict:dict,idManager:DocIdManager) -> None:
-        if not isinstance(dict,dict):
+    def __init__(self,dic:dict,idManager:DocIdManager) -> None:
+        if not isinstance(dic,dict):
             raise TypeError("DataForm的参数必须是dict")
         
-        if not 'page_content' in dict:
+        if not 'page_content' in dic:
             raise KeyError("DataForm的参数必须包含page_content")
-        if not 'title' in dict:
+        if not 'title' in dic:
             raise KeyError("DataForm的参数必须包含title")
-        if not 'doc ID' in dict:
+        if not 'doc ID' in dic:
             raise KeyError("DataForm的参数必须包含doc ID")
-        if not 'metadata' in dict:
+        if not 'metadata' in dic:
             raise KeyError("DataForm的参数必须包含metadata")
-        if not 'questions' in dict:
+        if not 'questions' in dic:
             raise KeyError("DataForm的参数必须包含questions")
         
         if not isinstance(idManager,DocIdManager):
             raise TypeError("DataForm的参数offset必须是str")
-        if not isinstance(dict['page_content'],str):
+        if not isinstance(dic['page_content'],str):
             raise TypeError("DataForm的参数page_content必须是str")
-        if not isinstance(dict['title'],str):
+        if not isinstance(dic['title'],str):
             raise TypeError("DataForm的参数title必须是str")
-        if not isinstance(dict['doc ID'],int):
+        if not isinstance(dic['doc ID'],int):
             raise TypeError("DataForm的参数doc ID必须是int")
-        if not isinstance(dict['metadata'],dict):
+        if not isinstance(dic['metadata'],dict):
             raise TypeError("DataForm的参数metadata必须是dict")
-        if not isinstance(dict['questions'],list):
+        if not isinstance(dic['questions'],list):
             raise TypeError("DataForm的参数questions必须是list")
 
-        self.page_content=dict['page_content']
-        self.title=dict['title']
-        self.docId=dict['doc ID']
-        self.metadata=dict['metadata']
-        self.questions=dict['questions']
-        self.docOffset=idManager
+        self.page_content=dic['page_content']
+        self.title=dic['title']
+        self.docId=dic['doc ID']
+        self.metadata=dic['metadata']
+        self.questions=dic['questions']
+        self.docIdManager=idManager
 
     @property
     def docId_qa(self):
@@ -113,28 +134,47 @@ class DataForm:
     def docId_qq(self):
         return self.docIdManager.get_qq_id(self.docId)
 
-class BaseDataManager(ABC,DocIdManager):
+class BaseDataManager(DocIdManager):
     """
     一个基础版本的数据管理器，用于规范数据管理器的接口
     """
-    folder:str
-    data:list[DataForm]
-    pointer:int
-    len:int
+    """
+    一个基础版本的数据管理器，用于规范数据管理器的接口
+    """
+    folder:str=os.path.join(tools.searchsystempath,'pairs')
+    data:list[DataForm] = []
+    len:int = 0
+    pointer:int  # 这个将作为实例变量
 
     def __init__(self):
-        self.folder=os.path.join(tools.projectpath,'pairs')
-        self.data=[]
-        self.pointer=0
-        # 读取这个文件夹中的json文件
-        docList=[int(x.split('.')[0]) for x in os.listdir(os.path.join(self.folder,'pairs')) if x.endswith(".json")]
-        # 排序保证每次拿到的顺序都一样
-        docList.sort()
-        for file in docList:
-            with open(os.path.join(self.folder,str(file)+".json"),'r',encoding='utf-8') as f:
-                self.data.extend(json.load(f))
-        self.len=len(self.data)
-        DocIdManager.__init__(self,self.len)
+        # 只有在data为空时，我们才从文件夹读取json文件
+        if not BaseDataManager.data:
+            # 读取这个文件夹中的json文件
+            docList=[int(x.split('.')[0]) for x in os.listdir(BaseDataManager.folder) if x.endswith(".json")]
+            print(docList)
+            # 排序保证每次拿到的顺序都一样
+            docList.sort()
+            for file in docList:
+                with open(os.path.join(BaseDataManager.folder,str(file)+".json"),'r',encoding='utf-8') as f:
+                    BaseDataManager.data.extend(json.load(f))
+            BaseDataManager.len=len(BaseDataManager.data)
+            DocIdManager.__init__(self,BaseDataManager.len)
+
+        self.pointer = 0  # 每个实例都有自己独立的pointer
+
+    # def __init__(self):
+    #     self.data=[]
+    #     self.pointer=0
+    #     # 读取这个文件夹中的json文件
+    #     docList=[int(x.split('.')[0]) for x in os.listdir(self.folder) if x.endswith(".json")]
+    #     print(docList)
+    #     # 排序保证每次拿到的顺序都一样
+    #     docList.sort()
+    #     for file in docList:
+    #         with open(os.path.join(self.folder,str(file)+".json"),'r',encoding='utf-8') as f:
+    #             self.data.extend(json.load(f))
+    #     self.len=len(self.data)
+    #     DocIdManager.__init__(self,self.len)
     
     def __iter__(self):
         return self
@@ -153,9 +193,11 @@ class BaseDataManager(ABC,DocIdManager):
         """
         随机获取指定docId的内容
         """        
-        docId=self.docIdManager.get_docId(docId)
+        docId=self.get_docId(docId)
         return DataForm(self.data[docId],DocIdManager(self.len))
     
     def __len__(self)->int:
         return self.len
     
+    def show(self):
+        return self.data
