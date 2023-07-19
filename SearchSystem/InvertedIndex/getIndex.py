@@ -1,14 +1,14 @@
 import json
-import tools
+import SearchSystem.tools as tools
 
 def getIndex():
-    file = open(tools.projectpath + 'invertIndex.json', 'r')
+    file = open(tools.searchsystempath + 'invertIndex.json', 'r')
     indexStr = file.read()
     index = json.JSONDecoder().decode(indexStr)
     return index
 
 def getWordList():
-    file = open(tools.projectpath + 'wordList.json', 'r')
+    file = open(tools.searchsystempath + 'wordList.json', 'r')
     wordStr = file.read()
     wordList = json.JSONDecoder().decode(wordStr)
     return wordList

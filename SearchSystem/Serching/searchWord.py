@@ -1,8 +1,8 @@
 import queue
 import os
-import tools
+import SearchSystem.tools as tools
 import re
-from Serching import operateDocList
+from SearchSystem.Serching import operateDocList
 from nltk.corpus import wordnet
 
 

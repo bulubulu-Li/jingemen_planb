@@ -1,0 +1,6 @@
+jieba
+langchain
+openai
+thrift
+rouge
+chromadb

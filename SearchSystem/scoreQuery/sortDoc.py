@@ -1,5 +1,5 @@
-from scoreQuery import getScore
-# import tools
+from SearchSystem.scoreQuery import getScore
+# import SearchSystem.tools as tools
 
 DOC_ID=1
 

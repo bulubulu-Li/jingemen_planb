@@ -1,7 +1,7 @@
 import nltk
 import collections
-from Serching import operateDocList as listSort
-from Serching import searchWord as search
+from SearchSystem.Serching import operateDocList as listSort
+from SearchSystem.Serching import searchWord as search
 
 # input is a list of query
 # 布尔检索的形式如下  a and b or not c

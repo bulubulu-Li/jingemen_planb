@@ -1,9 +1,9 @@
 import os
-import tools
-from LanguageAnalysis import stemming
+import SearchSystem.tools as tools
+from SearchSystem.LanguageAnalysis import stemming
 import jieba
 import json
-from DataManager import DataForm,BaseDataManager
+from SearchSystem.DataManager import DataForm,BaseDataManager
 from langchain.document_loaders import DiffbotLoader
 
 
@@ -15,14 +15,14 @@ def preProcess(filename):
 
 
 def preProcess_zh_qq(dataItem:DataForm):
-    return jieba.cut(dataItem.title)
+    return list(jieba.cut(dataItem.title))
 
 def preProcess_zh_qa(dataItem:DataForm):
-    return jieba.cut(dataItem.title+'\n\n'+dataItem.page_content)
+    return list(jieba.cut(dataItem.title+'\n\n'+dataItem.page_content))
 
 
 def processDirectory(directname):
-    path = tools.projectpath
+    path = tools.searchsystempath
     path += directname
     files = os.listdir(path)
     result = []

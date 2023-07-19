@@ -1,13 +1,13 @@
 import copy
 import os
-import tools
-from LanguageAnalysis import PreprocessFile
+import SearchSystem.tools as tools
+from SearchSystem.LanguageAnalysis import PreprocessFile
 import jieba
-from DataManager import BaseDataManager
+from SearchSystem.DataManager import BaseDataManager
 
 def createIndex(directname):
     invertedIndex = {}
-    path = tools.projectpath + directname
+    path = tools.searchsystempath + directname
     path = tools.reuterspath
     files = os.listdir(path)
 
@@ -47,14 +47,17 @@ def createIndex(directname):
     printIndex(invertedIndex)
 
     #将数据写入文件中
-    tools.writeToFile(invertedIndex, tools.projectpath + 'invertIndex.json')
-    tools.writeToFile(wordList, tools.projectpath + 'wordList.json')
+    tools.writeToFile(invertedIndex, tools.searchsystempath + 'invertIndex.json')
+    tools.writeToFile(wordList, tools.searchsystempath + 'wordList.json')
 
 def createIndex_zh():
     # if establishindex in config is false, read from exist file, else generate
     if tools.getConfig("establishIndex") == False:
         return
-    
+    exceptList=[ "[", "]",
+" ", "—", "“", "”", "→", "≥", "①", "②", "　", "、", "。", "〈", "〉", "《", "》", "【", "】", "〔", "〕",
+"\n", " ", "\"", "#", "(", ")", ",", "-", ".", "/",
+"﹣", "（", "）", "，", "－", "：", "；", "＜", "＞", "？"]
 
     files = BaseDataManager()
 
@@ -70,6 +73,8 @@ def createIndex_zh():
 
         contents = PreprocessFile.preProcess_zh_qa(file)
         titles = PreprocessFile.preProcess_zh_qq(file)
+        contents=[x for x in contents if x not in exceptList]
+        titles=[x for x in titles if x not in exceptList]
         # skip empty files
         if len(contents)==0:
             continue

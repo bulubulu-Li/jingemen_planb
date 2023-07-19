@@ -1,9 +1,9 @@
 import cmath
 import os
-import tools
+import SearchSystem.tools as tools
 
 def createVSM(index, wordList, directname):
-    path = tools.projectpath + directname
+    path = tools.searchsystempath + directname
     files = os.listdir(path)
     fileNum = len(files)
     VSM = {}
@@ -27,7 +27,7 @@ def createVSM(index, wordList, directname):
 
         VSM[fileID] = tf_idf_list
         # print(tf_idf_list)
-    tools.writeToFile(VSM, tools.projectpath + 'VSM.json')
+    tools.writeToFile(VSM, tools.searchsystempath + 'VSM.json')
     #return VSM
 
 

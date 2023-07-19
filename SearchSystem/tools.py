@@ -4,22 +4,22 @@ import os
 import time
 import yaml
 
-projectpath = os.getcwd()
-projectpath = projectpath.replace('/',"\\")
-projectpath += "\\"
-while(not projectpath.endswith("SearchSystem\\")):
-    print(projectpath)
-    projectpath = os.path.dirname(projectpath)
-indexpath = projectpath + "index\\"
-reuterspath = projectpath.replace("SearchSystem","Reuters_zh")
-questionspath = reuterspath+"questions\\"
-invertedindexpath =  reuterspath+"invertedIndex\\"
+projectpath = os.path.abspath(__file__)
+projectpath = projectpath[:projectpath.find('jingemen_planb') + len('jingemen_planb')]
+print(f'projectpath is {projectpath}')
+searchsystempath = os.path.join(projectpath,"SearchSystem")
+# searchsystempath = searchsystempath.replace('/',"\\")
+while(not searchsystempath.endswith("SearchSystem")):
+    print(searchsystempath)
+    searchsystempath = os.path.dirname(searchsystempath)
+indexpath = os.path.join(searchsystempath,'index/')
+reuterspath = os.path.join(searchsystempath,"pairs/")
 config={}
 secret={}
-print("projectpath:",projectpath)
+print("searchsystempath:",searchsystempath)
 print("indexpath:",indexpath)
 print("Reuters path",reuterspath)
-renew_path=[indexpath+x for x in os.listdir(indexpath) if x.endswith(".json")]
+renew_path=[reuterspath+x for x in os.listdir(reuterspath) if x.endswith(".json")]
 # sort renew_path by alphabet
 renew_path.sort()
 
@@ -37,31 +37,11 @@ def writeToFile_zh(item,filename,method='index'):
         str = json.dumps(item, ensure_ascii=False)
         file.write(str)
         file.close()
-    elif method=='question':
-        file = open(questionspath+filename,'w',encoding='utf-8')
-        str = json.dumps(item, ensure_ascii=False)
-        file.write(str)
-        file.close()
-    elif method=='reuter':
-        file = open(reuterspath+filename,'w',encoding='utf-8')
-        str = json.dumps(item, ensure_ascii=False)
-        file.write(str)
-        file.close()
 
 def readFile_zh(filename,method='index'):
     # 读取文件中的数据
     if method=='index':
         file = open(indexpath+filename,'r',encoding='utf-8')
-        str = file.read()
-        item = json.JSONDecoder().decode(str)
-        file.close()
-    elif method=='question':
-        file = open(questionspath+filename,'r',encoding='utf-8')
-        str = file.read()
-        item = json.JSONDecoder().decode(str)
-        file.close()
-    elif method=='reuter':
-        file = open(reuterspath+filename,'r',encoding='utf-8')
         str = file.read()
         item = json.JSONDecoder().decode(str)
         file.close()
@@ -71,10 +51,6 @@ def listFile_zh(subpath='',method='index'):
     # 列出文件夹中的文件
     if method=='index':
         files = os.listdir(indexpath+subpath)
-    elif method=='question':
-        files = os.listdir(questionspath+subpath)
-    elif method=='reuter':
-        files = os.listdir(reuterspath+subpath)
     return files
 
 #获取文档名中的文档的id
@@ -145,9 +121,9 @@ def setRetrieveMethod(id,method):
 def initConfig():
     global config
     global secret
-    with open(projectpath + 'SearchConfig.yaml','r',encoding="utf-8") as f:
+    with open(os.path.join(searchsystempath ,'SearchConfig.yaml'),'r',encoding="utf-8") as f:
         config = yaml.safe_load(f)
-    with open(projectpath + 'secret.yaml','r',encoding="utf-8") as f:
+    with open(os.path.join(searchsystempath, 'secret.yaml'),'r',encoding="utf-8") as f:
         secret = yaml.safe_load(f)
         # set"OPENAI_API_KEY" in secret as environment variable
         os.environ["OPENAI_API_KEY"]=secret["OPENAI_API_KEY"]
@@ -162,9 +138,13 @@ def getConfig(str):
 
 def setConfig(str,value):
     global config
+    print(f'setting {str} as {value}')
     config[str] = value
-    with open(projectpath + 'SearchConfig.yaml','w') as f:
+    with open(searchsystempath + 'SearchConfig.yaml','w') as f:
         yaml.dump(config,f)
+
+def searchSystemPath(file):
+    return os.path.join(searchsystempath,file)
 
 def check_renew_index():
     global renew_path
@@ -183,8 +163,9 @@ def check_renew_index():
         return
     setConfig("index_hash",hasher.hexdigest())
     setConfig("establishIndex",True)
+    setConfig("new_embedding",True)
 
 print("getting file list...")
-wholeDocList = getWholeDocList()
+# wholeDocList = getWholeDocList()
 initConfig()
 

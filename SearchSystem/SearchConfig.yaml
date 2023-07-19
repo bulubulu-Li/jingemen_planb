@@ -1,4 +1,5 @@
 establishIndex: false
 getQuestions: true
-index_hash: a5f8f326f12b281b75e9d9e18919b0dd007f45a3fdb521ba5680eb6291b85828
-new_embedding: true
+index_hash: 8c9dd1dcd0ef07e8ec47d4195ad8013ce7161317064b127ab3c382c259c4fdbd
+new_embedding: false
+searchsystempath: ''
