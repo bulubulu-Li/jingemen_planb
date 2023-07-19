@@ -6,7 +6,6 @@ import yaml
 
 projectpath = os.path.abspath(__file__)
 projectpath = projectpath[:projectpath.find('jingemen_planb') + len('jingemen_planb')]
-print(f'projectpath is {projectpath}')
 searchsystempath = os.path.join(projectpath,"SearchSystem")
 # searchsystempath = searchsystempath.replace('/',"\\")
 while(not searchsystempath.endswith("SearchSystem")):
@@ -14,11 +13,13 @@ while(not searchsystempath.endswith("SearchSystem")):
     searchsystempath = os.path.dirname(searchsystempath)
 indexpath = os.path.join(searchsystempath,'index/')
 reuterspath = os.path.join(searchsystempath,"pairs/")
+from Log.log import log
 config={}
 secret={}
-print("searchsystempath:",searchsystempath)
-print("indexpath:",indexpath)
-print("Reuters path",reuterspath)
+log.info(f'projectpath is {projectpath}')
+log.info(f"searchsystempath: {searchsystempath}")
+log.info(f"indexpath:{indexpath}")
+log.info(f"Reuters path {reuterspath}")
 renew_path=[reuterspath+x for x in os.listdir(reuterspath) if x.endswith(".json")]
 # sort renew_path by alphabet
 renew_path.sort()
@@ -127,7 +128,7 @@ def initConfig():
         secret = yaml.safe_load(f)
         # set"OPENAI_API_KEY" in secret as environment variable
         os.environ["OPENAI_API_KEY"]=secret["OPENAI_API_KEY"]
-        print(os.getenv("OPENAI_API_KEY"))
+        log.info(os.getenv("OPENAI_API_KEY"))
     # 看看是否需要建立索引
     check_renew_index()
 
@@ -138,7 +139,7 @@ def getConfig(str):
 
 def setConfig(str,value):
     global config
-    print(f'setting {str} as {value}')
+    log.info(f'setting {str} as {value}')
     config[str] = value
     with open(searchsystempath + 'SearchConfig.yaml','w') as f:
         yaml.dump(config,f)
@@ -158,14 +159,14 @@ def check_renew_index():
                     break
                 hasher.update(data)
         end_time = time.time()
-        print(f"计算 {file_path} 的哈希值用时：{end_time - start_time} 秒。")
+        log.info(f"计算 {file_path} 的哈希值用时：{end_time - start_time} 秒。")
     if hasher.hexdigest() == getConfig("index_hash"):
         return
     setConfig("index_hash",hasher.hexdigest())
     setConfig("establishIndex",True)
     setConfig("new_embedding",True)
 
-print("getting file list...")
+log.info("getting file list...")
 # wholeDocList = getWholeDocList()
 initConfig()
 

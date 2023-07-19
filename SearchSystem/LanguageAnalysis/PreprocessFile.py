@@ -5,7 +5,7 @@ import jieba
 import json
 from SearchSystem.DataManager import DataForm,BaseDataManager
 from langchain.document_loaders import DiffbotLoader
-
+from Log.log import log
 
 def preProcess(filename):
     file = open(filename, 'r')
@@ -29,7 +29,7 @@ def processDirectory(directname):
     for file in files:
         content = preProcess(path + '/' + file)
         result.append(content)
-        # print(content)
+        # log.info(content)
     return result
 
 # processDirectory('test')

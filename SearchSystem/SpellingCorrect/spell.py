@@ -7,11 +7,11 @@ Created on Thu Jun 15 11:44:31 2017
 
 import re
 from collections import Counter
-
+from Log.log import log
 def words(text):
     return re.findall(r'\w+', text)
 
-print('loading spell words')
+log.info('loading spell words')
 WORDS = Counter(words(open('SpellingCorrect/big.txt').read()))
 
 def P(word, N=sum(WORDS.values())): 
@@ -52,7 +52,7 @@ def correctSentence(input):
             res.append(word)
         else:
             res.append(correction(word))
-        # print(correction(word))
+        # log.info(correction(word))
     return res
 #input = ['(','and','fuck',')']
-#print(correctSentence(input))
+#log.info(correctSentence(input))

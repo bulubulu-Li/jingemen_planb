@@ -1,10 +1,17 @@
 import os
 import sys
-projectpath = os.path.abspath(__file__)
-projectpath = projectpath[:projectpath.find('jingemen_planb') + len('jingemen_planb')]
-print(f'projectpath is {projectpath}')
-if sys.path.count(projectpath)==0:
-    sys.path.append(projectpath)
+import time
+
+try:
+    from Log.log import log
+except:
+    projectpath = os.path.abspath(__file__)
+    projectpath = projectpath[:projectpath.find('jingemen_planb') + len('jingemen_planb')]
+    print(f'projectpath is {projectpath}')
+    if sys.path.count(projectpath)==0:
+        sys.path.append(projectpath)
+    from Log.log import log
+
 
 import SearchSystem.tools as tools
 import nltk
@@ -32,15 +39,15 @@ DIRECTNAME = 'Reuters_zh'
 # 建立索引
 establishIndex.createIndex_zh()
 manager = BaseDataManager()
-print("getting word list...")
+log.info("getting word list...")
 WORDLIST = getIndex.getWordList_zh()
 
-print("getting index...")
+log.info("getting index...")
 INDEX = getIndex.getIndex_zh()
 INDEX_QQ = getIndex.getIndex_zh_qq()
 INDEX_QA = getIndex.getIndex_zh_qa()
 
-print("loading the wordnet...")
+log.info("loading the wordnet...")
 WORDCOUNT = getIndex.getWordCount_zh()
 WORDCOUNT_QQ = getIndex.getWordCount_zh_qq()
 WORDCOUNT_QA = getIndex.getWordCount_zh_qa()
@@ -51,30 +58,30 @@ FILES = os.listdir(tools.reuterspath)
 FILENUM = manager.len
 
 LOOP = True
-print("=================Searching System=================")
+log.info("=================Searching System=================")
 
 # 词形还原+纠错
 
 
 def preCheck(statement):
     return statement
-    print("spelling correcting...")
+    log.info("spelling correcting...")
     INPUTWORDS = spell.correctSentence(INPUTWORDS)
-    print(INPUTWORDS)
-    print("stemming...")
+    log.info(INPUTWORDS)
+    log.info("stemming...")
     INPUTWORDS = stemming.lemmatize_sentence(statement, True)
-    print(INPUTWORDS)
+    log.info(INPUTWORDS)
     return INPUTWORDS
 
 
 def preCheck_zh(statement):
-    # print("分词...")
+    # log.info("分词...")
     INPUTWORDS = jieba.cut(statement)
     return INPUTWORDS
 
 
 def check_expect(doclist, expectlist):
-    # print("check_expect...")
+    # log.info("check_expect...")
     res = []
     docs = [x[1] for x in doclist]
     for i, doc in enumerate(docs):
@@ -120,7 +127,7 @@ def searching(statement, choice=1, loop=False, expectList=[]):
     
     """
     # 查询排序
-    # print("searching...")
+    # log.info("searching...")
     STATEMENT = statement
     source = []
     # 倒排全部查找
@@ -131,13 +138,13 @@ def searching(statement, choice=1, loop=False, expectList=[]):
 
         DOCLIST = searchWord.searchWords(INDEX, WORDSET)
         SORTEDDOCLIST = sortDoc.TopKScore(40, INDEX, FILENUM, WORDSET, DOCLIST, WORDCOUNT)
-        # print(SORTEDDOCLIST)
+        # log.info(SORTEDDOCLIST)
         source = check_expect(SORTEDDOCLIST, expectList)
-        print(SORTEDDOCLIST)
+        log.info(SORTEDDOCLIST)
         if loop == False:
             return SORTEDDOCLIST, source
         for doc in SORTEDDOCLIST:
-            print("doc ID: ", tools.showDocID(doc[1]), " score: ", "%.3f" % doc[0])
+            log.info(f"doc ID: {tools.showDocID(doc[1])} score: {doc[0]:.3f}" )
 
     # 倒排qq查找
     if choice == 2:
@@ -151,8 +158,7 @@ def searching(statement, choice=1, loop=False, expectList=[]):
         if loop == False:
             return SORTEDDOCLIST, source
         for doc in SORTEDDOCLIST:
-            print("doc ID: ", tools.showDocID(
-                doc[1]), " score: ", "%.3f" % doc[0])
+            log.info(f"doc ID: {tools.showDocID(doc[1])} score: {doc[0]:.3f}" )
 
     # 倒排qa查找
     if choice == 3:
@@ -166,8 +172,7 @@ def searching(statement, choice=1, loop=False, expectList=[]):
         if loop == False:
             return SORTEDDOCLIST, source
         for doc in SORTEDDOCLIST:
-            print("doc ID: ", tools.showDocID(
-                doc[1]), " score: ", "%.3f" % doc[0])
+            log.info(f"doc ID: {tools.showDocID(doc[1])} score: {doc[0]:.3f}" )
 
     # qq qa 各召回一部分
     if choice == 4:
@@ -195,12 +200,12 @@ def searching(statement, choice=1, loop=False, expectList=[]):
     #     WORDSET = set(INPUTWORDS)
 
     #     DOCLIST = searchWord.searchWords(INDEX, WORDSET)
-    #     # print(DOCLIST)
+    #     # log.info(DOCLIST)
     #     #根据tf-idf计算分数
     #     #取top20
     #     SORTEDDOCLIST = sortDoc.TopKScore(20, INDEX, FILENUM, WORDSET, DOCLIST,WORDCOUNT)
     #     for doc in SORTEDDOCLIST:
-    #         print("doc ID: ", tools.showDocID(doc[1]), " score: ", "%.3f" % doc[0])
+    #         log.info("doc ID: ", tools.showDocID(doc[1]), " score: ", "%.3f" % doc[0])
     #     if loop==False:
     #         return SORTEDDOCLIST
     # #Bool 查询
@@ -208,8 +213,8 @@ def searching(statement, choice=1, loop=False, expectList=[]):
     #     INPUTWORDS=preCheck_zh(STATEMENT)
 
     #     DOCLIST = BoolSearchDel.BoolSearch(INPUTWORDS, INDEX)
-    #     print(len(DOCLIST),"DOCs :")
-    #     print(DOCLIST)
+    #     log.info(len(DOCLIST),"DOCs :")
+    #     log.info(DOCLIST)
     # #短语查询
     # elif choice == 4:
     #     INPUTWORDS=preCheck_zh(STATEMENT)
@@ -218,11 +223,11 @@ def searching(statement, choice=1, loop=False, expectList=[]):
 
     #     PHRASEDOCLIST = searchWord.searchPhrase(INDEX, WORDSET, INPUTWORDS)
     #     if 0 == len(PHRASEDOCLIST):
-    #         print("Doesn't find \"", INPUTWORDS, '"')
+    #         log.info("Doesn't find \"", INPUTWORDS, '"')
     #     else:
     #         for key in PHRASEDOCLIST:
-    #             print('docID: ', key, "   num: ", len(PHRASEDOCLIST[key]))
-    #             print('    location: ', PHRASEDOCLIST[key])
+    #             log.info('docID: ', key, "   num: ", len(PHRASEDOCLIST[key]))
+    #             log.info('    location: ', PHRASEDOCLIST[key])
     # 模糊查询
     # elif choice == 5:
     #     list = searchWord.wildcardSearch(STATEMENT, INDEX, WORDLIST)
@@ -236,7 +241,7 @@ def searching(statement, choice=1, loop=False, expectList=[]):
 
     elif choice == 7:
         retrieve_res = chain.Retrieve(STATEMENT)
-        print(retrieve_res)
+        log.info(retrieve_res)
         answer=retrieve_res["result"]
         # 找出answer中的参考文献，使用的方式是找出所有被[]包裹的数字，然后保留unique的
         # 参考文献的格式是[1] [2] [3]，所以可以用正则表达式匹配
@@ -247,7 +252,7 @@ def searching(statement, choice=1, loop=False, expectList=[]):
         #             "index":x,
         #             "doc":
         #         })
-        # print(referenceList)
+        # log.info(referenceList)
         rouge = Rouge()
         source = []
         # 如果result包含“未找到答案”，直接返回
@@ -262,10 +267,11 @@ def searching(statement, choice=1, loop=False, expectList=[]):
                 sub_doc = retrieve_res["source_documents"][i]
                 rouge_score = rouge.get_scores([' '.join(list(sub_string))], [' '.join(list(sub_doc.page_content))])
                 tmp_score.append(rouge_score[0]["rouge-l"]['f'])
-            print("tmp_score: ", tmp_score)
+            log.info(f"tmp_score: {tmp_score}")
+
             source.append(tmp_score.index(max(tmp_score)))
 
-        print("source: ", source)
+        log.info(f"source: {source}" )
         temp=[]
         for x in source:
             if x not in temp:
@@ -273,29 +279,29 @@ def searching(statement, choice=1, loop=False, expectList=[]):
         
         docList = [retrieve_res["source_documents"][x] for x in temp]
         
-        print(f"answer {answer}, docList {docList}")
+        log.info(f"answer {answer}, docList {docList}")
 
         if loop == False:
             return answer,docList
-        # print(chain.Retrieve(STATEMENT, PATH))
+        # log.info(chain.Retrieve(STATEMENT, PATH))
 
 
 # if __name__ == '__main__':
 #     while LOOP:
-#         print("searching operation: ")
-#         print(
+#         log.info("searching operation: ")
+#         log.info(
 #             "[1]qa mix qq [2]qq [3]qa [4]qa + qq [5]wildcard [6]synonyms [7]LLM [88]exit")
-#         print("your choice(int):")
+#         log.info("your choice(int):")
 #         try:
 #             choice = int(input())
 #             if choice == 88:
 #                 break
 #         except:
-#             print()
+#             log.info()
 #             continue
 
 #         if choice >= 1 and choice <= 7:
-#             print("input the query statement:")
+#             log.info("input the query statement:")
 #             STATEMENT = input()
 #             if STATEMENT == "EXIT":
 #                 break
@@ -304,11 +310,15 @@ def searching(statement, choice=1, loop=False, expectList=[]):
 #             searching(STATEMENT, choice, True)
 
 #         else:
-#             print("Invalid choice! Please observe these choices carefully!")
-#         print()
+#             log.info("Invalid choice! Please observe these choices carefully!")
+#         log.info()
 
-#     print("ByeBye!")
+#     log.info("ByeBye!")
 
-retrieve_res = searching("老年人优待证怎么办理",choice=7)
-print(retrieve_res)
+start_time = time.time()
+for i in range(10):
+    retrieve_res = searching("老年人优待证怎么办理",choice=7)
+end_time = time.time()
+print("Time taken to process the sentence: ", end_time - start_time, "seconds")
+# log.info(retrieve_res)
 # establishVSM.createVSM(INDEX,WORDLIST,'test')

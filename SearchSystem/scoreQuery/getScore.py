@@ -1,5 +1,5 @@
 import cmath
-
+from Log.log import log
 def get_tfidf(index, fileNum , docID, word) :
     docID = str(docID)
     if docID not in index[word]:
@@ -47,6 +47,6 @@ def get_tfidf_Score(index,fileNum,docID,wordList):
         tf = len(index[word][docID])
         df = len(index[word])
         idf = cmath.log10(fileNum / df).real
-        # print("filenum / df",fileNum / df, "df: ",df, " idf: ", idf )
+        # log.info("filenum / df",fileNum / df, "df: ",df, " idf: ", idf )
         score += tf * idf
     return score

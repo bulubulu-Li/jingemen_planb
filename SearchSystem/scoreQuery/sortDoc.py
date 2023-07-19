@@ -1,6 +1,6 @@
 from SearchSystem.scoreQuery import getScore
 # import SearchSystem.tools as tools
-
+from Log.log import log
 DOC_ID=1
 
 def getScoreDocList(index,fileNum, words,docList,wordCount):
@@ -10,7 +10,7 @@ def getScoreDocList(index,fileNum, words,docList,wordCount):
         score=scores["score"]
         #scoreDocList 是score和doc的list
         scoreDocList.append([score,doc,scores])
-    #print(scoreDocList)
+    #log.info(scoreDocList)
     return scoreDocList
 
 #从大到小得到sortedDocList
@@ -21,12 +21,12 @@ def sortScoreDocList(index,fileNum,words,docList,wordCount):
 #堆排序实现的top K查询
 def TopKScore(K,index,fileNum,words,docList,wordCount):
     scoreDocList = getScoreDocList(index, fileNum, words, docList,wordCount)
-    # print(scoreDocList)
+    # log.info(scoreDocList)
     N = len(scoreDocList)
     if N is 0:
         return []
     # scoreDocList = heapsort(scoreDocList,N,2*K)
-    # print("scoreDocList:",scoreDocList[0])
+    # log.info("scoreDocList:",scoreDocList[0])
     # # exit()
     # L = 2*K
     # if N < 2*K: L = N

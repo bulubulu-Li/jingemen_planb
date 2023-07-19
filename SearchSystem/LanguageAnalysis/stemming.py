@@ -2,7 +2,7 @@ import nltk
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import wordnet
 from nltk import word_tokenize, pos_tag
-
+from Log.log import log
 #下载需要的依赖文件
 # nltk.download("wordnet")
 # nltk.download("averaged_perceptron_tagger")
@@ -35,7 +35,7 @@ def lemmatize_sentence(sentence,forinput):
 
     for word in res:
         #如果是 's什么的，直接排除
-        if word[0] is '\'':
+        if word[0] == '\'':
             continue
         
         #去除标点符号
@@ -47,7 +47,7 @@ def lemmatize_sentence(sentence,forinput):
                 word = word.replace(c,'')
 
         #排除空的字符串
-        if len(word) is 0 or word[0] is '-':
+        if len(word) == 0 or word[0] == '-':
             continue
 
         #如果分解的单词中有/,则将其中的每个单词添加到结果中
@@ -74,6 +74,6 @@ def getWord(word):
 #     str = input()
 #     result = lemmatize_sentence(str)
 #     for word in result:
-#         print(word)
+#         log.info(word)
 
-#print(WordNetLemmatizer().lemmatize('probable', pos='v'))
+#log.info(WordNetLemmatizer().lemmatize('probable', pos='v'))

@@ -1,5 +1,6 @@
 import json
 import os
+from Log.log import log
 from langchain.prompts import PromptTemplate
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.embeddings.openai import OpenAIEmbeddings
@@ -58,13 +59,13 @@ class chain_loader(BaseLoader):
             meta["title"]=item.title
             doc=Document(page_content=item.title+"\n\n"+item.page_content ,metadata=meta)
             if len(doc.page_content) > 1000:
-                print(f'{item.title} is too long, {doc}')
+                log.info(f'{item.title} is too long, {doc}')
             # split text if filetype is doc 
             # if item["metadata"]["filetype"]=="doc":
-            #     print(f"splitting doc {path}/{filename}")
+            #     log.info(f"splitting doc {path}/{filename}")
             #     docs.extend(doc_splitter.split_documents([doc]))  
             else:
-                print(f"splitting {item.metadata['filetype']} {item.docId}")
+                log.info(f"splitting {item.metadata['filetype']} {item.docId}")
                 docs.extend(text_splitter.split_documents([doc]))
         return docs
 
@@ -76,12 +77,12 @@ def getApiKey():
         return API_KEY
     else:
         if os.getenv("OPENAI_API_KEY") is not None:  # 如果是在Railway上部署，需要删除代理
-            print('Got API_KEY from env')
-            print(os.getenv("OPENAI_API_KEY"))
+            log.info('Got API_KEY from env')
+            log.info(os.getenv("OPENAI_API_KEY"))
             API_KEY = os.getenv("OPENAI_API_KEY")  # 如果环境变量中设置了OPENAI_API_KEY，则使用环境变量中的OPENAI_API_KEY
             return API_KEY
         else:
-            print('请在openai官网注册账号，获取api_key填写至程序内或命令行参数中')
+            log.info('请在openai官网注册账号，获取api_key填写至程序内或命令行参数中')
             exit()
 
 def getDocID(filename):
@@ -104,7 +105,7 @@ def embedding():
     
     loader = chain_loader()
     split_docs = loader.load()
-    print(f'embeding start')
+    log.info(f'embeding start')
     if len(split_docs) > 0:
         if docsearch is None:
             docsearch=Chroma.from_documents(split_docs,embeddings, persist_directory=persist_directory)
@@ -115,11 +116,11 @@ def embedding():
 
 def init():
     global chain
-    print('chain init!!!')
+    log.info('chain init!!!')
     if chain is None:
-        print("chain is None,start embedding")
+        log.info("chain is None,start embedding")
         embedding()
-        print("embedding finished")
+        log.info("embedding finished")
         chain_type_kwargs = {"prompt": PROMPT}
         # retrieve 5 items each time
         chain = RetrievalQA.from_chain_type(llm=OpenAI(model_name="gpt-3.5-turbo-16k-0613",max_tokens=500,temperature=0), chain_type="stuff",retriever=docsearch.as_retriever(search_kwargs={'k':5}), chain_type_kwargs=chain_type_kwargs,verbose=True,return_source_documents=True)

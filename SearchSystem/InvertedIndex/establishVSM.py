@@ -1,6 +1,7 @@
 import cmath
 import os
 import SearchSystem.tools as tools
+from Log.log import log
 
 def createVSM(index, wordList, directname):
     path = tools.searchsystempath + directname
@@ -26,7 +27,7 @@ def createVSM(index, wordList, directname):
             tf_idf_list.append(tf_idf)
 
         VSM[fileID] = tf_idf_list
-        # print(tf_idf_list)
+        # log.info(tf_idf_list)
     tools.writeToFile(VSM, tools.searchsystempath + 'VSM.json')
     #return VSM
 

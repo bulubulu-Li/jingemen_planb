@@ -4,6 +4,7 @@ import SearchSystem.tools as tools
 from SearchSystem.LanguageAnalysis import PreprocessFile
 import jieba
 from SearchSystem.DataManager import BaseDataManager
+from Log.log import log
 
 def createIndex(directname):
     invertedIndex = {}
@@ -13,7 +14,7 @@ def createIndex(directname):
 
     #单词:docid:[pos]
     for file in files:
-        print("analyzing file: ", file)
+        log.info("analyzing file: ", file)
         #每个文档的词项 list
         #此处，需要做一个分词，还需要设置停用词，做过滤
         #然后，保存jingmen数据为html
@@ -69,7 +70,7 @@ def createIndex_zh():
     wordCount_qq={}  # qq的wordcount
     #单词:docid:[pos]
     for file in files:
-        print("analyzing file: ", file)
+        log.info("analyzing file: ", file)
 
         contents = PreprocessFile.preProcess_zh_qa(file)
         titles = PreprocessFile.preProcess_zh_qq(file)
@@ -180,9 +181,9 @@ def sortTheDict(dict):
 
 def printIndex(index):
     for stem in index:
-        print(stem)
+        log.info(stem)
         for doc in index[stem]:
-            print("    " , doc , " : " , index[stem][doc])
+            log.info("    " , doc , " : " , index[stem][doc])
 
 def getWordList(invertedIndex):
     wordList = []
@@ -190,7 +191,7 @@ def getWordList(invertedIndex):
         wordList.append(word)
     return wordList
 
-# print("establishing the INDEX...")
+# log.info("establishing the INDEX...")
 # establishIndex.createIndex('Reuters')
 
 

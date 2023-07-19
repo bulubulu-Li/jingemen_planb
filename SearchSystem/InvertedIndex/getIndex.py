@@ -40,4 +40,4 @@ def getWordCount_zh_qq():
 def getWordCount_zh_qa():
     return tools.readFile_zh('wordCount_zh_qa.json', 'index')
 
-# print(getWordList())
+# log.info(getWordList())

@@ -2,6 +2,7 @@ import nltk
 import collections
 from SearchSystem.Serching import operateDocList as listSort
 from SearchSystem.Serching import searchWord as search
+from Log.log import log
 
 # input is a list of query
 # 布尔检索的形式如下  a and b or not c
@@ -34,7 +35,7 @@ def InfxiToPofix(inputList):
             while sym != '(':
                 pofix_res.append(sym)
                 if len(tmp) == 0:
-                    print("Incorrect query")
+                    log.info("Incorrect query")
                     exit(1)  #查询错误退出
                     break
                 sym = tmp.pop()
@@ -67,9 +68,9 @@ def InfxiToPofix(inputList):
 #
 #input = ["NOT", "(" ,"A" ,"AND","B",")"]
 #res = InfxiToPofix(input)
-#print(res)
+#log.info(res)
 #while len(res) > 0:
-#    print(res.pop())
+#    log.info(res.pop())
 
 #the bool query function
 #def serachtest(Index,wordlist,flag):
@@ -78,7 +79,7 @@ def InfxiToPofix(inputList):
 def BoolSearch(query, index):
     pofix = InfxiToPofix(query)
     result = []
-    #print(pofix)
+    #log.info(pofix)
     queryArray = []
     notTrue = ['1']
     notFalse = ['0']
@@ -88,7 +89,7 @@ def BoolSearch(query, index):
     while i < limit:
         item = pofix[i]
         if item != 'AND'and item !='OR':
-            #print(result)
+            #log.info(result)
             #lookforword to see if is item
             if i < limit - 1:
                 if pofix[i+1] == "NOT":
@@ -102,7 +103,7 @@ def BoolSearch(query, index):
                 result.append(search.serarchPhraseForBool(index, item, flag=False))
         elif item == 'AND':
             if len(result) < 2:
-                print("illegal query")
+                log.info("illegal query")
                 return nullReturn
             else:
                 list1 = result.pop()
@@ -110,7 +111,7 @@ def BoolSearch(query, index):
                 result.append(listSort.andTwoList(list1,list2))
         elif item == 'OR':
             if len(result) < 2:
-                print("illegal query")
+                log.info("illegal query")
                 return nullReturn
             else:
                 list1 = result.pop()
@@ -118,7 +119,7 @@ def BoolSearch(query, index):
                 result.append(listSort.mergeTwoList(list1,list2))
         i += 1
     if len(result) != 1:
-        print("illegal query")
+        log.info("illegal query")
         return nullReturn
     else:
         return result.pop()

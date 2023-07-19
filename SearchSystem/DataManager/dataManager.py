@@ -29,7 +29,7 @@ import os
 import json
 from typing import Any
 import SearchSystem.tools as tools
-
+from Log.log import log
 
 class DocIdManager:
     """
@@ -151,7 +151,7 @@ class BaseDataManager(DocIdManager):
         if not BaseDataManager.data:
             # 读取这个文件夹中的json文件
             docList=[int(x.split('.')[0]) for x in os.listdir(BaseDataManager.folder) if x.endswith(".json")]
-            print(docList)
+            log.info(docList)
             # 排序保证每次拿到的顺序都一样
             docList.sort()
             for file in docList:
@@ -167,7 +167,7 @@ class BaseDataManager(DocIdManager):
     #     self.pointer=0
     #     # 读取这个文件夹中的json文件
     #     docList=[int(x.split('.')[0]) for x in os.listdir(self.folder) if x.endswith(".json")]
-    #     print(docList)
+    #     log.info(docList)
     #     # 排序保证每次拿到的顺序都一样
     #     docList.sort()
     #     for file in docList:

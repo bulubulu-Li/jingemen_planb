@@ -1,18 +1,33 @@
-import copy
+import logging
+import sys
 import os
+
+projectpath = os.path.abspath(__file__)
+projectpath = projectpath[:projectpath.find('jingemen_planb') + len('jingemen_planb')]
+print(f'projectpath is {projectpath}')
+if sys.path.count(projectpath)==0:
+    sys.path.append(projectpath)
+
+from Log.log import log,switchToStd
+# update logger to log.info to stdout
+switchToStd()
+
+import copy
+
 import json
 import re
 import time
 import openai
 import main
-import SearchSystem.tools as tools
 import pandas as pd
 import numpy as np
 import jieba
 import cProfile
+import SearchSystem.tools as tools
 from SearchSystem.DataManager import DataForm,BaseDataManager
 
-# try to extract key from tools.secret, if false, print
+
+# try to extract key from tools.secret, if false, log.info
 DOC_ID=1
 SCORE=0
 WORD_LIST=2
@@ -36,7 +51,7 @@ def get_completion_from_messages(messages, model="gpt-3.5-turbo-16k-06130", temp
         messages=messages,
         temperature=temperature, # this is the degree of randomness of the model's output
     )
-#     print(str(response.choices[0].message))
+#     log.info(str(response.choices[0].message))
     return response.choices[0].message["content"]
 
 def extract_json(text):
@@ -46,11 +61,11 @@ def extract_json(text):
     #     try:
     #         return result_match.group(1)   
     #     except:
-    #         print(f"解析 JSON 失败: {text}")
+    #         log.info(f"解析 JSON 失败: {text}")
     #         return []             
 
     # except json.JSONDecodeError:
-    #     print(f"解析 JSON 失败: {text}")
+    #     log.info(f"解析 JSON 失败: {text}")
     #     return []
     json_list = []
     pattern = re.compile(r'\{.*?\}', re.DOTALL)
@@ -79,7 +94,7 @@ def dump_question(file,textName,result):
         os.makedirs(f'{file}/questions')
 
     with open(f'{file}/questions/{textName}.json', 'w', encoding='utf-8') as f:
-        print(f"Writing to {textName}.json")
+        log.info(f"Writing to {textName}.json")
         json.dump(result, f, ensure_ascii=False, indent=4)
         f.close()
 
@@ -166,15 +181,15 @@ A:
         </article>"""
         },
     ]
-    # print(f"content is {content}")
+    # log.info(f"content is {content}")
 
     response = get_completion_from_messages(messages=messages, temperature=0) 
     # extract the json between the first and last square brackets
-    print("response", response)
+    log.info("response", response)
     json_res = extract_json(response)
-    print(json_res)
+    log.info(json_res)
     if len(json_res)==0:
-        print("No response")
+        log.info("No response")
         return []
 
     return json_res
@@ -187,20 +202,20 @@ def generate_questions(file):
             os.makedirs(f'{file}/questions')
 
         if tools.getConfig("getQuestions")==False and filename.split('.')[0]+'.json' in os.listdir(f'{file}/questions'):
-            print(f"Skipping {filename}")
+            log.info(f"Skipping {filename}")
             continue
         # if is a folder,skip it
         if os.path.isdir(f'{file}/{filename}'):
-            print(f"Skipping folder {filename}")
+            log.info(f"Skipping folder {filename}")
             continue
 
-        print(f"Generating questions for {filename}")
+        log.info(f"Generating questions for {filename}")
         textName=filename.split('.')[0]
         result={"doc ID":int(textName),"question_list":[]}
         with open(f'{file}/{filename}', 'r', encoding='utf-8') as f:
             json_data=json.load(f)
             for i, item in enumerate(json_data):
-                print(f"Generating questions for {filename} {i+1}/{len(json_data)}")
+                log.info(f"Generating questions for {filename} {i+1}/{len(json_data)}")
                 qq=query_questions(item["page_content"])
                 question_num+=len(qq)
                 result["question_list"].append({
@@ -227,7 +242,7 @@ def update_questions():
                     # skip empty file
                     if os.path.getsize(f'{tools.reuterspath}/{filename}')==0:
                         continue
-                    print(f"deal with {filename}")
+                    log.info(f"deal with {filename}")
                     if filename.split('-')[0]==str(mainID):
                         with open(f'{tools.reuterspath}/{filename}', 'r', encoding='utf-8') as f2:
                             json_data2=json.load(f2)
@@ -264,7 +279,7 @@ def retrieve_files(question_file,searchType):
     for dataItem in files:
         questions = dataItem.questions
         # 看看retrieve的第一条的结果是不是想要的东西
-        print(f"Retrieving {dataItem.docId} Method {searchType}")
+        log.info(f"Retrieving {dataItem.docId} Method {searchType}")
         for ques in questions:
             searching_res,expectList=main.searching(ques,searchType,expectList=[dataItem.docId_qa,dataItem.docId_qq])
             if searchType!=88:
@@ -281,7 +296,7 @@ def retrieve_files(question_file,searchType):
                 for i in mainFile_temp:
                     if i not in mainFile:
                         mainFile.append(i)
-                # print(res)
+                # log.info(res)
                 if dataItem.docId not in mainFile[:3]:
                     fullContent={
                         "retrieved_title":[],
@@ -326,7 +341,7 @@ def retrieve_files(question_file,searchType):
                                 "idf":f'{i["idf"]:.3f}'
                             })
                         expect_word_detail.append(word_temp)
-                    print(f'expection: {expectList}')
+                    log.info(f'expection: {expectList}')
                     expect_detail={
                         "retrieve_method":[files.get_method(x[1]) for x in expectList],
                         "doc_score":[f'{x[0]:.3f}' for x in expectList],
@@ -414,7 +429,7 @@ def to_html(json_data_input):
         item["score_detail"]=pd.DataFrame(item["score_detail"]).to_html(escape=False).replace('\n','')
         item["expected_detail"]=pd.DataFrame(item["expected_detail"]).to_html(escape=False).replace('\n','')
         json_data[j]=item
-        # print("item is ",item["score_detail"])
+        # log.info("item is ",item["score_detail"])
     return pd.DataFrame(json_data).to_html(escape=False)
 
 # def to_xlsx(json_data):
@@ -444,15 +459,15 @@ def evaluate_accuracy():
         with open(f'bad_case/{file}','r',encoding='utf-8') as f:
             json_data=json.load(f)
             worst_num[method]+=len(json_data)
-    print(f"Total number of questions generated: {question_num}")
-    print(f"Total number of failures: {failure_num}")
-    print(f"Total number of worst   : {worst_num}")
+    log.info(f"Total number of questions generated: {question_num}")
+    log.info(f"Total number of failures: {failure_num}")
+    log.info(f"Total number of worst   : {worst_num}")
     fn=np.array(failure_num)
     fn=1-fn/question_num
     wn=np.array(worst_num)
     wn=1-wn/question_num
-    print(f"Percentage of failures: {[f'{x*100:.1f}%' for x in fn.tolist()]}")
-    print(f"Percentage of worst   : {[f'{x*100:.1f}%' for x in wn.tolist()]}")
+    log.info(f"Percentage of failures: {[f'{x*100:.1f}%' for x in fn.tolist()]}")
+    log.info(f"Percentage of worst   : {[f'{x*100:.1f}%' for x in wn.tolist()]}")
 
 def extract_failure_retrieve():
     # 打开 ./bad_case 文件夹，读取所有文件名, 取出其中 .json 文件
@@ -460,7 +475,7 @@ def extract_failure_retrieve():
     bad_case_files = os.listdir(bad_case_path)
     bad_case_files = [file for file in bad_case_files if file.endswith('.json')]
     bad_case_files = [file for file in bad_case_files if file.startswith('failureFull')]
-    print("bad_case_files:",bad_case_files)
+    log.info("bad_case_files:",bad_case_files)
     # case example:
     # {
     #     "question": "哪些人容易患上钩体病？",
@@ -487,7 +502,7 @@ def extract_failure_retrieve():
 
             # add "split_question" key
             for j,case in enumerate(json_data):
-                print(f'split_question {case["question"]}')
+                log.info(f'split_question {case["question"]}')
                 temp={
                     "question": case["question"],
                     "split_question":list(jieba.cut(case['question'])),
@@ -504,19 +519,19 @@ def extract_failure_retrieve():
 
             # add "in_list" key
             for j,case in enumerate(json_data):
-                print(f'analyzing expacted {case["question"]}')
+                log.info(f'analyzing expacted {case["question"]}')
                 # if the expected doc_id is in the "score" doc_Id, then in_list is the rank, otherwise is -1
                 # change score into a dict list with key "doc_Id" and "score"
                 expacted=case['expected']
                 score_list= case['score_detail'].split('<hr>')
-                print("score_list")
-                print(score_list)
+                log.info("score_list")
+                log.info(score_list)
                 score_list = [score.split('<br>')[0] for score in score_list]
-                print("score_list #")
-                print(score_list)
+                log.info("score_list #")
+                log.info(score_list)
                 score_list = [score.split(', doc_score: ') for score in score_list]
-                print("score_list , doc_score: ")
-                print(score_list)
+                log.info("score_list , doc_score: ")
+                log.info(score_list)
                 score_list = [{'doc_Id': score[0].split(': ')[1], 'score': float(score[1])} for score in score_list]
                 doc_list = [BaseDataManager().get_method(doc['doc_Id']) for doc in score_list]
 
