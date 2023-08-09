@@ -108,6 +108,8 @@ def searchResults(statement, choice=1, loop=False, expectList=[]):
             docList = docList[:3]
 
         res = [manager[x] for x in docList]
+        log.info(f"docList: {[docList]}" )
+        log.info(f"searchResults titles: {[x.title for x in res]}" )
         return res
     
     else:
@@ -130,6 +132,7 @@ def searching(statement, choice=1, loop=False, expectList=[]):
     # log.info("searching...")
     STATEMENT = statement
     source = []
+    log.info(f"choice: {choice}" )
     # 倒排全部查找
     if choice == 1:
         INPUTWORDS = preCheck_zh(STATEMENT)
@@ -140,7 +143,7 @@ def searching(statement, choice=1, loop=False, expectList=[]):
         SORTEDDOCLIST = sortDoc.TopKScore(40, INDEX, FILENUM, WORDSET, DOCLIST, WORDCOUNT)
         # log.info(SORTEDDOCLIST)
         source = check_expect(SORTEDDOCLIST, expectList)
-        log.info(SORTEDDOCLIST)
+        # log.info(SORTEDDOCLIST)
         if loop == False:
             return SORTEDDOCLIST, source
         for doc in SORTEDDOCLIST:
@@ -315,10 +318,10 @@ def searching(statement, choice=1, loop=False, expectList=[]):
 
 #     log.info("ByeBye!")
 
-start_time = time.time()
-for i in range(10):
-    retrieve_res = searching("老年人优待证怎么办理",choice=7)
-end_time = time.time()
-print("Time taken to process the sentence: ", end_time - start_time, "seconds")
+# start_time = time.time()
+# for i in range(10):
+#     retrieve_res = searching("老年人优待证怎么办理",choice=7)
+# end_time = time.time()
+# print("Time taken to process the sentence: ", end_time - start_time, "seconds")
 # log.info(retrieve_res)
 # establishVSM.createVSM(INDEX,WORDLIST,'test')

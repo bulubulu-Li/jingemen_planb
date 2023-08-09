@@ -2,13 +2,14 @@ import QuestionAnswerServer.QuestionAnswerServer as QuestionAnswerServer
 from SearchSystem import main as searching
 from SearchSystem.DataManager import DataForm
 from QuestionAnswer.ttypes import QuestionAnswerPair, QuestionAnswerRequest, QuestionAnswerResponse, QuestionAnswerResult,FileSourceInfo,GenerateAnswer
+from Log.log import log
 
 
 class QuestionAnswerHandler(QuestionAnswerServer.Iface):
     def searchAndGeneration(self, request: QuestionAnswerRequest) -> QuestionAnswerResponse:
 
         if request.isGenerate == 0:
-            print(f'not generate {request.question}')
+            log.info(f'not generate {request.question}')
             qaList = []
             search_res:list[DataForm] = searching.searchResults(request.question)
             for item in search_res:
@@ -19,17 +20,18 @@ class QuestionAnswerHandler(QuestionAnswerServer.Iface):
                         source="历史问答对上传"
                     )
                 )
-
-            return QuestionAnswerResponse(
+            log.info(f'questions:{[x.question for x in qaList]},answers:{[x.answer for x in qaList]}')
+            response = QuestionAnswerResponse(
                 errCode=0,
                 errMsg="SUCCESS",
                 results=QuestionAnswerResult(
                     questionAnswerPairs=qaList
                 )
             )
+            return response
         
         elif request.isGenerate == 1:
-            print(f'generate {request.question}')
+            log.info(f'generate {request.question}')
             qaList = {}
             search_res:list[DataForm]
             answer,search_res,fragment = searching.searchResults(request.question,choice=7)
@@ -41,7 +43,7 @@ class QuestionAnswerHandler(QuestionAnswerServer.Iface):
                     fileName=item.title,
                     referenceFragment=fragment[i],
                 )
-            return QuestionAnswerResponse(
+            response =  QuestionAnswerResponse(
                 errCode=0,
                 errMsg="SUCCESS",
                 results=QuestionAnswerResult(
@@ -51,8 +53,10 @@ class QuestionAnswerHandler(QuestionAnswerServer.Iface):
                     )
                 )
             )
+            return response
 
         else:
-            print(f'isGenerate参数错误,需要为0或者1')
-            return QuestionAnswerResponse(errCode=1, errMsg="isGenerate参数错误,需要为0或者1",results=None)
+            log.info(f'isGenerate参数错误,需要为0或者1')
+            response = QuestionAnswerResponse(errCode=1, errMsg="isGenerate参数错误,需要为0或者1",results=None)
+            return response
     

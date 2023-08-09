@@ -1,1 +1,18 @@
-nohup: ignoring input
+2023-08-06 21:03:05,433 INFO: This is an info message, log start
+2023-08-06 21:03:05,494 INFO: projectpath is D:\Code\jingemen_planb
+2023-08-06 21:03:05,494 INFO: searchsystempath: D:\Code\jingemen_planb\SearchSystem
+2023-08-06 21:03:05,494 INFO: indexpath:D:\Code\jingemen_planb\SearchSystem\index/
+2023-08-06 21:03:05,494 INFO: Reuters path D:\Code\jingemen_planb\SearchSystem\pairs/
+2023-08-06 21:03:05,494 INFO: getting file list...
+2023-08-06 21:03:05,496 INFO: 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
+2023-08-06 21:03:05,496 INFO: 计算 D:\Code\jingemen_planb\SearchSystem\pairs/0.json 的哈希值用时：0.0 秒。
+2023-08-06 21:03:09,500 INFO: chain init!!!
+2023-08-06 21:03:09,500 INFO: chain is None,start embedding
+2023-08-06 21:03:09,500 INFO: Got API_KEY from env
+2023-08-06 21:03:09,500 INFO: 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
+2023-08-06 21:03:09,826 INFO: embedding finished
+2023-08-06 21:03:09,827 INFO: [0]
+2023-08-06 21:03:09,828 INFO: getting word list...
+2023-08-06 21:03:09,829 INFO: getting index...
+2023-08-06 21:03:09,840 INFO: loading the wordnet...
+2023-08-06 21:03:09,841 INFO: =================Searching System=================
