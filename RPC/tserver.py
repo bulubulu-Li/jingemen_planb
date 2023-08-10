@@ -13,14 +13,36 @@ sys.path.append(projectpath)
 import QuestionAnswerServer.QuestionAnswerServer as QuestionAnswerServer
 import handler as Handler
 
-handler = Handler.QuestionAnswerHandler()
-processor = QuestionAnswerServer.Processor(handler)
-transport = TSocket.TServerSocket(port=9090)
-tfactory = TTransport.TBufferedTransportFactory()
-pfactory = TBinaryProtocol.TBinaryProtocolFactory()
+# handler = Handler.QuestionAnswerHandler()
+# processor = QuestionAnswerServer.Processor(handler)
+# transport = TSocket.TServerSocket(port=9090)
+# tfactory = TTransport.TBufferedTransportFactory()
+# pfactory = TBinaryProtocol.TBinaryProtocolFactory()
 
-server = TServer.TSimpleServer(processor, transport, tfactory, pfactory)
+# server = TServer.TSimpleServer(processor, transport, tfactory, pfactory)
 
-print("Starting python server...")
-server.serve()
-print("done!")
+# print("Starting python server...")
+# server.serve()
+# print("done!")
+
+
+
+__HOST = '127.0.0.1'
+__PORT = 9091
+
+
+if __name__ == '__main__':
+    handler = Handler.QuestionAnswerHandler()
+    processor = QuestionAnswerServer.Processor(handler)
+    transport = TSocket.TServerSocket(port=__PORT)
+    tfactory = TTransport.TBufferedTransportFactory()
+    pfactory = TBinaryProtocol.TBinaryProtocolFactory()
+    # tfactory = TTransport.TFramedTransportFactory()
+    # pfactory = TCompactProtocol.TCompactProtocolFactory()
+    # rpcServer = TServer.TSimpleServer(processor,transport, tfactory, pfactory)
+    rpcServer = TServer.TThreadPoolServer(processor,transport, tfactory, pfactory)
+    # rpcServer = TServer.TThreadedSelectorServer(processor,transport, tfactory, pfactory)
+    rpcServer.setNumThreads(5)
+    print('Starting the rpc server at:', __PORT)
+    #print('Starting the rpc server at', __HOST,':', __PORT)
+    rpcServer.serve()
