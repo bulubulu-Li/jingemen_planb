@@ -196,51 +196,6 @@ def searching(statement, choice=1, loop=False, expectList=[]):
         if loop == False:
             return SORTEDDOCLIST, source
 
-    # #TOP K 查询
-    # elif choice == 2:
-    #     INPUTWORDS=preCheck_zh(STATEMENT)
-
-    #     WORDSET = set(INPUTWORDS)
-
-    #     DOCLIST = searchWord.searchWords(INDEX, WORDSET)
-    #     # log.info(DOCLIST)
-    #     #根据tf-idf计算分数
-    #     #取top20
-    #     SORTEDDOCLIST = sortDoc.TopKScore(20, INDEX, FILENUM, WORDSET, DOCLIST,WORDCOUNT)
-    #     for doc in SORTEDDOCLIST:
-    #         log.info("doc ID: ", tools.showDocID(doc[1]), " score: ", "%.3f" % doc[0])
-    #     if loop==False:
-    #         return SORTEDDOCLIST
-    # #Bool 查询
-    # elif choice == 3:
-    #     INPUTWORDS=preCheck_zh(STATEMENT)
-
-    #     DOCLIST = BoolSearchDel.BoolSearch(INPUTWORDS, INDEX)
-    #     log.info(len(DOCLIST),"DOCs :")
-    #     log.info(DOCLIST)
-    # #短语查询
-    # elif choice == 4:
-    #     INPUTWORDS=preCheck_zh(STATEMENT)
-
-    #     WORDSET = set(INPUTWORDS)
-
-    #     PHRASEDOCLIST = searchWord.searchPhrase(INDEX, WORDSET, INPUTWORDS)
-    #     if 0 == len(PHRASEDOCLIST):
-    #         log.info("Doesn't find \"", INPUTWORDS, '"')
-    #     else:
-    #         for key in PHRASEDOCLIST:
-    #             log.info('docID: ', key, "   num: ", len(PHRASEDOCLIST[key]))
-    #             log.info('    location: ', PHRASEDOCLIST[key])
-    # 模糊查询
-    # elif choice == 5:
-    #     list = searchWord.wildcardSearch(STATEMENT, INDEX, WORDLIST)
-
-    # elif choice == 6:
-    #     INPUTWORDS = preCheck_zh(STATEMENT)
-
-    #     WORDSET = set(INPUTWORDS)
-
-    #     resultlist = searchWord.searchSynonymsWord(INDEX, INPUTWORDS[0])
 
     elif choice == 7:
         retrieve_res = chain.Retrieve(STATEMENT)
