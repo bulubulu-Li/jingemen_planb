@@ -4,6 +4,7 @@ SearchSystem/db*
 # SearchSystem/wordList_zh.json
 SearchSystem/secret.yaml
 SearchSystem/index
+SearchSystem/temp.py
 
 Reuters
 Reuters_zh
@@ -13,3 +14,4 @@ SearchSystem/bad_case.zip
 .vscode/settings.json
 server.log
 dir
+RPC/gen-py
