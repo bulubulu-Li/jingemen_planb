@@ -111,6 +111,7 @@ class SearchSyetem():
         scheduler = BackgroundScheduler()
         scheduler.add_job(self.update, 'interval', hours=24)
         scheduler.start()
+        log.info("=================Searching System=================")
     
     def update(self):
         # 数据库更新

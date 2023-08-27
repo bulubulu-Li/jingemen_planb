@@ -223,8 +223,8 @@ class SqlDataManager(DocIdManager):
         try:
             # 尝试获取新的值
             new_mysqlHelper=MysqlHelper(config=tools.getMysqlConfig())
-            new_len=cls.mysqlHelper.search("SELECT COUNT(*) FROM knowledgefile WHERE isValid=TRUE")[0][0]
-            data = cls.mysqlHelper.searchDict("SELECT * FROM knowledgefile WHERE isValid=TRUE")
+            new_len=new_mysqlHelper.search("SELECT COUNT(*) FROM knowledgepair ")[0][0]
+            data = new_mysqlHelper.searchDict("SELECT * FROM knowledgepair ")
             new_data=[DataForm({
                 "page_content": x['answer'],
                 "title": x['question'],
