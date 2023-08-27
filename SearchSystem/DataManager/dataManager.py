@@ -134,6 +134,9 @@ class DataForm:
     @property
     def docId_qq(self):
         return self.docIdManager.get_qq_id(self.docId)
+    
+    def __str__(self):
+            return "DataForm(page_content={}, title={}, docId={}, metadata={}, questions={})".format(self.page_content, self.title, self.docId, self.metadata, self.questions)
 
 class BaseDataManager(DocIdManager):
     """
@@ -225,7 +228,7 @@ class SqlDataManager(DocIdManager):
             new_data=[DataForm({
                 "page_content": x['answer'],
                 "title": x['question'],
-                "doc ID": x['id'],
+                "doc ID": int(x['id']),
                 "metadata": {
                     "filetype": "json",
                     "keyWord": x['keyWord'],
@@ -236,7 +239,8 @@ class SqlDataManager(DocIdManager):
                     "isDeleted": x['isDeleted']
                 },
                 "questions": []
-            }, DocIdManager(cls.len)) for x in data]
+            }, DocIdManager(new_len)) for x in data]
+            print('finish')
             cls.mysqlHelper = new_mysqlHelper
             cls.len = new_len
             cls.data = new_data
@@ -256,7 +260,7 @@ class SqlDataManager(DocIdManager):
         """
         if self.pointer < self.len:
             self.pointer += 1
-            return self.data[self.pointer - 1]
+            return SqlDataManager.data[self.pointer - 1]
         else:
             raise StopIteration
         
@@ -265,10 +269,10 @@ class SqlDataManager(DocIdManager):
         随机获取指定docId的内容
         """        
         docId = self.get_docId(docId)
-        return self.data[docId]
+        return SqlDataManager.data[docId]
     
     def __len__(self):
-        return self.len
+        return SqlDataManager.len
     
     def show(self):
-        return self.data
+        return SqlDataManager.data

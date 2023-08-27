@@ -183,7 +183,7 @@ def printIndex(index):
     for stem in index:
         log.info(stem)
         for doc in index[stem]:
-            log.info("    " , doc , " : " , index[stem][doc])
+            log.info("    " + str(doc) + " : " + str(index[stem][doc]))
 
 def getWordList(invertedIndex):
     wordList = []
