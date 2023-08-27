@@ -18,7 +18,7 @@ import json
 import re
 import time
 import openai
-import main
+import searchSystem 
 import pandas as pd
 import numpy as np
 import jieba
@@ -26,7 +26,7 @@ import cProfile
 import SearchSystem.tools as tools
 from SearchSystem.DataManager import DataForm,BaseDataManager
 
-
+main=searchSystem.SearchSystem()
 # try to extract key from tools.secret, if false, log.info
 DOC_ID=1
 SCORE=0
@@ -281,7 +281,7 @@ def retrieve_files(question_file,searchType):
         # 看看retrieve的第一条的结果是不是想要的东西
         log.info(f"Retrieving {dataItem.docId} Method {searchType}")
         for ques in questions:
-            searching_res,expectList=main.searching(ques,searchType,expectList=[dataItem.docId_qa,dataItem.docId_qq])
+            searching_res,expectList=main.search(ques,searchType,expectList=[dataItem.docId_qa,dataItem.docId_qq])
             if searchType!=88:
                 # 形式：[[97-3,7.445],...]
                 resFull=[[x[DOC_ID],x[SCORE],x[WORD_LIST]] for x in searching_res]

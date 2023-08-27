@@ -1,8 +1,10 @@
 import QuestionAnswerServer.QuestionAnswerServer as QuestionAnswerServer
-from SearchSystem import searchSystem as searching
+from SearchSystem import searchSystem 
 from SearchSystem.DataManager import DataForm
 from QuestionAnswer.ttypes import QuestionAnswerPair, QuestionAnswerRequest, QuestionAnswerResponse, QuestionAnswerResult,FileSourceInfo,GenerateAnswer
 from Log.log import log
+
+searching = searchSystem.SearchSyetem(config="config.json")
 
 
 class QuestionAnswerHandler(QuestionAnswerServer.Iface):
