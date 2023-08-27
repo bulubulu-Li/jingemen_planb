@@ -138,7 +138,7 @@ def getConfig(str):
     return config[str]
 
 def getMysqlConfig():
-    return config["mysql"]
+    return secret["mysql"]
 
 
 def setConfig(str,value):
