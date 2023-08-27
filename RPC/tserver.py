@@ -11,6 +11,7 @@ projectpath = projectpath[:projectpath.find('jingemen_planb') + len('jingemen_pl
 print(f'projectpath is {projectpath}')
 sys.path.append(projectpath)
 import QuestionAnswerServer.QuestionAnswerServer as QuestionAnswerServer
+import QuestionAnswerServer.BlockListService as BlockListService
 import handler as Handler
 
 # handler = Handler.QuestionAnswerHandler()
@@ -34,6 +35,8 @@ __PORT = 9091
 if __name__ == '__main__':
     handler = Handler.QuestionAnswerHandler()
     processor = QuestionAnswerServer.Processor(handler)
+    block_handler = Handler.BlockHandler()
+    block_processor = BlockListService.Processor(block_handler)
     transport = TSocket.TServerSocket(port=__PORT)
     tfactory = TTransport.TBufferedTransportFactory()
     pfactory = TBinaryProtocol.TBinaryProtocolFactory()
@@ -43,6 +46,7 @@ if __name__ == '__main__':
     rpcServer = TServer.TThreadPoolServer(processor,transport, tfactory, pfactory)
     # rpcServer = TServer.TThreadedSelectorServer(processor,transport, tfactory, pfactory)
     rpcServer.setNumThreads(5)
+    rpcServer.registerProcessor("BlockListService", block_processor)
     print('Starting the rpc server at:', __PORT)
     #print('Starting the rpc server at', __HOST,':', __PORT)
     rpcServer.serve()

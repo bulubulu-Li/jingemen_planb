@@ -13,20 +13,20 @@ struct QuestionAnswerPair {
     2: optional string answer;
     3: optional string source;
     4: optional string questionAnswerId;
+    5: optional string sourceUnit;
+    6: optional list<FileSourceInfo> knowledgeFileSource;
 }
 
 // 知识生成文件信息
 struct FileSourceInfo {
     1: optional string fileName;
     2: optional string fileLink;
-    3: optional string referenceFragment;
 }
 
 // 知识生产答案
 struct GenerateAnswer {
     1: optional string answer;
-    // key引用下标    value是FileSourceInfo
-    2: optional map<string,FileSourceInfo> source;
+    2: list<QuestionAnswerPair> questionAnswerPairs;
 }
 
 struct QuestionAnswerResult {

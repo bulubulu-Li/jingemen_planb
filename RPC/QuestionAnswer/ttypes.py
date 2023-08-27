@@ -102,15 +102,19 @@ class QuestionAnswerPair(object):
      - answer
      - source
      - questionAnswerId
+     - sourceUnit
+     - knowledgeFileSource
 
     """
 
 
-    def __init__(self, question=None, answer=None, source=None, questionAnswerId=None,):
+    def __init__(self, question=None, answer=None, source=None, questionAnswerId=None, sourceUnit=None, knowledgeFileSource=None,):
         self.question = question
         self.answer = answer
         self.source = source
         self.questionAnswerId = questionAnswerId
+        self.sourceUnit = sourceUnit
+        self.knowledgeFileSource = knowledgeFileSource
 
     def read(self, iprot):
         if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
@@ -141,6 +145,22 @@ class QuestionAnswerPair(object):
                     self.questionAnswerId = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
                 else:
                     iprot.skip(ftype)
+            elif fid == 5:
+                if ftype == TType.STRING:
+                    self.sourceUnit = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
+            elif fid == 6:
+                if ftype == TType.LIST:
+                    self.knowledgeFileSource = []
+                    (_etype3, _size0) = iprot.readListBegin()
+                    for _i4 in range(_size0):
+                        _elem5 = FileSourceInfo()
+                        _elem5.read(iprot)
+                        self.knowledgeFileSource.append(_elem5)
+                    iprot.readListEnd()
+                else:
+                    iprot.skip(ftype)
             else:
                 iprot.skip(ftype)
             iprot.readFieldEnd()
@@ -167,6 +187,17 @@ class QuestionAnswerPair(object):
             oprot.writeFieldBegin('questionAnswerId', TType.STRING, 4)
             oprot.writeString(self.questionAnswerId.encode('utf-8') if sys.version_info[0] == 2 else self.questionAnswerId)
             oprot.writeFieldEnd()
+        if self.sourceUnit is not None:
+            oprot.writeFieldBegin('sourceUnit', TType.STRING, 5)
+            oprot.writeString(self.sourceUnit.encode('utf-8') if sys.version_info[0] == 2 else self.sourceUnit)
+            oprot.writeFieldEnd()
+        if self.knowledgeFileSource is not None:
+            oprot.writeFieldBegin('knowledgeFileSource', TType.LIST, 6)
+            oprot.writeListBegin(TType.STRUCT, len(self.knowledgeFileSource))
+            for iter6 in self.knowledgeFileSource:
+                iter6.write(oprot)
+            oprot.writeListEnd()
+            oprot.writeFieldEnd()
         oprot.writeFieldStop()
         oprot.writeStructEnd()
 
@@ -190,15 +221,13 @@ class FileSourceInfo(object):
     Attributes:
      - fileName
      - fileLink
-     - referenceFragment
 
     """
 
 
-    def __init__(self, fileName=None, fileLink=None, referenceFragment=None,):
+    def __init__(self, fileName=None, fileLink=None,):
         self.fileName = fileName
         self.fileLink = fileLink
-        self.referenceFragment = referenceFragment
 
     def read(self, iprot):
         if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
@@ -219,11 +248,6 @@ class FileSourceInfo(object):
                     self.fileLink = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
                 else:
                     iprot.skip(ftype)
-            elif fid == 3:
-                if ftype == TType.STRING:
-                    self.referenceFragment = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
-                else:
-                    iprot.skip(ftype)
             else:
                 iprot.skip(ftype)
             iprot.readFieldEnd()
@@ -241,10 +265,6 @@ class FileSourceInfo(object):
         if self.fileLink is not None:
             oprot.writeFieldBegin('fileLink', TType.STRING, 2)
             oprot.writeString(self.fileLink.encode('utf-8') if sys.version_info[0] == 2 else self.fileLink)
-            oprot.writeFieldEnd()
-        if self.referenceFragment is not None:
-            oprot.writeFieldBegin('referenceFragment', TType.STRING, 3)
-            oprot.writeString(self.referenceFragment.encode('utf-8') if sys.version_info[0] == 2 else self.referenceFragment)
             oprot.writeFieldEnd()
         oprot.writeFieldStop()
         oprot.writeStructEnd()
@@ -268,14 +288,14 @@ class GenerateAnswer(object):
     """
     Attributes:
      - answer
-     - source
+     - questionAnswerPairs
 
     """
 
 
-    def __init__(self, answer=None, source=None,):
+    def __init__(self, answer=None, questionAnswerPairs=None,):
         self.answer = answer
-        self.source = source
+        self.questionAnswerPairs = questionAnswerPairs
 
     def read(self, iprot):
         if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
@@ -292,15 +312,14 @@ class GenerateAnswer(object):
                 else:
                     iprot.skip(ftype)
             elif fid == 2:
-                if ftype == TType.MAP:
-                    self.source = {}
-                    (_ktype1, _vtype2, _size0) = iprot.readMapBegin()
-                    for _i4 in range(_size0):
-                        _key5 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
-                        _val6 = FileSourceInfo()
-                        _val6.read(iprot)
-                        self.source[_key5] = _val6
-                    iprot.readMapEnd()
+                if ftype == TType.LIST:
+                    self.questionAnswerPairs = []
+                    (_etype10, _size7) = iprot.readListBegin()
+                    for _i11 in range(_size7):
+                        _elem12 = QuestionAnswerPair()
+                        _elem12.read(iprot)
+                        self.questionAnswerPairs.append(_elem12)
+                    iprot.readListEnd()
                 else:
                     iprot.skip(ftype)
             else:
@@ -317,13 +336,12 @@ class GenerateAnswer(object):
             oprot.writeFieldBegin('answer', TType.STRING, 1)
             oprot.writeString(self.answer.encode('utf-8') if sys.version_info[0] == 2 else self.answer)
             oprot.writeFieldEnd()
-        if self.source is not None:
-            oprot.writeFieldBegin('source', TType.MAP, 2)
-            oprot.writeMapBegin(TType.STRING, TType.STRUCT, len(self.source))
-            for kiter7, viter8 in self.source.items():
-                oprot.writeString(kiter7.encode('utf-8') if sys.version_info[0] == 2 else kiter7)
-                viter8.write(oprot)
-            oprot.writeMapEnd()
+        if self.questionAnswerPairs is not None:
+            oprot.writeFieldBegin('questionAnswerPairs', TType.LIST, 2)
+            oprot.writeListBegin(TType.STRUCT, len(self.questionAnswerPairs))
+            for iter13 in self.questionAnswerPairs:
+                iter13.write(oprot)
+            oprot.writeListEnd()
             oprot.writeFieldEnd()
         oprot.writeFieldStop()
         oprot.writeStructEnd()
@@ -368,11 +386,11 @@ class QuestionAnswerResult(object):
             if fid == 1:
                 if ftype == TType.LIST:
                     self.questionAnswerPairs = []
-                    (_etype12, _size9) = iprot.readListBegin()
-                    for _i13 in range(_size9):
-                        _elem14 = QuestionAnswerPair()
-                        _elem14.read(iprot)
-                        self.questionAnswerPairs.append(_elem14)
+                    (_etype17, _size14) = iprot.readListBegin()
+                    for _i18 in range(_size14):
+                        _elem19 = QuestionAnswerPair()
+                        _elem19.read(iprot)
+                        self.questionAnswerPairs.append(_elem19)
                     iprot.readListEnd()
                 else:
                     iprot.skip(ftype)
@@ -395,8 +413,8 @@ class QuestionAnswerResult(object):
         if self.questionAnswerPairs is not None:
             oprot.writeFieldBegin('questionAnswerPairs', TType.LIST, 1)
             oprot.writeListBegin(TType.STRUCT, len(self.questionAnswerPairs))
-            for iter15 in self.questionAnswerPairs:
-                iter15.write(oprot)
+            for iter20 in self.questionAnswerPairs:
+                iter20.write(oprot)
             oprot.writeListEnd()
             oprot.writeFieldEnd()
         if self.generateAnswers is not None:
@@ -513,19 +531,20 @@ QuestionAnswerPair.thrift_spec = (
     (2, TType.STRING, 'answer', 'UTF8', None, ),  # 2
     (3, TType.STRING, 'source', 'UTF8', None, ),  # 3
     (4, TType.STRING, 'questionAnswerId', 'UTF8', None, ),  # 4
+    (5, TType.STRING, 'sourceUnit', 'UTF8', None, ),  # 5
+    (6, TType.LIST, 'knowledgeFileSource', (TType.STRUCT, [FileSourceInfo, None], False), None, ),  # 6
 )
 all_structs.append(FileSourceInfo)
 FileSourceInfo.thrift_spec = (
     None,  # 0
     (1, TType.STRING, 'fileName', 'UTF8', None, ),  # 1
     (2, TType.STRING, 'fileLink', 'UTF8', None, ),  # 2
-    (3, TType.STRING, 'referenceFragment', 'UTF8', None, ),  # 3
 )
 all_structs.append(GenerateAnswer)
 GenerateAnswer.thrift_spec = (
     None,  # 0
     (1, TType.STRING, 'answer', 'UTF8', None, ),  # 1
-    (2, TType.MAP, 'source', (TType.STRING, 'UTF8', TType.STRUCT, [FileSourceInfo, None], False), None, ),  # 2
+    (2, TType.LIST, 'questionAnswerPairs', (TType.STRUCT, [QuestionAnswerPair, None], False), None, ),  # 2
 )
 all_structs.append(QuestionAnswerResult)
 QuestionAnswerResult.thrift_spec = (

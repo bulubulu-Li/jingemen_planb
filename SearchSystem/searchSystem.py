@@ -22,7 +22,8 @@ from SearchSystem.scoreQuery import sortDoc
 from SearchSystem.BoolSearch import BoolSearchDel
 from SearchSystem.InvertedIndex import establishIndex
 from SearchSystem.LargeLanguageModel import chain
-from SearchSystem.DataManager import BaseDataManager, DataForm
+from SearchSystem.DataManager import SqlDataManager, DataForm
+from apscheduler.schedulers.background import BackgroundScheduler
 import jieba
 from rouge import Rouge
 
@@ -46,7 +47,7 @@ class SearchIndex():
     # 用self.word_list、self.index_qq来存储
     def __init__(self, config):
         self.config = config
-        SqlDataManager.update()
+
         self.load()
     
     def load(self):
@@ -104,6 +105,7 @@ class SearchSyetem():
         # 类初始化
         self.config = config
         self.index = SearchIndex(config)
+        self.blockList=[]
 
         # 直接定义一个定时器
         scheduler = BackgroundScheduler()
@@ -112,9 +114,12 @@ class SearchSyetem():
     
     def update(self):
         # 数据库更新
+        SqlDataManager.update()
+        tools.setConfig("establishIndex", True)
         search_index = SearchIndex()
         self.index = search_index
-        
+        self.blockList=[]
+
 
     def search(self, statement, choice=1, loop=False, expectList=[]):
         source = []
@@ -126,13 +131,15 @@ class SearchSyetem():
             wordset = set(inputwords)
 
             DOCLIST = searchWord.searchWords(self.index.get_index(), wordset)
-            SORTEDDOCLIST = sortDoc.TopKScore(40, self.index.get_index(), self.index.filenum(), wordset, DOCLIST, self.index.get_word_count())
-            # log.info(SORTEDDOCLIST)
-            source = check_expect(SORTEDDOCLIST, expectList)
-            # log.info(SORTEDDOCLIST)
+            sortedDocList = sortDoc.TopKScore(40, self.index.get_index(), self.index.filenum(), wordset, DOCLIST, self.index.get_word_count())
+            # exclude blockList
+            sortedDocList = [x for x in sortedDocList if x[1] not in self.blockList]
+            # log.info(sortedDocList)
+            source = check_expect(sortedDocList, expectList)
+            # log.info(sortedDocList)
             if loop == False:
-                return SORTEDDOCLIST, source
-            for doc in SORTEDDOCLIST:
+                return sortedDocList, source
+            for doc in sortedDocList:
                 log.info(f"doc ID: {tools.showDocID(doc[1])} score: {doc[0]:.3f}" )
 
         # 倒排qq查找
@@ -142,11 +149,12 @@ class SearchSyetem():
             wordset = set(inputwords)
 
             DOCLIST = searchWord.searchWords(self.index.get_index_qq(), wordset)
-            SORTEDDOCLIST = sortDoc.TopKScore(40, self.index.get_index_qq(), self.index.filenum(), wordset, DOCLIST, self.index.get_word_count_qq())
-            source = check_expect(SORTEDDOCLIST, expectList)
+            sortedDocList = sortDoc.TopKScore(40, self.index.get_index_qq(), self.index.filenum(), wordset, DOCLIST, self.index.get_word_count_qq())
+            sortedDocList = [x for x in sortedDocList if x[1] not in self.blockList]
+            source = check_expect(sortedDocList, expectList)
             if loop == False:
-                return SORTEDDOCLIST, source
-            for doc in SORTEDDOCLIST:
+                return sortedDocList, source
+            for doc in sortedDocList:
                 log.info(f"doc ID: {tools.showDocID(doc[1])} score: {doc[0]:.3f}" )
 
         # 倒排qa查找
@@ -156,11 +164,12 @@ class SearchSyetem():
             wordset = set(inputwords)
 
             DOCLIST = searchWord.searchWords(self.index.get_index_qa(), wordset)
-            SORTEDDOCLIST = sortDoc.TopKScore(40, self.index.get_index_qa(), self.index.filenum(), wordset, DOCLIST, self.index.get_word_count_qa())
-            source = check_expect(SORTEDDOCLIST, expectList)
+            sortedDocList = sortDoc.TopKScore(40, self.index.get_index_qa(), self.index.filenum(), wordset, DOCLIST, self.index.get_word_count_qa())
+            sortedDocList = [x for x in sortedDocList if x[1] not in self.blockList]
+            source = check_expect(sortedDocList, expectList)
             if loop == False:
-                return SORTEDDOCLIST, source
-            for doc in SORTEDDOCLIST:
+                return sortedDocList, source
+            for doc in sortedDocList:
                 log.info(f"doc ID: {tools.showDocID(doc[1])} score: {doc[0]:.3f}" )
 
         # qq qa 各召回一部分
@@ -175,12 +184,13 @@ class SearchSyetem():
             DOCLIST_QA = searchWord.searchWords(self.index.get_index_qa(), wordset)
             SORTEDDOCLIST_QA = sortDoc.TopKScore(20, self.index.get_index_qa(), self.index.filenum(), wordset, DOCLIST_QA, self.index.get_word_count_qa())
 
-            SORTEDDOCLIST = SORTEDDOCLIST_QQ + SORTEDDOCLIST_QA
-            SORTEDDOCLIST = sorted(SORTEDDOCLIST, key=lambda x: x[0], reverse=True)
+            sortedDocList = SORTEDDOCLIST_QQ + SORTEDDOCLIST_QA
+            sortedDocList = [x for x in sortedDocList if x[1] not in self.blockList]
+            sortedDocList = sorted(sortedDocList, key=lambda x: x[0], reverse=True)
 
-            source = check_expect(SORTEDDOCLIST, expectList)
+            source = check_expect(sortedDocList, expectList)
             if loop == False:
-                return SORTEDDOCLIST, source
+                return sortedDocList, source
 
 
         elif choice == 7:
@@ -252,8 +262,13 @@ class SearchSyetem():
             result,docList=self.search(statement, choice)
 
             return result,[manager[int(x.metadata["docId"])] for x in docList],[x.page_content for x in docList]
+        
+    def block(self,bList:list[int]):
+        log.info(f"block: {bList}" )
+        self.blockList.extend(bList)
 
 
 if __name__ == "__main__":
     config = {}
     search_system = SearchSyetem(config)
+    print(search_system.search("腾讯会议与用户初次相遇是在什么时候？"))
