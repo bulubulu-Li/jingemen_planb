@@ -3,7 +3,7 @@ import os
 import SearchSystem.tools as tools
 from SearchSystem.LanguageAnalysis import PreprocessFile
 import jieba
-from SearchSystem.DataManager import BaseDataManager
+from SearchSystem.DataManager import SqlDataManager
 from Log.log import log
 
 def createIndex(directname):
@@ -60,7 +60,7 @@ def createIndex_zh():
 "\n", " ", "\"", "#", "(", ")", ",", "-", ".", "/",
 "﹣", "（", "）", "，", "－", "：", "；", "＜", "＞", "？"]
 
-    files = BaseDataManager()
+    files = SqlDataManager()
 
     invertedIndex = {}  # 完整的index
     invertedIndex_qa = {} # qa的index

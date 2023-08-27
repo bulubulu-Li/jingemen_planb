@@ -18,7 +18,7 @@ import openai as BaseOpenAI
 
 from langchain.document_loaders.base import BaseLoader
 from langchain.docstore.document import Document
-from SearchSystem.DataManager import BaseDataManager, DataForm
+from SearchSystem.DataManager import SqlDataManager, DataForm
 from langchain.prompts import PromptTemplate
 prompt_template = """
 你现在是一个经验丰富，十分严谨的12345热线工作人员，负责解答市民的各种问题。现在，你会得到一份 背景知识 ，里面包括了回答市民问题所需要相关的知识。
@@ -52,7 +52,7 @@ class chain_loader(BaseLoader):
         super().__init__()
     def load(self) -> list:
         docs = []
-        datamanager=BaseDataManager()
+        datamanager=SqlDataManager()
         for item in datamanager:
             meta=item.metadata
             meta["docId"]=item.docId

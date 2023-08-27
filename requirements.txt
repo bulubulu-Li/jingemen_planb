@@ -4,3 +4,5 @@ openai
 thrift
 rouge
 chromadb
+PyMysql
+apscheduler

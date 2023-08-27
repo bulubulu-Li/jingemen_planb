@@ -46,12 +46,13 @@ class SearchIndex():
     # 用self.word_list、self.index_qq来存储
     def __init__(self, config):
         self.config = config
+        SqlDataManager.update()
         self.load()
     
     def load(self):
         # 创建index
         establishIndex.createIndex_zh()
-        self.manager = BaseDataManager()
+        self.manager = SqlDataManager()
         log.info("getting word list...")
         self.WORDLIST = getIndex.getWordList_zh()
 

@@ -30,6 +30,7 @@ import json
 from typing import Any
 import SearchSystem.tools as tools
 from Log.log import log
+from SearchSystem.DataManager.mysql_helper import MysqlHelper
 
 class DocIdManager:
     """
@@ -82,11 +83,11 @@ class DataForm:
         ]
     }
     """
-    page_content:str
-    title:str
-    docId:int
-    metadata:dict
-    questions:list[str]
+    # page_content:str
+    # title:str
+    # docId:int
+    # metadata:dict
+    # questions:list[str]
     docIdManager:DocIdManager
     
 
@@ -197,6 +198,76 @@ class BaseDataManager(DocIdManager):
         return DataForm(self.data[docId],DocIdManager(self.len))
     
     def __len__(self)->int:
+        return self.len
+    
+    def show(self):
+        return self.data
+
+class SqlDataManager(DocIdManager):
+    len = None
+    mysqlHelper = None
+    data = None
+    
+    def __new__(cls):
+        if cls.mysqlHelper is None:
+            cls.update()
+        return super().__new__(cls)
+    
+    @classmethod
+    def update(cls):
+        # 先缓存原来的值
+
+        try:
+            # 尝试获取新的值
+            new_mysqlHelper=MysqlHelper(config=tools.getMysqlConfig())
+            new_len=cls.mysqlHelper.search("SELECT COUNT(*) FROM knowledgefile WHERE isValid=TRUE")[0][0]
+            data = cls.mysqlHelper.searchDict("SELECT * FROM knowledgefile WHERE isValid=TRUE")
+            new_data=[DataForm({
+                "page_content": x['answer'],
+                "title": x['question'],
+                "doc ID": x['id'],
+                "metadata": {
+                    "filetype": "json",
+                    "keyWord": x['keyWord'],
+                    "from": x['from'],
+                    "fromId": x['fromId'],
+                    "state": x['state'],
+                    "isValid": x['isValid'],
+                    "isDeleted": x['isDeleted']
+                },
+                "questions": []
+            }, DocIdManager(cls.len)) for x in data]
+            cls.mysqlHelper = new_mysqlHelper
+            cls.len = new_len
+            cls.data = new_data
+        except Exception as e:
+            # 如果获取新的值失败，则恢复原来的值
+            log.warning(f"SqlDataManager update failed: {e}")
+
+    def __init__(self):
+        self.pointer = 1
+    
+    def __iter__(self):
+        return self
+    
+    def __next__(self):
+        """
+        迭代器的实现
+        """
+        if self.pointer < self.len:
+            self.pointer += 1
+            return self.data[self.pointer - 1]
+        else:
+            raise StopIteration
+        
+    def __getitem__(self, docId:int):
+        """
+        随机获取指定docId的内容
+        """        
+        docId = self.get_docId(docId)
+        return self.data[docId]
+    
+    def __len__(self):
         return self.len
     
     def show(self):

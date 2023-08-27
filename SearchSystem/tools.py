@@ -137,6 +137,10 @@ def getConfig(str):
     global config
     return config[str]
 
+def getMysqlConfig():
+    return config["mysql"]
+
+
 def setConfig(str,value):
     global config
     log.info(f'setting {str} as {value}')
