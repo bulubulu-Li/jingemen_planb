@@ -132,10 +132,8 @@ wf-idf 和 tf-idf比较：
 - ![Alt text](img/image3.png)
 
 
-
-
-
-
+## 服务启动:
+- 在根目录下运行server.sh
 
 
 
