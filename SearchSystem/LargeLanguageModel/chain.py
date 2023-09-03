@@ -57,6 +57,10 @@ class chain_loader(BaseLoader):
             meta=item.metadata
             meta["docId"]=item.docId
             meta["title"]=item.title
+            # 把none的设为""
+            for key in meta:
+                if meta[key] is None:
+                    meta[key]=""
             doc=Document(page_content=item.title+"\n\n"+item.page_content ,metadata=meta)
             if len(doc.page_content) > 1000:
                 log.info(f'{item.title} is too long, {doc}')
@@ -105,7 +109,7 @@ def embedding():
     
     loader = chain_loader()
     split_docs = loader.load()
-    log.info(f'embeding start')
+    log.info(f'embeding start, persist_directory:{persist_directory}, split_docs:{split_docs}')
     if len(split_docs) > 0:
         if docsearch is None:
             docsearch=Chroma.from_documents(split_docs,embeddings, persist_directory=persist_directory)
