@@ -37,19 +37,14 @@ class DocIdManager:
     """
     用于管理docid的各种变换
     """
-    _instances = {}
-
-    def __new__(cls, offset:int):
-        if not isinstance(offset,int):
+    def __init__(self, offset: int):
+        if not isinstance(offset, int):
             raise TypeError("DocIdManager的参数必须是int")
-        if offset<10000:
-            offset=10000
+        if offset < 10000:
+            offset = 10000
         else:
-            offset=10**int(math.log10(offset)+2)
-        if offset not in cls._instances:
-            cls._instances[offset] = super().__new__(cls)
-            cls._instances[offset].docOffset = offset
-        return cls._instances[offset]
+            offset = 10 ** int(math.log10(offset) + 2)
+        self.docOffset = offset
 
     def get_qa_id(self,docId:int)->int:
         return docId+self.docOffset
