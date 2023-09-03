@@ -6,3 +6,4 @@ rouge
 chromadb
 PyMysql
 apscheduler
+collections
