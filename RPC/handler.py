@@ -10,7 +10,7 @@ searching = searchSystem.SearchSyetem(config="config.json")
 
 class QuestionAnswerHandler(QuestionAnswerServer.Iface):
     def searchAndGeneration(self, request: QuestionAnswerRequest) -> QuestionAnswerResponse:
-
+        log.info(f'QuestionAnswerHandler searchAndGeneration: question:{request.question},isGenerate:{request.isGenerate}')
         sources={
             101:"用户上传",
             102:"通话生成",

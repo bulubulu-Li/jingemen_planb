@@ -45,7 +45,7 @@ def check_expect(doclist, expectlist):
 class SearchIndex():
     # 涉及搜索所需要的索引、数据都存在这个类里面，如WORDLIST、INDEX_QQ等，都存在这里。
     # 用self.word_list、self.index_qq来存储
-    def __init__(self, config):
+    def __init__(self, config={}):
         self.config = config
 
         self.load()

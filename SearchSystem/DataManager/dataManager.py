@@ -36,16 +36,20 @@ class DocIdManager:
     """
     用于管理docid的各种变换
     """
-    docOffset:int
+    _instances = {}
 
-    def __init__(self,offset:int):
+    def __new__(cls, offset:int):
         if not isinstance(offset,int):
             raise TypeError("DocIdManager的参数必须是int")
         if offset<10000:
-            self.docOffset=10000
+            offset=10000
         else:
-            self.docOffset=10**int(math.log10(offset)+2)
-    
+            offset=10**int(math.log10(offset)+2)
+        if offset not in cls._instances:
+            cls._instances[offset] = super().__new__(cls)
+            cls._instances[offset].docOffset = offset
+        return cls._instances[offset]
+
     def get_qa_id(self,docId:int)->int:
         return docId+self.docOffset
     
@@ -241,6 +245,7 @@ class SqlDataManager(DocIdManager):
                 "questions": []
             }, DocIdManager(new_len)) for x in data]
             print('finish')
+            log.info(f"SqlDataManager update success")
             cls.mysqlHelper = new_mysqlHelper
             cls.len = new_len
             cls.data = new_data
@@ -250,6 +255,7 @@ class SqlDataManager(DocIdManager):
 
     def __init__(self):
         self.pointer = 1
+        super().__init__(SqlDataManager.len)
     
     def __iter__(self):
         return self
@@ -266,7 +272,7 @@ class SqlDataManager(DocIdManager):
         
     def __getitem__(self, docId:int):
         """
-        随机获取指定docId的内容
+        随机访问获取指定docId的内容
         """        
         docId = self.get_docId(docId)
         return SqlDataManager.data[docId]
