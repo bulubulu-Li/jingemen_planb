@@ -98,7 +98,7 @@ class SearchIndex():
         return self.manager
 
     def filenum(self):
-        return self.manager.len
+        return len(self.manager)
 
 class SearchSyetem():
     def __init__(self, config):
@@ -117,6 +117,7 @@ class SearchSyetem():
         # 数据库更新
         SqlDataManager.update()
         tools.setConfig("establishIndex", True)
+        tools.setConfig("new_embedding", True)
         search_index = SearchIndex()
         self.index = search_index
         self.blockList=[]
