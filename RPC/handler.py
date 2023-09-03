@@ -30,7 +30,7 @@ class QuestionAnswerHandler(QuestionAnswerServer.Iface):
                         question=item.title,
                         answer=item.page_content,
                         source=sources[item.metadata["from"]],
-                        questionAnswerId=item.docId,
+                        questionAnswerId=str(item.docId),
                         sourceUnit="",
                         # TODO 这是啥呀？
                         knowledgeFileSource=None
@@ -58,7 +58,7 @@ class QuestionAnswerHandler(QuestionAnswerServer.Iface):
                         question=item.title,
                         answer=item.page_content,
                         source=sources[item.metadata["from"]],
-                        questionAnswerId=item.docId,
+                        questionAnswerId=str(item.docId),
                         sourceUnit="",
                         # TODO 这是啥呀？
                         knowledgeFileSource=None
