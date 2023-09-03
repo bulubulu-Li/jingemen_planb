@@ -31,6 +31,7 @@ from typing import Any
 import SearchSystem.tools as tools
 from Log.log import log
 from SearchSystem.DataManager.mysql_helper import MysqlHelper
+from collections import OrderedDict
 
 class DocIdManager:
     """
@@ -248,7 +249,7 @@ class SqlDataManager(DocIdManager):
             log.info(f"SqlDataManager update success")
             cls.mysqlHelper = new_mysqlHelper
             cls.len = new_len
-            cls.data = new_data
+            cls.data = OrderedDict([(x.docId, x) for x in new_data])
         except Exception as e:
             # 如果获取新的值失败，则恢复原来的值
             log.warning(f"SqlDataManager update failed: {e}")
@@ -264,9 +265,10 @@ class SqlDataManager(DocIdManager):
         """
         迭代器的实现
         """
-        if self.pointer < self.len:
+        if self.pointer <= self.len:
             self.pointer += 1
-            return SqlDataManager.data[self.pointer - 1]
+            item = list(SqlDataManager.data.values())[self.pointer - 2]
+            return item
         else:
             raise StopIteration
         
