@@ -14,7 +14,7 @@ def createIndex(directname):
 
     #单词:docid:[pos]
     for file in files:
-        log.info("analyzing file: ", file)
+        log.info(f"analyzing file: {file}" )
         #每个文档的词项 list
         #此处，需要做一个分词，还需要设置停用词，做过滤
         #然后，保存jingmen数据为html
@@ -70,7 +70,7 @@ def createIndex_zh():
     wordCount_qq={}  # qq的wordcount
     #单词:docid:[pos]
     for file in files:
-        log.info("analyzing file: ", file)
+        log.info(f"analyzing file: {file}" )
 
         contents = PreprocessFile.preProcess_zh_qa(file)
         titles = PreprocessFile.preProcess_zh_qq(file)
