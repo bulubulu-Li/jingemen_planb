@@ -3,7 +3,6 @@ SearchSystem/db*
 # SearchSystem/invertIndex_zh.json
 # SearchSystem/wordList_zh.json
 SearchSystem/secret.yaml
-SearchSystem/index
 SearchSystem/temp.py
 
 Reuters
@@ -15,3 +14,13 @@ SearchSystem/bad_case.zip
 server.log
 dir
 RPC/gen-py
+bad_case
+data.json
+files.json
+server.log
+test.json
+test.log
+test.sh
+SearchSystemSearchConfig.yaml
+SearchSystem/SearchConfig.yaml
+SearchSystem/index
