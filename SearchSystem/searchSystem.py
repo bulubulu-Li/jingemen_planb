@@ -26,10 +26,75 @@ from SearchSystem.DataManager import SqlDataManager, DataForm
 from apscheduler.schedulers.background import BackgroundScheduler
 import jieba
 from rouge import Rouge
+import numpy as np
+
+class TokenDistance():
+    def __init__(self, idf_path):
+        idf_dict = {}
+        tmp_idx_list = []
+        with open(idf_path, encoding="utf8") as f:
+            for line in f:
+                ll = line.strip().split(" ")
+                idf_dict[ll[0]] = float(ll[1])
+                tmp_idx_list.append(float(ll[1]))
+        self._idf_dict = idf_dict
+        self._median_idf = np.median(tmp_idx_list)
+    
+    def predict_jaccard(self, q1, q2):
+        # jaccard距离，根据idf加权
+        if len(q1) < 1 or len(q2) < 1:
+            return 0
+        if type(q1) == str:
+            q1 = set(list(jieba.cut(q1)))
+        # q2不是list，而是一个字符串
+        if type(q2) == str:
+            q2 = set(list(jieba.cut(q2)))
+        print(q1.intersection(q2))
+        print(q1.union(q2))
+
+        numerator = sum([self._idf_dict.get(word, self._median_idf) for word in q1.intersection(q2)])
+        denominator  = sum([self._idf_dict.get(word, self._median_idf) for word in q1.union(q2)])
+        return numerator / denominator
+
+    def predict_left(self, q1, q2):
+        # 单向相似度，分母为q1，根据idf加权
+        if len(q1) < 1 or len(q2) < 1:
+            return 0
+        
+        if type(q1) == str:
+            q1 = set(list(jieba.cut(q1)))
+        if type(q2) == str:
+            q2 = set(list(jieba.cut(q2)))
+
+        numerator = sum([self._idf_dict.get(word, self._median_idf) for word in q1.intersection(q2)])
+        denominator  = sum([self._idf_dict.get(word, self._median_idf) for word in q1])
+        return numerator / denominator
+
+    def predict_cqrctr(self, q1, q2):
+        # cqr*ctr
+        if len(q1) < 1 or len(q2) < 1:
+            return 0
+
+        cqr = self.predict_left(q1, q2)
+        ctr = self.predict_left(q2, q1)
+
+        return cqr * ctr
+    
+    def filter(self,query,sortedDocList):
+        temp=[[doc[0],doc[1],doc[2],{
+            "jaccard":self.predict_jaccard(query,set([x['word'] for x in doc[2]['word_list']])),
+            "cqrctr":self.predict_cqrctr(query,set([x['word'] for x in doc[2]['word_list']])),
+            "left":self.predict_left(query,set([x['word'] for x in doc[2]['word_list']]))
+        }] for doc in sortedDocList]
+        # filt by the score of jaccard cqrctr and left, require all of them to be larger than 0.25
+        temp=[x for x in temp if x[3]['jaccard']>0.25 and x[3]['cqrctr']>0.25 and x[3]['left']>0.25]
+        return temp
+
 
 def preCheck_zh(statement):
     # log.info("分词...")
     inputwords = jieba.cut(statement)
+    # print(f'in precheck: {set(list(inputwords))}')
     return inputwords
 
 def check_expect(doclist, expectlist):
@@ -100,12 +165,15 @@ class SearchIndex():
     def filenum(self):
         return len(self.manager)
 
-class SearchSyetem():
-    def __init__(self, config):
+class SearchSystem():
+    def __init__(self, config={}):
         # 类初始化
-        self.config = config
-        self.index = SearchIndex(config)
-        self.blockList=[]
+        # self.config = config
+        # self.index = SearchIndex(config)
+        # self.blockList=[]
+        self.update()
+        # TODO 处理文件
+        self.token_distance = TokenDistance("./idf.txt")
 
         # 直接定义一个定时器
         scheduler = BackgroundScheduler()
@@ -117,7 +185,7 @@ class SearchSyetem():
         # 数据库更新
         SqlDataManager.update()
         tools.setConfig("establishIndex", True)
-        tools.setConfig("new_embedding", True)
+        tools.setConfig("new_embedding", False)
         search_index = SearchIndex()
         self.index = search_index
         self.blockList=[]
@@ -125,7 +193,7 @@ class SearchSyetem():
 
     def search(self, statement, choice=1, loop=False, expectList=[]):
         source = []
-        log.info(f"choice: {choice}" )
+        log.info(f"choice: {choice}, statement {statement}" )
         # 倒排全部查找
         if choice == 1:
             inputwords = preCheck_zh(statement)
@@ -135,9 +203,11 @@ class SearchSyetem():
             DOCLIST = searchWord.searchWords(self.index.get_index(), wordset)
             sortedDocList = sortDoc.TopKScore(40, self.index.get_index(), self.index.filenum(), wordset, DOCLIST, self.index.get_word_count())
             # exclude blockList
+            # print(f'sortedDocList {sortedDocList}, DOCLIST {DOCLIST},wordset {wordset},index {self.index.get_index()},filenum {self.index.filenum()},wordcount {self.index.get_word_count()}')
             sortedDocList = [x for x in sortedDocList if x[1] not in self.blockList]
-            # log.info(sortedDocList)
             source = check_expect(sortedDocList, expectList)
+            sortedDocList = self.token_distance.filter(statement, sortedDocList)
+            print(sortedDocList)
             # log.info(sortedDocList)
             if loop == False:
                 return sortedDocList, source
@@ -245,7 +315,7 @@ class SearchSyetem():
 
         """
         manager=self.index.get_manager()
-        searchRes, _ = self.search(statement, choice, loop, expectList)
+        searchRes, tempdoclist = self.search(statement, choice, loop, expectList)
         docList = []
         if choice != 7:
             for x in searchRes:
@@ -261,7 +331,7 @@ class SearchSyetem():
         
         else:
 
-            result,docList=self.search(statement, choice)
+            result,docList=searchRes, tempdoclist
 
             return result,[manager[int(x.metadata["docId"])] for x in docList],[x.page_content for x in docList]
         
@@ -272,5 +342,5 @@ class SearchSyetem():
 
 if __name__ == "__main__":
     config = {}
-    search_system = SearchSyetem(config)
+    search_system = SearchSystem(config)
     print(search_system.search("腾讯会议与用户初次相遇是在什么时候？"))

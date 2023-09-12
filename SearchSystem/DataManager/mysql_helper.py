@@ -1,5 +1,7 @@
 # pip3 install PyMysql
 import pymysql
+import json
+import datetime
 
 class MysqlHelper():
     def __init__(self, config):
@@ -94,6 +96,31 @@ if __name__ == "__main__":
               "database":'test'}
     mysql = MysqlHelper(config)
     # print(mysql.search("SELECT * FROM knowledgefile WHERE isValid=TRUE"))
-    print(mysql.searchDict("SELECT * FROM knowledgepair "))
+    data=mysql.searchDict("SELECT * FROM knowledgepair WHERE state=10002")
+    # Convert datetime objects to strings
+    for d in data:
+        for k, v in d.items():
+            if isinstance(v, datetime.datetime):
+                d[k] = str(v)
+    print(data)
+    with open('data.json', 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=4)
+    # extract files using the same method
+    data=mysql.searchDict("SELECT * FROM knowledgefile WHERE isValid=TRUE")
+    # Convert datetime objects to strings
+    for d in data:
+        for k, v in d.items():
+            if isinstance(v, datetime.datetime):
+                d[k] = str(v)
+    print(data)
+    with open('files.json', 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=4)
+
+    # qa_list = [{'question': d['question'], 'answer': d['answer']} for d in data]
+    # # 输入到一个json文件中
+
+    # with open('qa.json', 'w', encoding='utf-8') as f:
+    #     json.dump(qa_list, f, ensure_ascii=False, indent=4)
+
     # print(mysql.search("SELECT COUNT(*) FROM knowledgefile WHERE isValid=TRUE"))
     # mysql.print_first_row("SELECT COUNT(*) FROM knowledgefile WHERE isValid=TRUE;")

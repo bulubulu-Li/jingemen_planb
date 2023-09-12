@@ -223,8 +223,9 @@ class SqlDataManager(DocIdManager):
         try:
             # 尝试获取新的值
             new_mysqlHelper=MysqlHelper(config=tools.getMysqlConfig())
-            new_len=new_mysqlHelper.search("SELECT COUNT(*) FROM knowledgepair ")[0][0]
-            data = new_mysqlHelper.searchDict("SELECT * FROM knowledgepair ")
+            new_len=new_mysqlHelper.search("SELECT COUNT(*) FROM knowledgepair WHERE state=10002")[0][0]
+            data = new_mysqlHelper.searchDict("SELECT * FROM knowledgepair WHERE state=10002")
+            log.info(f"SqlDataManager update: {data}")
             new_data=[DataForm({
                 "page_content": x['answer'],
                 "title": x['question'],
@@ -263,6 +264,7 @@ class SqlDataManager(DocIdManager):
         if self.pointer <= self.len:
             self.pointer += 1
             item = list(SqlDataManager.data.values())[self.pointer - 2]
+            log.info(f"SqlDataManager __next__ success: {item}")
             return item
         else:
             raise StopIteration
@@ -272,6 +274,7 @@ class SqlDataManager(DocIdManager):
         随机访问获取指定docId的内容
         """        
         docId = self.get_docId(docId)
+        log.info(f"SqlDataManager __getitem__ success: {SqlDataManager.data[docId]}")
         return SqlDataManager.data[docId]
     
     def __len__(self):

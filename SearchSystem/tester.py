@@ -24,7 +24,7 @@ import numpy as np
 import jieba
 import cProfile
 import SearchSystem.tools as tools
-from SearchSystem.DataManager import DataForm,BaseDataManager
+from SearchSystem.DataManager import DataForm,BaseDataManager,SqlDataManager
 
 main=searchSystem.SearchSystem()
 # try to extract key from tools.secret, if false, log.info
@@ -275,7 +275,7 @@ def retrieve_files(question_file,searchType):
     failuresFull=[]
     worstCases=[]
     global failure_num
-    files=BaseDataManager()
+    files=SqlDataManager()
     for dataItem in files:
         questions = dataItem.questions
         # 看看retrieve的第一条的结果是不是想要的东西
@@ -413,6 +413,178 @@ def retrieve_files(question_file,searchType):
     # 写入HTML文件
     with open(f'bad_case/worstCases_{searchType}.html', 'w',encoding='utf-8') as f:
         f.write(html)
+
+def retrieve_files_update(question_file,searchType):
+
+    failures =[]
+    failuresFull=[]
+    worstCases=[]
+    global failure_num
+    fi=SqlDataManager()
+    files=[]
+    # 从question_file中读取所有的问题
+    with open(question_file,'r',encoding='utf-8') as f:
+        qs=json.load(f)
+    for i, dataItem in enumerate(fi):
+        # 检查这个项目有没有对应的生成的问题，如果有在item中添加这个问题
+        files.append(dataItem)
+        for item in qs:
+            print(f'item is {item["question"]} dataItem is {dataItem.title}')
+            if dataItem.title==item["question"]:
+                files[i].questions.append(item["generate"])
+                print('got')
+                print(files[i].questions)
+
+    print("after append")
+
+    for dataItem in files:
+        questions = dataItem.questions
+        if len(questions)==0:
+            print(f"Skipping {dataItem.docId}")
+            continue
+        # 看看retrieve的第一条的结果是不是想要的东西
+        log.info(f"Retrieving {dataItem.docId} Method {searchType}")
+        for ques in questions:
+            searching_res,expectList=main.search(ques,searchType,expectList=[dataItem.docId_qa,dataItem.docId_qq])
+            if searchType!=88:
+                # 形式：[[97-3,7.445],...]
+                resFull=[[x[DOC_ID],x[SCORE],x[WORD_LIST],x[3]] for x in searching_res]
+                if len(resFull)>10:
+                    resFull=resFull[:10]
+                print(f'resFull is {resFull}')
+                # 形式 10097
+                res=[x[DOC_ID] for x in searching_res[:10]]
+                # 形式：97
+                mainFile_temp=[dataItem.docIdManager.get_docId(x) for x in res]
+                mainFile=[]
+                # delete same elements in mainFile
+                for i in mainFile_temp:
+                    if i not in mainFile:
+                        mainFile.append(i)
+                # log.info(res)
+                # if dataItem.docId not in mainFile[:3]:
+                if True:
+                    fullContent={
+                        "retrieved_title":[],
+                        "retrieved_content":[]
+                    }
+                    failure_num[searchType]+=1
+                    failures.append({
+                        "question":ques,
+                        "retrieved":mainFile_temp,
+                        "expected":dataItem.docId,
+                        "method":searchType
+                    })
+                    # open the file in res and collect the first page_content
+                    for i in res:
+                        fullContent["retrieved_title"].append(fi[i].title)
+                        fullContent["retrieved_content"].append(fi[i].page_content)
+                    
+                    print(f'fullContent is {fullContent}')
+
+                    word_detail=[]
+                    for y in resFull:
+                        word_temp=[]
+                        for i in y[2]["word_list"]:
+                            word_temp.append({
+                                "word":i["word"],
+                                "score":f'{i["score"]:.3f}',
+                                "tf":f'{i["tf"]:.3f}',
+                                "df":f'{i["df"]:.3f}',
+                                "wf":f'{i["wf"]:.3f}',
+                                "idf":f'{i["idf"]:.3f}'
+                            })
+                        word_detail.append(word_temp)
+                    
+                    expect_word_detail=[]
+                    for y in expectList:
+                        word_temp=[]
+                        for i in y[2]["word_list"]:
+                            word_temp.append({
+                                "word":i["word"],
+                                "score":f'{i["score"]:.3f}',
+                                "tf":f'{i["tf"]:.3f}',
+                                "df":f'{i["df"]:.3f}',
+                                "wf":f'{i["wf"]:.3f}',
+                                "idf":f'{i["idf"]:.3f}'
+                            })
+                        expect_word_detail.append(word_temp)
+                    log.info(f'expection: {expectList}')
+                    expect_detail={
+                        "retrieve_method":[fi.get_method(x[1]) for x in expectList],
+                        "doc_score":[f'{x[0]:.3f}' for x in expectList],
+                        "rank":[int(x[3]) for x in expectList],
+                        "word_detail":copy.deepcopy(expect_word_detail),
+                    }
+
+                    score_detail={
+                        "retrieve_method":[fi.get_method(x[0]) for x in resFull],
+                        "retrieved":copy.deepcopy(mainFile_temp),
+                        "doc_score":[f'{x[1]:.3f}' for x in resFull],
+                        "jaccard":[f'{x[3]["jaccard"]:.3f}' for x in resFull],
+                        "cqrctr":[f'{x[3]["cqrctr"]:.3f}' for x in resFull],
+                        "left":[f'{x[3]["left"]:.3f}' for x in resFull],
+                        "retrieved_title":copy.deepcopy(fullContent["retrieved_title"]),
+                        "word_detail":copy.deepcopy(word_detail),
+                        "retrieved_content":copy.deepcopy(fullContent["retrieved_content"]),
+                    }
+                    try:
+                        temp={
+                            "question":ques,
+                            "split_question":list(jieba.cut(ques)),
+                            "expected":dataItem.docId,
+                            "expected_detail":copy.deepcopy(expect_detail),
+                            "in_list":int(mainFile.index(dataItem.docId)),
+                            "expected_title":dataItem.title,
+                            "expected_content":dataItem.page_content,
+                            "score_detail":copy.deepcopy(score_detail),
+                            "method":searchType
+                        }
+                        failuresFull.append(temp)
+                    except:
+                        temp={
+                            "question":ques,
+                            "split_question":list(jieba.cut(ques)),
+                            "expected":dataItem.docId,
+                            "expected_detail":copy.deepcopy(expect_detail),
+                            "in_list":-99,
+                            "expected_title":dataItem.title,
+                            "expected_content":dataItem.page_content,
+                            "score_detail":copy.deepcopy(score_detail),
+                            "method":searchType
+                        }
+                        failuresFull.append(temp)
+                        # 删除temp的in_list 这个key
+                        del temp["in_list"]
+                        worstCases.append(temp)
+
+    with open(f'bad_case/failure_{searchType}.json', 'w',encoding='utf-8') as f:
+        json.dump(failures, f,ensure_ascii=False, indent=4)
+    with open(f'bad_case/failureFull_{searchType}.json', 'w',encoding='utf-8') as f:
+        json.dump(failuresFull, f,ensure_ascii=False, indent=4)
+    with open(f'bad_case/worstCases_{searchType}.json', 'w',encoding='utf-8') as f:
+        json.dump(worstCases, f,ensure_ascii=False, indent=4)
+    
+    # 转换为HTML
+    html = to_html(failures)
+    # 写入HTML文件
+    with open(f'bad_case/failure_{searchType}.html', 'w',encoding='utf-8') as f:
+        f.write(html)
+
+    # 转换为HTML
+    html = to_html(failuresFull)
+    # 写入HTML文件
+    with open(f'bad_case/failureFull_{searchType}.html', 'w',encoding='utf-8') as f:
+        f.write(html)
+
+    # 转换为HTML
+    html = to_html(worstCases)
+    # 写入HTML文件
+    with open(f'bad_case/worstCases_{searchType}.html', 'w',encoding='utf-8') as f:
+        f.write(html)
+
+
+
 
 # 目的是处理score_detail and the word_list with in it
 def to_html(json_data_input):
@@ -597,19 +769,26 @@ def extract_failure_retrieve():
             df.to_csv('bad_case/worstCases_'+index+'.csv', encoding='utf-8-sig')
 
 
-# 文档分为切分为每一个小文档的文档和一整个大文档
-# generate_questions(f'{tools.reuterspath}\\wholeFiles')
+if __name__ == "__main__":
+    # 文档分为切分为每一个小文档的文档和一整个大文档
+    # generate_questions(f'{tools.reuterspath}\\wholeFiles')
 
-# profiler = cProfile.Profile()
-# num=1
-# profiler.runctx('retrieve_files(question_file, num)', globals(), locals())
+    # profiler = cProfile.Profile()
+    # num=1
+    # profiler.runctx('retrieve_files(question_file, num)', globals(), locals())
 
 
-retrieve_files(question_file,1)
-retrieve_files(question_file,2)
-retrieve_files(question_file,3)
-retrieve_files(question_file,4)
-# # extract_failure_retrieve()  
-evaluate_accuracy()
+    
 
-# update_questions()
+    # retrieve_files(question_file,2)
+    # retrieve_files(question_file,3)
+    # retrieve_files(question_file,4)
+    # # extract_failure_retrieve()  
+    # evaluate_accuracy()
+
+    # update_questions()
+
+    question_file='questions.json'
+    retrieve_files_update(question_file,1)
+    print("finished")
+    pass
