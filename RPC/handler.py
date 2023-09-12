@@ -5,7 +5,7 @@ from SearchSystem.DataManager import DataForm
 from QuestionAnswer.ttypes import QuestionAnswerPair, QuestionAnswerRequest, QuestionAnswerResponse, QuestionAnswerResult,FileSourceInfo,GenerateAnswer
 from Log.log import log
 
-searching = searchSystem.SearchSyetem(config="config.json")
+searching = searchSystem.SearchSystem(config="config.json")
 
 
 class QuestionAnswerHandler(QuestionAnswerServer.Iface):
@@ -21,6 +21,10 @@ class QuestionAnswerHandler(QuestionAnswerServer.Iface):
             log.info(f'not generate {request.question}')
             qaList = []
             search_res:list[DataForm] = searching.searchResults(request.question)
+            if len(search_res) == 0:
+                log.info(f'没有找到答案')
+                response = QuestionAnswerResponse(errCode=2, errMsg="can't find answer",results=None)
+                return response
             for item in search_res:
                 # 判断sourceunit，基于item.metadata["from"]的值，判断来源
 
@@ -54,15 +58,20 @@ class QuestionAnswerHandler(QuestionAnswerServer.Iface):
             answer=answer.split("参考文献")[0]
             for i,item in enumerate(search_res):
                 qaPair.append(
-                    QuestionAnswerPair(
-                        question=item.title,
-                        answer=item.page_content,
-                        source=sources[item.metadata["from"]],
-                        questionAnswerId=str(item.docId),
-                        sourceUnit="",
-                        # TODO 这是啥呀？
-                        knowledgeFileSource=None
+                    FileSourceInfo(
+                        fileName=item.title,
+                        # TODO 这里需要什么来着？ 一个例子"from": 103,"fromId": 1000041,
+                        fileLink=""
                     )
+                    # QuestionAnswerPair(
+                    #     question=item.title,
+                    #     answer=item.page_content,
+                    #     source=sources[item.metadata["from"]],
+                    #     questionAnswerId=str(item.docId),
+                    #     sourceUnit="",
+                    #     # TODO 这是啥呀？
+                    #     knowledgeFileSource=None
+                    # )
                 )
 
             response =  QuestionAnswerResponse(
@@ -71,7 +80,7 @@ class QuestionAnswerHandler(QuestionAnswerServer.Iface):
                 results=QuestionAnswerResult(
                     generateAnswers=GenerateAnswer(
                         answer=answer,
-                        questionAnswerPairs=qaPair
+                        knowledgeFileSource=qaPair
                     )
                 )
             )
@@ -79,7 +88,7 @@ class QuestionAnswerHandler(QuestionAnswerServer.Iface):
 
         else:
             log.info(f'isGenerate参数错误,需要为0或者1')
-            response = QuestionAnswerResponse(errCode=1, errMsg="isGenerate参数错误,需要为0或者1",results=None)
+            response = QuestionAnswerResponse(errCode=1, errMsg="isGenerate param error, need to be 0 or 1",results=None)
             return response
     
 class BlockHandler(BlockHandlerServer.Iface):

@@ -26,7 +26,7 @@ struct FileSourceInfo {
 // 知识生产答案
 struct GenerateAnswer {
     1: optional string answer;
-    2: list<QuestionAnswerPair> questionAnswerPairs;
+    2: list<FileSourceInfo> knowledgeFileSource;
 }
 
 struct QuestionAnswerResult {
@@ -37,7 +37,7 @@ struct QuestionAnswerResult {
 // 知识问答输出
 struct QuestionAnswerResponse {
     // 错误状态码、以及错误信息描述
-    // 0：正常返回；1：输入请求异常；2：服务内部错误（重试可能有效）
+    // TODO 0：正常返回；1：输入请求异常；2：无答案
     1: optional i64 errCode=0;
 
     2: optional string errMsg;

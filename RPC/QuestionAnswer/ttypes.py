@@ -288,14 +288,14 @@ class GenerateAnswer(object):
     """
     Attributes:
      - answer
-     - questionAnswerPairs
+     - knowledgeFileSource
 
     """
 
 
-    def __init__(self, answer=None, questionAnswerPairs=None,):
+    def __init__(self, answer=None, knowledgeFileSource=None,):
         self.answer = answer
-        self.questionAnswerPairs = questionAnswerPairs
+        self.knowledgeFileSource = knowledgeFileSource
 
     def read(self, iprot):
         if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
@@ -313,12 +313,12 @@ class GenerateAnswer(object):
                     iprot.skip(ftype)
             elif fid == 2:
                 if ftype == TType.LIST:
-                    self.questionAnswerPairs = []
+                    self.knowledgeFileSource = []
                     (_etype10, _size7) = iprot.readListBegin()
                     for _i11 in range(_size7):
-                        _elem12 = QuestionAnswerPair()
+                        _elem12 = FileSourceInfo()
                         _elem12.read(iprot)
-                        self.questionAnswerPairs.append(_elem12)
+                        self.knowledgeFileSource.append(_elem12)
                     iprot.readListEnd()
                 else:
                     iprot.skip(ftype)
@@ -336,10 +336,10 @@ class GenerateAnswer(object):
             oprot.writeFieldBegin('answer', TType.STRING, 1)
             oprot.writeString(self.answer.encode('utf-8') if sys.version_info[0] == 2 else self.answer)
             oprot.writeFieldEnd()
-        if self.questionAnswerPairs is not None:
-            oprot.writeFieldBegin('questionAnswerPairs', TType.LIST, 2)
-            oprot.writeListBegin(TType.STRUCT, len(self.questionAnswerPairs))
-            for iter13 in self.questionAnswerPairs:
+        if self.knowledgeFileSource is not None:
+            oprot.writeFieldBegin('knowledgeFileSource', TType.LIST, 2)
+            oprot.writeListBegin(TType.STRUCT, len(self.knowledgeFileSource))
+            for iter13 in self.knowledgeFileSource:
                 iter13.write(oprot)
             oprot.writeListEnd()
             oprot.writeFieldEnd()
@@ -544,7 +544,7 @@ all_structs.append(GenerateAnswer)
 GenerateAnswer.thrift_spec = (
     None,  # 0
     (1, TType.STRING, 'answer', 'UTF8', None, ),  # 1
-    (2, TType.LIST, 'questionAnswerPairs', (TType.STRUCT, [QuestionAnswerPair, None], False), None, ),  # 2
+    (2, TType.LIST, 'knowledgeFileSource', (TType.STRUCT, [FileSourceInfo, None], False), None, ),  # 2
 )
 all_structs.append(QuestionAnswerResult)
 QuestionAnswerResult.thrift_spec = (
