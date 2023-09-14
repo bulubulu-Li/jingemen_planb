@@ -177,7 +177,7 @@ class SearchSystem():
 
         # 直接定义一个定时器
         scheduler = BackgroundScheduler()
-        scheduler.add_job(self.update, 'interval', hours=24)
+        scheduler.add_job(self.update, 'interval', minutes=3)
         scheduler.start()
         log.info("=================Searching System=================")
     
