@@ -4,7 +4,7 @@ from SearchSystem.LanguageAnalysis import stemming
 import jieba
 import json
 from SearchSystem.DataManager import DataForm,BaseDataManager
-from langchain.document_loaders import DiffbotLoader
+
 from Log.log import log
 
 def preProcess(filename):

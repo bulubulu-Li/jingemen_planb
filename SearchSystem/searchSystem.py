@@ -21,7 +21,7 @@ from SearchSystem.Serching import searchWord
 from SearchSystem.scoreQuery import sortDoc
 from SearchSystem.BoolSearch import BoolSearchDel
 from SearchSystem.InvertedIndex import establishIndex
-from SearchSystem.LargeLanguageModel import chain
+from SearchSystem.LargeLanguageModel.chain import Chain
 from SearchSystem.DataManager import SqlDataManager, DataForm
 from apscheduler.schedulers.background import BackgroundScheduler
 import jieba
@@ -172,6 +172,8 @@ class SearchSystem():
         # self.index = SearchIndex(config)
         # self.blockList=[]
         self.update()
+        self.chain=Chain()
+        self.chain.init()
         # TODO 处理文件
         self.token_distance = TokenDistance("./idf.txt")
 
@@ -266,7 +268,10 @@ class SearchSystem():
 
 
         elif choice == 7:
-            retrieve_res = chain.Retrieve(statement)
+            
+            retrieved_docs = self.searchResults(statement)
+            
+            retrieve_res=self.chain.Retrieve(statement,["\n"+x.title + "\n" + x.page_content for x in retrieved_docs])
             log.info(retrieve_res)
             answer=retrieve_res["result"]
             # 找出answer中的参考文献，使用的方式是找出所有被[]包裹的数字，然后保留unique的

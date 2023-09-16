@@ -145,7 +145,7 @@ def setConfig(str,value):
     global config
     log.info(f'setting {str} as {value}')
     config[str] = value
-    with open(searchsystempath + 'SearchConfig.yaml','w') as f:
+    with open(os.path.join(searchsystempath ,'SearchConfig.yaml'),'w') as f:
         yaml.dump(config,f)
 
 def searchSystemPath(file):
