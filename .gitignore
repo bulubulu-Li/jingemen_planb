@@ -21,6 +21,6 @@ server.log
 test.json
 test.log
 test.sh
-SearchSystemSearchConfig.yaml
 SearchSystem/SearchConfig.yaml
 SearchSystem/index
+SearchSystem/LargeLanguageModel/chatglm-6b
