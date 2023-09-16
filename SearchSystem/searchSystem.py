@@ -348,4 +348,14 @@ class SearchSystem():
 if __name__ == "__main__":
     config = {}
     search_system = SearchSystem(config)
-    print(search_system.search("腾讯会议与用户初次相遇是在什么时候？"))
+    # print(search_system.search("腾讯会议与用户初次相遇是在什么时候？", choice=7, loop=False))
+    while True:
+        mode = input("Select a mode : 1: qq mix qa, 2: qq, 3: qa, 4: qq + qa, 7: chain, 88: exit\n")
+        if mode not in ["1", "2", "3", "4", "7", "88"]:
+            print("Invalid mode!")
+            continue
+        if mode == "88":
+            break
+        question = input("Enter your question: ")
+        results = search_system.searchResults(question, choice=int(mode))
+        print(results)
