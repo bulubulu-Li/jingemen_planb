@@ -191,7 +191,7 @@ class SearchSystem():
         search_index = SearchIndex()
         self.index = search_index
         self.blockList=[]
-
+        log.info(f"================= update finish =================")
 
     def search(self, statement, choice=1, loop=False, expectList=[]):
         source = []
@@ -271,7 +271,10 @@ class SearchSystem():
             
             retrieved_docs = self.searchResults(statement)
             
-            retrieve_res=self.chain.Retrieve(statement,["\n"+x.title + "\n" + x.page_content for x in retrieved_docs])
+            retrieve_res={
+                "result":self.chain.retrieve(statement,retrieved_docs)[0],
+                "source_documents":retrieved_docs
+                }
             log.info(retrieve_res)
             answer=retrieve_res["result"]
             # 找出answer中的参考文献，使用的方式是找出所有被[]包裹的数字，然后保留unique的
@@ -337,8 +340,10 @@ class SearchSystem():
         else:
 
             result,docList=searchRes, tempdoclist
+            print(f"docList: {[str(x) for x in docList]}")
+            print(f"result: {result}")
 
-            return result,[manager[int(x.metadata["docId"])] for x in docList],[x.page_content for x in docList]
+            return result,[manager[int(x.docId)] for x in docList],[x.page_content for x in docList]
         
     def block(self,bList:list[int]):
         log.info(f"block: {bList}" )
@@ -349,6 +354,10 @@ if __name__ == "__main__":
     config = {}
     search_system = SearchSystem(config)
     # print(search_system.search("腾讯会议与用户初次相遇是在什么时候？", choice=7, loop=False))
+    results,_,_ = search_system.searchResults("腾讯会议与用户初次相遇是在什么时候？", choice=7)
+    print(results)
+    exit()
+    
     while True:
         mode = input("Select a mode : 1: qq mix qa, 2: qq, 3: qa, 4: qq + qa, 7: chain, 88: exit\n")
         if mode not in ["1", "2", "3", "4", "7", "88"]:

@@ -1,7 +1,7 @@
 import os
 from Log.log import log
 import SearchSystem.tools as tools
-
+from SearchSystem.DataManager import DataForm
 from transformers import AutoTokenizer, AutoModel
 
 class Chain:
@@ -25,12 +25,21 @@ class Chain:
         log.info('chain init!!!')
         if self.chain is None:
             log.info("chain is None,start loading")
-            self.tokenizer = AutoTokenizer.from_pretrained(os.path.join(tools.searchSystemPath,'LargeLanguageModel/chatglm-6b'), trust_remote_code=True)
-            self.chain = AutoModel.from_pretrained(os.path.join(tools.searchSystemPath,'LargeLanguageModel/chatglm-6b'), trust_remote_code=True).half().cuda()
+            self.tokenizer = AutoTokenizer.from_pretrained('/jingmen/chatglm-6b', trust_remote_code=True)
+            self.chain = AutoModel.from_pretrained('/jingmen/chatglm-6b', trust_remote_code=True).half().cuda()
             self.chain = self.chain.eval()
             log.info("loading finished")
 
-    def retrieve(self, question, context):
+    def retrieve(self, question, docs:list[DataForm]):
+        context = '\n'
+        for i, doc in enumerate(docs):
+            # context + docs + question length should be less than 1500
+            if len(self.prompt_template)+ len(context) + len(doc.title)+2+len(doc.page_content) + len(question) < 1500:
+                context += f'{doc.title}\n{doc.page_content}\n'
+            else:
+                docs = docs[:i]
+                break
+
         prompt = self.prompt_template.format(context=context, question=question)
         response, history = self.chain.chat(self.tokenizer, prompt, history=[])
-        return response
+        return response,docs

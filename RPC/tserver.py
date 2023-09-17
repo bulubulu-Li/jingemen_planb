@@ -3,6 +3,7 @@ from thrift.transport import TTransport
 from thrift.protocol import TBinaryProtocol 
 from thrift.server import TServer
 from thrift.TMultiplexedProcessor import TMultiplexedProcessor
+import threading
 
 # Import the project into python path
 import sys
@@ -43,8 +44,11 @@ if __name__ == '__main__':
     rpcServer2 = TServer.TThreadPoolServer(block_processor, transport2, tfactory, pfactory)
     rpcServer2.setNumThreads(5)
     
-    print(f'Starting the rpc server at port: {__PORT1} for QuestionAnswerService')
-    rpcServer1.serve()
+    # Start servers in separate threads
+    t1 = threading.Thread(target=rpcServer1.serve)
+    t2 = threading.Thread(target=rpcServer2.serve)
+    t1.start()
+    t2.start()
     
+    print(f'Starting the rpc server at port: {__PORT1} for QuestionAnswerService')
     print(f'Starting the rpc server at port: {__PORT2} for BlockListService')
-    rpcServer2.serve()
