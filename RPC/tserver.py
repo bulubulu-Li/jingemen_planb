@@ -17,15 +17,17 @@ sys.path.append(projectpath)
 import QuestionAnswerServer.QuestionAnswerServer as QuestionAnswerServer
 import QuestionAnswerServer.BlockListService as BlockListService
 import handler as Handler
-
+from SearchSystem import searchSystem 
 __HOST = '127.0.0.1'
 __PORT1 = 3030
 __PORT2 = 9091
 
 if __name__ == '__main__':
     # Handlers
-    question_answer_handler = Handler.QuestionAnswerHandler()
-    block_handler = Handler.BlockHandler()
+    searching = searchSystem.SearchSystem(config="config.json")
+
+    question_answer_handler = Handler.QuestionAnswerHandler(searching)
+    block_handler = Handler.BlockHandler(searching)
     
     # Processors
     question_answer_processor = QuestionAnswerServer.Processor(question_answer_handler)

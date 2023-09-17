@@ -5,10 +5,12 @@ from SearchSystem.DataManager import DataForm
 from QuestionAnswer.ttypes import QuestionAnswerPair, QuestionAnswerRequest, QuestionAnswerResponse, QuestionAnswerResult,FileSourceInfo,GenerateAnswer
 from Log.log import log
 
-searching = searchSystem.SearchSystem(config="config.json")
 
 
 class QuestionAnswerHandler(QuestionAnswerServer.Iface):
+    def __init__(self, searching: searchSystem.SearchSystem):
+        self.searching = searching
+
     def searchAndGeneration(self, request: QuestionAnswerRequest) -> QuestionAnswerResponse:
         log.info(f'QuestionAnswerHandler searchAndGeneration: question:{request.question},isGenerate:{request.isGenerate}')
         sources={
@@ -20,7 +22,7 @@ class QuestionAnswerHandler(QuestionAnswerServer.Iface):
         if request.isGenerate == 0:
             log.info(f'not generate {request.question}')
             qaList = []
-            search_res:list[DataForm] = searching.searchResults(request.question)
+            search_res:list[DataForm] = self.searching.searchResults(request.question)
             if len(search_res) == 0:
                 log.info(f'没有找到答案')
                 response = QuestionAnswerResponse(errCode=2, errMsg="can't find answer",results=None)
@@ -54,7 +56,7 @@ class QuestionAnswerHandler(QuestionAnswerServer.Iface):
             log.info(f'generate {request.question}')
             qaPair:list[QuestionAnswerPair]=[]
             search_res:list[DataForm]
-            answer,search_res,fragment = searching.searchResults(request.question,choice=7)
+            answer,search_res,fragment = self.searching.searchResults(request.question,choice=7)
             answer=answer.split("参考文献")[0]
             for i,item in enumerate(search_res):
                 qaPair.append(
@@ -92,6 +94,9 @@ class QuestionAnswerHandler(QuestionAnswerServer.Iface):
             return response
     
 class BlockHandler(BlockHandlerServer.Iface):
+    def __init__(self, searching: searchSystem.SearchSystem):
+        self.searching = searching
+
     def addBlockList(self, addList):
         log.info(f"BlockList add: {addList}")
-        searching.block(addList)
+        self.searching.block(addList)
