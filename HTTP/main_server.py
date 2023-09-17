@@ -1,9 +1,3 @@
-# coding=utf-8
-# Filename:    main_service_online.py
-# Author:      ZENGGUANRONG
-# Date:        2023-09-10
-# description: tornado服务启动核心脚本
-
 import tornado.ioloop
 from tornado.web import RequestHandler, Application
 from tornado.httpserver import HTTPServer
@@ -36,8 +30,7 @@ def launch_service(config):
     for process in processes:
         process.join()
 
-
 if __name__ == "__main__":
-    config = {"process_test_class_1":{"port":3030, "url_suffix":"/a"},
-              "process_test_class_2":{"port":9091, "url_suffix":"/b"}}
+    config = {"process_test_class_1":{"port":3130, "url_suffix":"/a"},
+              "process_test_class_2":{"port":3131, "url_suffix":"/b"}}
     launch_service(config)

@@ -25,7 +25,7 @@ def single_test(query_list, num, process_id = 0):
     for i in range(num):
         start_time = time.time()
         query = random.choice(query_list)
-        requests.post("http://127.0.0.1:3030/a", json.dumps({"question": query,"isGenerate":0}))
+        requests.post("http://127.0.0.1:3130/a", json.dumps({"question": query,"isGenerate":0}))
         end_time = time.time()
         time_list.append(end_time-start_time)
     return time_list
