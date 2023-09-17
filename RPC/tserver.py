@@ -17,14 +17,15 @@ sys.path.append(projectpath)
 import QuestionAnswerServer.QuestionAnswerServer as QuestionAnswerServer
 import QuestionAnswerServer.BlockListService as BlockListService
 import handler as Handler
-from SearchSystem import searchSystem 
+from SearchSystem.searchSystem import SearchSystem
+from Log.log import log
 __HOST = '127.0.0.1'
 __PORT1 = 3030
-__PORT2 = 9091
+__PORT2 = 3031
 
 if __name__ == '__main__':
     # Handlers
-    searching = searchSystem.SearchSystem(config="config.json")
+    searching = SearchSystem(config="config.json")
 
     question_answer_handler = Handler.QuestionAnswerHandler(searching)
     block_handler = Handler.BlockHandler(searching)
@@ -52,5 +53,8 @@ if __name__ == '__main__':
     t1.start()
     t2.start()
     
-    print(f'Starting the rpc server at port: {__PORT1} for QuestionAnswerService')
-    print(f'Starting the rpc server at port: {__PORT2} for BlockListService')
+    log.info(f'Starting the rpc server at port: {__PORT1} for QuestionAnswerService')
+    log.info(f'Starting the rpc server at port: {__PORT2} for BlockListService')
+
+    t1.join()
+    t2.join()

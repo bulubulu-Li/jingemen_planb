@@ -100,3 +100,4 @@ class BlockHandler(BlockHandlerServer.Iface):
     def addBlockList(self, addList):
         log.info(f"BlockList add: {addList}")
         self.searching.block(addList)
+        return len(addList)
