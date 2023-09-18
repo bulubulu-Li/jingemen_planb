@@ -14,23 +14,25 @@ projectpath = projectpath[:projectpath.find('jingemen_planb') + len('jingemen_pl
 print(f'projectpath is {projectpath}')
 sys.path.append(projectpath)
 
+from Log.log import log
+
 from SearchSystem.searchSystem import SearchSystem
 from handlers.Handler import QuestionAnswerHandler, BlockHandler,StartHandler
 
 def launch_service(config):
     searching = SearchSystem(config="config.json")
 
-    process_test_class_1 = Process(target=QuestionAnswerHandler, args=(config["process_test_class_1"], searching))
-    process_test_class_2 = Process(target=BlockHandler, args=(config["process_test_class_2"], searching))
+    process_test_class_1 = Process(target=StartHandler, args=(config["process_test_class_1"],QuestionAnswerHandler, searching))
+    process_test_class_2 = Process(target=StartHandler, args=(config["process_test_class_2"],BlockHandler, searching))
 
     processes = [process_test_class_1, process_test_class_2]
-    print("start")
+    log.info("start")
     for process in processes:
         process.start()
     for process in processes:
         process.join()
 
 if __name__ == "__main__":
-    config = {"process_test_class_1":{"port":3130, "url_suffix":"/a"},
-              "process_test_class_2":{"port":3131, "url_suffix":"/b"}}
+    config = {"process_test_class_1":{"port":3130, "url_suffix":"/qabot/question-answer"},
+              "process_test_class_2":{"port":3131, "url_suffix":"/qabot/blocklist"}}
     launch_service(config)

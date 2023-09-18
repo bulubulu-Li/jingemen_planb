@@ -18,10 +18,12 @@ from SearchSystem.searchSystem import SearchSystem
 class QuestionAnswerHandler(RequestHandler):
     
     def initialize(self, searching:SearchSystem):
+        log.info(f'QuestionAnswerHandler initialize')   
         self.searching = searching
 
     async def post(self):
         request=self.request.body
+        request=json_decode(request)
         log.info(f'QuestionAnswerHandler post: question:{request["question"]},isGenerate:{request["isGenerate"]}')
         sources={
             101:"用户上传",
@@ -106,6 +108,7 @@ class QuestionAnswerHandler(RequestHandler):
 
 class BlockHandler(RequestHandler):
     def initialize(self, searching:SearchSystem):
+        log.info(f'BlockHandler initialize')
         self.searching = searching
 
     async def post(self):
@@ -115,11 +118,11 @@ class BlockHandler(RequestHandler):
 
 
 
-def StartHandler(request_config: dict, searching: SearchSystem):
+def StartHandler(request_config: dict,handler, searching: SearchSystem):
     # 启动TestClass服务的进程
     # 注：如果是同端口，只是不同的url路径，则直接都放在handler_routes里面即可
     # 注：test_class需要在外面初始化后再传进来，而不能在initialize里面加载，initialize是每次请求都会执行一遍，例如知识问答的索引更新，肯定不能在这里面修改
-    handler_routes = [(request_config["url_suffix"], QuestionAnswerHandler, {"searchSystem":searching})]
+    handler_routes = [(request_config["url_suffix"], handler, {"searching":searching})]
     app = Application(handlers=handler_routes)
     http_server = HTTPServer(app)
     http_server.listen(request_config["port"])
