@@ -275,7 +275,8 @@ def retrieve_files(question_file,searchType):
     failuresFull=[]
     worstCases=[]
     global failure_num
-    files=SqlDataManager()
+    bad_case_path = os.path.join(tools.searchsystempath, 'bad_case')
+    files=BaseDataManager()
     for dataItem in files:
         questions = dataItem.questions
         # 看看retrieve的第一条的结果是不是想要的东西
@@ -341,7 +342,7 @@ def retrieve_files(question_file,searchType):
                                 "idf":f'{i["idf"]:.3f}'
                             })
                         expect_word_detail.append(word_temp)
-                    log.info(f'expection: {expectList}')
+                    # log.info(f'expection: {expectList}')
                     expect_detail={
                         "retrieve_method":[files.get_method(x[1]) for x in expectList],
                         "doc_score":[f'{x[0]:.3f}' for x in expectList],
@@ -389,29 +390,29 @@ def retrieve_files(question_file,searchType):
 
 
 
-    with open(f'bad_case/failure_{searchType}.json', 'w',encoding='utf-8') as f:
+    with open(os.path.join(bad_case_path,f'failure_{searchType}.json'), 'w',encoding='utf-8') as f:
         json.dump(failures, f,ensure_ascii=False, indent=4)
-    with open(f'bad_case/failureFull_{searchType}.json', 'w',encoding='utf-8') as f:
+    with open(os.path.join(bad_case_path,f'failureFull_{searchType}.json'), 'w',encoding='utf-8') as f:
         json.dump(failuresFull, f,ensure_ascii=False, indent=4)
-    with open(f'bad_case/worstCases_{searchType}.json', 'w',encoding='utf-8') as f:
+    with open(os.path.join(bad_case_path,f'worstCases_{searchType}.json'), 'w',encoding='utf-8') as f:
         json.dump(worstCases, f,ensure_ascii=False, indent=4)
     
     # 转换为HTML
     html = to_html(failures)
     # 写入HTML文件
-    with open(f'bad_case/failure_{searchType}.html', 'w',encoding='utf-8') as f:
+    with open(os.path.join(bad_case_path,f'failure_{searchType}.html'), 'w',encoding='utf-8') as f:
         f.write(html)
 
     # 转换为HTML
     html = to_html(failuresFull)
     # 写入HTML文件
-    with open(f'bad_case/failureFull_{searchType}.html', 'w',encoding='utf-8') as f:
+    with open(os.path.join(bad_case_path,f'failureFull_{searchType}.html'), 'w',encoding='utf-8') as f:
         f.write(html)
 
     # 转换为HTML
     html = to_html(worstCases)
     # 写入HTML文件
-    with open(f'bad_case/worstCases_{searchType}.html', 'w',encoding='utf-8') as f:
+    with open(os.path.join(bad_case_path,f'worstCases_{searchType}.html'), 'w',encoding='utf-8') as f:
         f.write(html)
 
 def retrieve_files_update(question_file,searchType):
@@ -509,7 +510,7 @@ def retrieve_files_update(question_file,searchType):
                                 "idf":f'{i["idf"]:.3f}'
                             })
                         expect_word_detail.append(word_temp)
-                    log.info(f'expection: {expectList}')
+                    # log.info(f'expection: {expectList}')
                     expect_detail={
                         "retrieve_method":[fi.get_method(x[1]) for x in expectList],
                         "doc_score":[f'{x[0]:.3f}' for x in expectList],
@@ -623,12 +624,12 @@ def evaluate_accuracy():
     # calculate item numbers in full or worst cases file, by loading to json and count the lenth of list
     for file in full_cases:
         method=int(file.split('_')[1].split('.')[0])
-        with open(f'bad_case/{file}','r',encoding='utf-8') as f:
+        with open(os.path.join(bad_case_path,file),'r',encoding='utf-8') as f:
             json_data=json.load(f)
             failure_num[method]+=len(json_data)
     for file in worst_cases:
         method=int(file.split('_')[1].split('.')[0])
-        with open(f'bad_case/{file}','r',encoding='utf-8') as f:
+        with open(os.path.join(bad_case_path,file),'r',encoding='utf-8') as f:
             json_data=json.load(f)
             worst_num[method]+=len(json_data)
     log.info(f"Total number of questions generated: {question_num}")
@@ -780,15 +781,15 @@ if __name__ == "__main__":
 
     
 
-    # retrieve_files(question_file,2)
+    retrieve_files(question_file,1)
     # retrieve_files(question_file,3)
     # retrieve_files(question_file,4)
-    # # extract_failure_retrieve()  
-    # evaluate_accuracy()
+    # extract_failure_retrieve()  
+    evaluate_accuracy()
 
     # update_questions()
 
-    question_file='questions.json'
-    retrieve_files_update(question_file,1)
+    # question_file='questions.json'
+    # retrieve_files_update(question_file,1)
     print("finished")
     pass
