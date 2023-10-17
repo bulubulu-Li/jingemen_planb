@@ -135,6 +135,9 @@ def initConfig():
 
 def getConfig(str):
     global config
+    if str not in config:
+        log.info(f'config {str} not found')
+        return None
     return config[str]
 
 def getMysqlConfig():
