@@ -37,7 +37,7 @@ class DocIdManager:
     """
     用于管理docid的各种变换
     """
-    def __init__(self, offset: int):
+    def __init__(self, offset: int=0):
         if not isinstance(offset, int):
             raise TypeError("DocIdManager的参数必须是int")
         if offset < 10000:
@@ -138,14 +138,24 @@ class DataForm:
     def __str__(self):
             return "DataForm(page_content={}, title={}, docId={}, metadata={}, questions={})".format(self.page_content, self.title, self.docId, self.metadata, self.questions)
 
+class DataFormEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, DataForm):
+            return {
+                'page_content': obj.page_content,
+                'title': obj.title,
+                'doc ID': obj.docId,
+                'metadata': obj.metadata,
+                'questions': obj.questions
+            }
+        return super().default(obj)
+
+
 class BaseDataManager(DocIdManager):
     """
     一个基础版本的数据管理器，用于规范数据管理器的接口
     """
-    """
-    一个基础版本的数据管理器，用于规范数据管理器的接口
-    """
-    folder:str=os.path.join(tools.searchsystempath,'pairs')
+    folder:str=os.path.join(tools.searchsystempath,'pairs/old')
     data:list[DataForm] = []
     len:int = 0
     pointer:int  # 这个将作为实例变量
@@ -165,40 +175,20 @@ class BaseDataManager(DocIdManager):
             DocIdManager.__init__(self,BaseDataManager.len)
 
         self.pointer = 0  # 每个实例都有自己独立的pointer
+        self.data = OrderedDict([(x['doc ID'], DataForm(x, DocIdManager(BaseDataManager.len))) for x in BaseDataManager.data])
+        self.docOffset=DocIdManager(BaseDataManager.len).docOffset
+        
 
-    # def __init__(self):
-    #     self.data=[]
-    #     self.pointer=0
-    #     # 读取这个文件夹中的json文件
-    #     docList=[int(x.split('.')[0]) for x in os.listdir(self.folder) if x.endswith(".json")]
-    #     log.info(docList)
-    #     # 排序保证每次拿到的顺序都一样
-    #     docList.sort()
-    #     for file in docList:
-    #         with open(os.path.join(self.folder,str(file)+".json"),'r',encoding='utf-8') as f:
-    #             self.data.extend(json.load(f))
-    #     self.len=len(self.data)
-    #     DocIdManager.__init__(self,self.len)
-    
     def __iter__(self):
-        return self
-    
-    def __next__(self)->DataForm:
-        """
-        迭代器的实现
-        """
-        if self.pointer<self.len:
-            self.pointer+=1
-            return DataForm(self.data[self.pointer-1],DocIdManager(self.len))
-        else:
-            raise StopIteration
+        return iter(BaseDataManager.data.values())
         
     def __getitem__(self, docId:int)->DataForm:
         """
         随机获取指定docId的内容
         """        
         docId=self.get_docId(docId)
-        return DataForm(self.data[docId],DocIdManager(self.len))
+        print(f'\n getting {docId}\n')
+        return self.data[docId]
     
     def __len__(self)->int:
         return self.len
@@ -225,7 +215,7 @@ class SqlDataManager(DocIdManager):
             new_mysqlHelper=MysqlHelper(config=tools.getMysqlConfig())
             new_len=new_mysqlHelper.search("SELECT COUNT(*) FROM knowledgepair WHERE state=10002")[0][0]
             data = new_mysqlHelper.searchDict("SELECT * FROM knowledgepair WHERE state=10002")
-            log.info(f"SqlDataManager update: {data}")
+            # log.info(f"SqlDataManager update: {data}")
             new_data=[DataForm({
                 "page_content": x['answer'],
                 "title": x['question'],
@@ -255,26 +245,14 @@ class SqlDataManager(DocIdManager):
         super().__init__(SqlDataManager.len)
     
     def __iter__(self):
-        return self
-    
-    def __next__(self):
-        """
-        迭代器的实现
-        """
-        if self.pointer <= self.len:
-            self.pointer += 1
-            item = list(SqlDataManager.data.values())[self.pointer - 2]
-            log.info(f"SqlDataManager __next__ success: {item}")
-            return item
-        else:
-            raise StopIteration
+        return iter(SqlDataManager.data.values())
         
     def __getitem__(self, docId:int):
         """
         随机访问获取指定docId的内容
         """        
         docId = self.get_docId(docId)
-        log.info(f"SqlDataManager __getitem__ success: {SqlDataManager.data[docId]}")
+        # log.info(f"SqlDataManager __getitem__ success: {SqlDataManager.data[docId]}")
         return SqlDataManager.data[docId]
     
     def __len__(self):
