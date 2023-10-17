@@ -3,7 +3,7 @@ import os
 import SearchSystem.tools as tools
 from SearchSystem.LanguageAnalysis import PreprocessFile
 import jieba
-from SearchSystem.DataManager import SqlDataManager
+from SearchSystem.DataManager import SqlDataManager, BaseDataManager
 from Log.log import log
 
 def createIndex(directname):
@@ -70,7 +70,7 @@ def createIndex_zh():
     wordCount_qq={}  # qq的wordcount
     #单词:docid:[pos]
     for file in files:
-        log.info(f"analyzing file: {file}" )
+        log.info(f"analyzing file: {file.title}" )
 
         contents = PreprocessFile.preProcess_zh_qa(file)
         titles = PreprocessFile.preProcess_zh_qq(file)
@@ -141,7 +141,7 @@ def createIndex_zh():
     invertedIndex_qa = sortTheDict(invertedIndex_qa)
     #获取词项列表
     wordList_qa = getWordList(invertedIndex_qa)
-    printIndex(invertedIndex_qa)
+    # printIndex(invertedIndex_qa)
     #将数据写入文件中
     tools.writeToFile_zh(invertedIndex_qa, 'invertIndex_zh_qa.json')
     tools.writeToFile_zh(wordList_qa,  'wordList_zh_qa.json')
@@ -152,7 +152,7 @@ def createIndex_zh():
     invertedIndex_qq = sortTheDict(invertedIndex_qq)
     #获取词项列表
     wordList_qq = getWordList(invertedIndex_qq)
-    printIndex(invertedIndex_qq)
+    # printIndex(invertedIndex_qq)
     #将数据写入文件中
     tools.writeToFile_zh(invertedIndex_qq,  'invertIndex_zh_qq.json')
     tools.writeToFile_zh(wordList_qq, 'wordList_zh_qq.json')
@@ -164,7 +164,7 @@ def createIndex_zh():
     invertedIndex = sortTheDict(invertedIndex)
     #获取词项列表
     wordList = getWordList(invertedIndex)
-    printIndex(invertedIndex)
+    # printIndex(invertedIndex)
     #将数据写入文件中
     tools.writeToFile_zh(invertedIndex, 'invertIndex_zh.json')
     tools.writeToFile_zh(wordList, 'wordList_zh.json')

@@ -7,6 +7,8 @@ def get_tfidf(index, fileNum , docID, word) :
     tf = len(index[word][docID])
     df = len(index[word])
     idf = cmath.log10(fileNum / df).real
+    if idf<0:
+        idf=0
     return tf * idf
 
 def get_wfidf(index, fileNum, docID, word):
@@ -17,6 +19,8 @@ def get_wfidf(index, fileNum, docID, word):
     df = len(index[word])
     wf = 1 + cmath.log10(tf).real
     idf = cmath.log10(fileNum / df).real
+    if idf<0:
+        idf=0
     return wf * idf
 
 def get_wfidf_Score(index,fileNum,docID,wordList,wordCount):
@@ -31,6 +35,8 @@ def get_wfidf_Score(index,fileNum,docID,wordList,wordCount):
         df = len(index[word]) # 包含这个词的文档数
         wf = 1 + cmath.log10(tf).real # 词频
         idf = cmath.log10(fileNum / df).real # 逆文档频率
+        if idf<0:
+            idf=0   
         scores["word_list"].append({"word":word,"tf":tf,"df":df,"wf":wf,"idf":idf,"score":wf*idf}) 
         score += wf * idf
     scores["score"]=score
@@ -47,6 +53,8 @@ def get_tfidf_Score(index,fileNum,docID,wordList):
         tf = len(index[word][docID])
         df = len(index[word])
         idf = cmath.log10(fileNum / df).real
+        if idf<0:
+            idf=0   
         # log.info("filenum / df",fileNum / df, "df: ",df, " idf: ", idf )
         score += tf * idf
     return score

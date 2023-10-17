@@ -28,8 +28,8 @@ class QuestionAnswerHandler(RequestHandler):
         sources={
             101:"用户上传",
             102:"通话生成",
-            103:"知识文件",
-            104:"历史工单"
+            103:"知识文件",#有id
+            104:"历史工单" #有id
         }
         searching=self.searching
         if request["isGenerate"] == 0:
@@ -48,6 +48,9 @@ class QuestionAnswerHandler(RequestHandler):
             
             for item in search_res:
                 # 判断sourceunit，基于item.metadata["from"]的值，判断来源
+                fileLink = ""
+                if  item.metadata["from"] in [103, 104] and "fromId" in item.metadata:
+                    fileLink = item.metadata["fromId"]
                 qaList.append(
                     {
                         "question": item.title,
@@ -55,7 +58,10 @@ class QuestionAnswerHandler(RequestHandler):
                         "source": sources[item.metadata["from"]],
                         "questionAnswerId": str(item.docId),
                         "sourceUnit": "",
-                        "knowledgeFileSource": None
+                        "knowledgeFileSource": [{
+                            "fileName": item.title,
+                            "fileLink": fileLink
+                        }]
                     }
                 )
             log.info(f'questions:{[x["question"] for x in qaList]},answers:{[x["answer"] for x in qaList]}')
@@ -66,6 +72,7 @@ class QuestionAnswerHandler(RequestHandler):
                     "questionAnswerPairs": qaList
                 }
             }
+            log.info(f"writing {response}")
             self.write(response)
             return
         
@@ -76,10 +83,13 @@ class QuestionAnswerHandler(RequestHandler):
             answer, search_res, fragment = searching.searchResults(request["question"], choice=7)
             answer = answer.split("参考文献")[0]
             for i, item in enumerate(search_res):
+                fileLink = ""
+                if  item.metadata["from"] in [103, 104] and "fromId" in item.metadata:
+                    fileLink = item.metadata["fromId"]
                 qaPair.append(
                     {
                         "fileName": item.title,
-                        "fileLink": ""
+                        "fileLink": fileLink
                     }
                 )
 
@@ -93,6 +103,7 @@ class QuestionAnswerHandler(RequestHandler):
                     }
                 }
             }
+            log.info(f"writing {response}")
             self.write(response)
             return
 
@@ -103,6 +114,7 @@ class QuestionAnswerHandler(RequestHandler):
                 "errMsg": "isGenerate param error, need to be 0 or 1",
                 "results": None
             }
+            log.info(f"writing {response}")
             self.write(response)
             return
 
@@ -115,6 +127,7 @@ class BlockHandler(RequestHandler):
         addList=json_decode(self.request.body)["addList"]
         log.info(f"BlockList add: {addList}")
         self.searching.block(addList)
+        self.write({"errCode":0,"errMsg":"SUCCESS","results":len(addList)})
 
 
 

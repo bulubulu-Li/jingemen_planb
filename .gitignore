@@ -22,5 +22,16 @@ test.json
 test.log
 test.sh
 SearchSystem/SearchConfig.yaml
-SearchSystem/index
 SearchSystem/LargeLanguageModel/chatglm-6b
+SearchSystem/bad_case
+SearchSystem/pairs
+SearchSystem/index/*
+SearchSystem/index/invertIndex_zh_qa.json
+SearchSystem/index/invertIndex_zh_qq.json
+SearchSystem/index/invertIndex_zh.json
+SearchSystem/index/wordCount_zh_qa.json
+SearchSystem/index/wordCount_zh_qq.json
+SearchSystem/index/wordCount_zh.json
+SearchSystem/index/wordList_zh_qa.json
+SearchSystem/index/wordList_zh_qq.json
+SearchSystem/index/wordList_zh.json

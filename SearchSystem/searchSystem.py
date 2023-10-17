@@ -21,7 +21,7 @@ from SearchSystem.Serching import searchWord
 from SearchSystem.scoreQuery import sortDoc
 from SearchSystem.BoolSearch import BoolSearchDel
 from SearchSystem.InvertedIndex import establishIndex
-from SearchSystem.LargeLanguageModel.chain import Chain
+from SearchSystem.LargeLanguageModel.chain import ChainFactory
 from SearchSystem.DataManager import SqlDataManager, DataForm
 from apscheduler.schedulers.background import BackgroundScheduler
 import jieba
@@ -49,8 +49,8 @@ class TokenDistance():
         # q2不是list，而是一个字符串
         if type(q2) == str:
             q2 = set(list(jieba.cut(q2)))
-        print(q1.intersection(q2))
-        print(q1.union(q2))
+        # print(q1.intersection(q2))
+        # print(q1.union(q2))
 
         numerator = sum([self._idf_dict.get(word, self._median_idf) for word in q1.intersection(q2)])
         denominator  = sum([self._idf_dict.get(word, self._median_idf) for word in q1.union(q2)])
@@ -86,8 +86,8 @@ class TokenDistance():
             "cqrctr":self.predict_cqrctr(query,set([x['word'] for x in doc[2]['word_list']])),
             "left":self.predict_left(query,set([x['word'] for x in doc[2]['word_list']]))
         }] for doc in sortedDocList]
-        # filt by the score of jaccard cqrctr and left, require all of them to be larger than 0.25
-        temp=[x for x in temp if x[3]['jaccard']>0.25 and x[3]['cqrctr']>0.25 and x[3]['left']>0.25]
+        # filt by the score of jaccard cqrctr and left, require all of them to be larger than 0.3
+        temp=[x for x in temp if x[3]['jaccard']>0.3 and x[3]['cqrctr']>0.3 and x[3]['left']>0.3]
         return temp
 
 
@@ -172,14 +172,14 @@ class SearchSystem():
         # self.index = SearchIndex(config)
         # self.blockList=[]
         self.update()
-        self.chain=Chain()
+        self.chain=ChainFactory(tools.getConfig("environment"))
         self.chain.init()
         # TODO 处理文件
         self.token_distance = TokenDistance("./idf.txt")
 
         # 直接定义一个定时器
         scheduler = BackgroundScheduler()
-        scheduler.add_job(self.update, 'interval', minutes=3)
+        scheduler.add_job(self.update, 'interval', minutes=30)
         scheduler.start()
         log.info("=================Searching System=================")
     
@@ -209,7 +209,7 @@ class SearchSystem():
             sortedDocList = [x for x in sortedDocList if x[1] not in self.blockList]
             source = check_expect(sortedDocList, expectList)
             sortedDocList = self.token_distance.filter(statement, sortedDocList)
-            print(sortedDocList)
+            # print(sortedDocList)
             # log.info(sortedDocList)
             if loop == False:
                 return sortedDocList, source
@@ -272,7 +272,7 @@ class SearchSystem():
             retrieved_docs = self.searchResults(statement)
             
             retrieve_res={
-                "result":self.chain.retrieve(statement,retrieved_docs)[0],
+                "result":self.chain.retrieve(statement,retrieved_docs),
                 "source_documents":retrieved_docs
                 }
             log.info(retrieve_res)
@@ -294,6 +294,7 @@ class SearchSystem():
             # 如果result包含“未找到答案”，直接返回
             if "未找到答案" in retrieve_res["result"]:
                 return answer, []
+            log.info(f'retrieve_res {retrieve_res["result"]}')
             a = retrieve_res["result"].split('。')
             if '' in a:
                 a.remove('')

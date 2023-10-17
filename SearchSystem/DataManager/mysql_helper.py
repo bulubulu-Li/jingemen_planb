@@ -89,11 +89,16 @@ class MysqlHelper():
 
 
 if __name__ == "__main__":
-    config = {"host":'8.217.5.212',
+    # config = {"host":'8.217.5.212',
+    #           "port":3306,
+    #           "user":'assistant',
+    #           "password":'kuaijie2023',
+    #           "database":'test'}
+    config = {"host":'10.254.13.105',
               "port":3306,
               "user":'assistant',
-              "password":'kuaijie2023',
-              "database":'test'}
+              "password":'ai123456',
+              "database":'management'}
     mysql = MysqlHelper(config)
     # print(mysql.search("SELECT * FROM knowledgefile WHERE isValid=TRUE"))
     data=mysql.searchDict("SELECT * FROM knowledgepair WHERE state=10002")
