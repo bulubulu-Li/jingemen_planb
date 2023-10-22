@@ -14,7 +14,7 @@ def createIndex(directname):
 
     #单词:docid:[pos]
     for file in files:
-        log.info(f"analyzing file: {file}" )
+        # log.info(f"analyzing file: {file}" )
         #每个文档的词项 list
         #此处，需要做一个分词，还需要设置停用词，做过滤
         #然后，保存jingmen数据为html
@@ -70,7 +70,7 @@ def createIndex_zh():
     wordCount_qq={}  # qq的wordcount
     #单词:docid:[pos]
     for file in files:
-        log.info(f"analyzing file: {file.title}" )
+        # log.info(f"analyzing file: {file.title}" )
 
         contents = PreprocessFile.preProcess_zh_qa(file)
         titles = PreprocessFile.preProcess_zh_qq(file)
@@ -172,6 +172,17 @@ def createIndex_zh():
 
     # set establishIndex in config to false
     tools.setConfig("establishIndex", False)
+
+    # 找出datamanager里最大的docid并输出
+    maxid=0
+    for file in files:
+        # log.info('establishIndex analyzing file: ' + file.title)
+        if file.docId>maxid:
+            maxid=file.docId
+        if file.docId>maxid:
+            maxid=file.docId
+    
+    log.info(f"establishIndex finish, max docId is {maxid}")
 
 def sortTheDict(dict):
     sdict =  { k:dict[k] for k in sorted(dict.keys())}
