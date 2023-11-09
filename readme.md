@@ -123,12 +123,17 @@ wf-idf 和 tf-idf比较：
    1. 把文件放入指定`content`文件夹即可，以doc文件举例![Alt text](img/image.png)
    2. 在`FileTransfer`文件夹下运行`python file_transfer.py`
 
+## tester 模块
+- 该模块用于测评召回的准确度
+- 使用方法，在`SearchSystem`件夹下运行`python tester.py`
+- 结果为几个json和html
+- `failure_x`为第x个召回方法的简化错误信息
+- `failureFull_x`为第x个召回方法的完整错误信息
+- ![Alt text](img/image3.png)
 
 
-
-
-
-
+## 服务启动:
+- 在根目录下运行server.sh
 
 
 

@@ -1,0 +1,9 @@
+jieba
+langchain
+openai
+thrift
+rouge
+chromadb
+PyMysql
+apscheduler
+collections

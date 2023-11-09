@@ -1,0 +1,15 @@
+{
+    "python.analysis.extraPaths": [
+        "./SearchSystem/Tools",
+        "./SearchSystem/RPC/gen-py",
+        "./RPC/gen-py"
+    ],
+    "githubPullRequests.ignoredPullRequestBranches": [
+        "master"
+    ],
+    "python.analysis.typeCheckingMode": "off",
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.autopep8"
+    },
+    "python.formatting.provider": "none"
+}

@@ -1,10 +1,10 @@
 import queue
 import os
-import tools
+import SearchSystem.tools as tools
 import re
-from Serching import operateDocList
+from SearchSystem.Serching import operateDocList
 from nltk.corpus import wordnet
-
+from Log.log import log
 
 def searchOneWord(index, word):
     if word not in index:
@@ -22,7 +22,7 @@ def searchWords(index, words):
     if len(words) == 0:
         return []
     docQueue = queue.Queue()
-    # print(wordset)
+    # log.info(wordset)
     for word in words:
         docQueue.put(searchOneWord(index, word))
     
@@ -55,20 +55,20 @@ def searchPhrase(index, words, inputList):
             resultList[doc] = index[inputList[0]][str(doc)]
         return resultList
 
-    # print(doclist)
+    # log.info(doclist)
     for docid in doclist:
         docid = str(docid)
         locList = []
         x = index[inputList[0]][docid]
         for loc in index[inputList[0]][docid]:
-            # print(index[inputList[0]][docid])
+            # log.info(index[inputList[0]][docid])
             floc = loc
             n = len(inputList)
             hasFind = True
             for word in inputList[1:n]:
                 floc += 1
                 try:
-                    # print(index[word][docid])
+                    # log.info(index[word][docid])
                     index[word][docid].index(floc)
                 except:
                     hasFind = False
@@ -106,14 +106,14 @@ def serarchPhraseForBool(index, wordList,flag):
         locList = []
         x = index[wordList[0]][docid]
         for loc in index[wordList[0]][docid]:
-            # print(index[inputList[0]][docid])
+            # log.info(index[inputList[0]][docid])
             floc = loc
             n = len(wordList)
             hasFind = True
             for word in wordList[1:n]:
                 floc += 1
                 try:
-                    # print(index[word][docid])
+                    # log.info(index[word][docid])
                     index[word][docid].index(floc)
                 except:
                     hasFind = False
@@ -130,7 +130,7 @@ def serarchPhraseForBool(index, wordList,flag):
 
 def wildcardSearch(statement,index,wordList):
     words = statement.split(' ')
-    #print(words)
+    #log.info(words)
     forSearchList = []
 
     for word in words:
@@ -138,7 +138,7 @@ def wildcardSearch(statement,index,wordList):
         if len(rset) > 0:
             forSearchList.append(rset)
         else:
-            print(word,"doesn't find matching words in these articles.")
+            log.info(word,"doesn't find matching words in these articles.")
             return []
 
     i = 0
@@ -163,8 +163,8 @@ def wildcardSearch(statement,index,wordList):
 
         resultList[statement] = docList
         if len(docList) > 0:
-            print(statement, ":")
-            print("    DocList: ", docList)
+            log.info(statement, ":")
+            log.info("    DocList: ", docList)
 
         j = 0
         while j < N:
@@ -211,7 +211,7 @@ def wildcard2regex(wildcard):
 '''
 e.g.
 ret = searchBasedOnWildcard('f*bility', ['feasability', 'family', 'hello', 'flexibility'])
-print(ret)
+log.info(ret)
 
 show: {'feasability', 'flexiblility'}
 '''
@@ -224,7 +224,7 @@ def searchBasedOnWildcard(wildcard, wordList):
     for word in wordList:
         if(pattern.match(word)):
             result.append(word)
-            # print(word)
+            # log.info(word)
     return result
         
 def getSynonyms(index,word):
@@ -242,15 +242,15 @@ def searchSynonymsWord(index,word):
     resultList = {}
 
     for phraseList in wordlist:
-        #print(phraseList)
+        #log.info(phraseList)
         wordset =set(phraseList)
         list = searchPhrase(index,wordset,phraseList)
         phrase = ''
         for w in phraseList:
             phrase += w + " "
         if len(list) > 0:
-            print(phrase, ":")
-            print("    ",list)
+            log.info(phrase, ":")
+            log.info("    ",list)
             resultList[phrase] = list
 
     return resultList

@@ -28,17 +28,28 @@ def get_file_path(fileType,fileName):
 def store_file(fileType,content):
     global counter
     # add metadata "doc ID"=counter into every item of content
-    for item in content:
-        item["metadata"]["doc ID"]=counter
+    for i,item in enumerate(content):
+        item["metadata"]["doc ID"]=f'{counter}-{i}'
         # set fileType
         item["metadata"]["filetype"]=fileType
-        
-    filename=f'{counter}.json'
+
+    # skip files who's type is not json
+    if fileType!="json":
+        filename=f'{counter}-0.json'
+        with open(reuterspath+filename, 'w',encoding='utf-8') as f:
+            # make the file empty
+            f.write("")
+            
+        counter+=1
+        return
+    
+    for i,item in enumerate(content):     
+        filename=f'{counter}-{i}.json'
+        json_data=json.dumps([item],ensure_ascii=False)
+        with open(reuterspath+filename, 'w',encoding='utf-8') as f:
+            f.write(json_data)
+
     counter+=1
-    # transfer content into json
-    content=json.dumps(content,ensure_ascii=False)
-    with open(reuterspath+filename, 'w',encoding='utf-8') as f:
-        f.write(content)
     return filename
 
 def transfer_doc():
@@ -81,7 +92,7 @@ def transfer_wx():
                 "page_content":json_text["content"],
                 "metadata":{
                     "url":json_text["url"],
-                    "title": "wx/"+filename,
+                    "source": "wx/"+filename,
                 }
             })
         filename=store_file("wx",content)
@@ -99,8 +110,9 @@ def transfer_json():
                     "page_content":item['kinfoName']+'\n\n'+item['kinfoContent'],
                     "metadata":{
                         "url":"https://www.jingmen.gov.cn/col/col18658/index.html?kinfoGuid="+item['kinfoGuid'],
-                        "title": "json/"+filename,
-                    }
+                        "source": "json/"+filename,
+                    },
+                    "title":item['kinfoName']
                 })
         filename=store_file("json",content)
 

@@ -1,9 +1,11 @@
 import os
-import tools
-from LanguageAnalysis import stemming
+import SearchSystem.tools as tools
+from SearchSystem.LanguageAnalysis import stemming
 import jieba
 import json
+from SearchSystem.DataManager import DataForm,BaseDataManager
 
+from Log.log import log
 
 def preProcess(filename):
     file = open(filename, 'r')
@@ -12,24 +14,22 @@ def preProcess(filename):
     return words
 
 
-def preProcess_zh(filename):
-    file = open(filename, 'r', encoding='utf-8')
-    content = json.load(file)
-    words=[]
-    for page in content:
-        words+=jieba.cut(page["page_content"])
-    return words
+def preProcess_zh_qq(dataItem:DataForm):
+    return list(jieba.cut(dataItem.title))
+
+def preProcess_zh_qa(dataItem:DataForm):
+    return list(jieba.cut(dataItem.title+'\n\n'+dataItem.page_content))
 
 
 def processDirectory(directname):
-    path = tools.projectpath
+    path = tools.searchsystempath
     path += directname
     files = os.listdir(path)
     result = []
     for file in files:
         content = preProcess(path + '/' + file)
         result.append(content)
-        # print(content)
+        # log.info(content)
     return result
 
 # processDirectory('test')

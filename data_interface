@@ -1,0 +1,15 @@
+// 每条信息的数据格式示例
+[
+    {
+        "page_content": "学校在校外实践基地开展研学活动是按照省、市关于组织中小学生开展研学实践教育活动的有关要求进行的，是年度教育教学工作的重要内容之一。",
+        "title": "校外实践基地开展研学活动符合政策吗",
+        "doc ID": 98,
+        "metadata": {
+            "url": "https://www.jingmen.gov.cn/col/col18658/index.html?kinfoGuid=8ab50925-8809-4a61-b236-34ea1a86655c",
+            "filetype": "json"
+        },
+        "questions": [
+            "在校外基地开展研学活动可以吗？"
+        ]
+    }
+]
