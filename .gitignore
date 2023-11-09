@@ -26,3 +26,4 @@ SearchSystem/LargeLanguageModel/chatglm-6b
 SearchSystem/bad_case
 SearchSystem/pairs
 SearchSystem/index
+move.sh
