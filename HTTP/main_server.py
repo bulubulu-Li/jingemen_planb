@@ -2,7 +2,7 @@ import tornado.ioloop
 from tornado.web import RequestHandler, Application
 from tornado.httpserver import HTTPServer
 from tornado.options import options, define
-from multiprocessing import Process
+import multiprocessing 
 
 # Import the project into python path
 import sys
@@ -19,20 +19,14 @@ from Log.log import log
 from SearchSystem.searchSystem import SearchSystem
 from handlers.Handler import QuestionAnswerHandler, BlockHandler,StartHandler
 
-def launch_service(config):
-    searching = SearchSystem(config="config.json")
-
-    process_test_class_1 = Process(target=StartHandler, args=(config["process_test_class_1"],QuestionAnswerHandler, searching))
-    process_test_class_2 = Process(target=StartHandler, args=(config["process_test_class_2"],BlockHandler, searching))
-
-    processes = [process_test_class_1, process_test_class_2]
-    log.info("start")
-    for process in processes:
-        process.start()
-    for process in processes:
-        process.join()
+def make_app(searching):
+    return Application([
+        (r"/qabot/question-answer", QuestionAnswerHandler, dict(searching=searching)),
+        (r"/qabot/blocklist", BlockHandler, dict(searching=searching)),
+    ])
 
 if __name__ == "__main__":
-    config = {"process_test_class_1":{"port":3130, "url_suffix":"/qabot/question-answer"},
-              "process_test_class_2":{"port":3131, "url_suffix":"/qabot/blocklist"}}
-    launch_service(config)
+    searching = SearchSystem(config="config.json")
+    app = make_app(searching)
+    app.listen(9091)
+    tornado.ioloop.IOLoop.current().start()

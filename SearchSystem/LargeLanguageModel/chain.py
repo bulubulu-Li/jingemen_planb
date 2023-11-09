@@ -54,7 +54,7 @@ class ChainGov(Chain):
         response, history = self.chain.chat(self.tokenizer, prompt, history=[])
         log.info(f'generateing question:{question},response:{response}')
         # return response[0],docs
-        return response[0]
+        return response
 
 class ChainWeb(Chain):
     def __init__(self):

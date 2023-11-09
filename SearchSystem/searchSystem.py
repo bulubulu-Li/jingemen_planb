@@ -133,6 +133,13 @@ class SearchIndex():
         self.WORDCOUNT = getIndex.getWordCount_zh()
         self.WORDCOUNT_QQ = getIndex.getWordCount_zh_qq()
         self.WORDCOUNT_QA = getIndex.getWordCount_zh_qa()
+
+        maxid=0
+        for item in self.index.keys():
+            for doc in [tools.mainDocID(int(x)) for x in self.index[item].keys()]:
+                if doc>maxid:
+                    maxid=doc
+        log.info(f"max IndexId is {maxid}")
         pass
 
     def get_config(self):
